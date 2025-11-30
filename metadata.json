@@ -1,0 +1,5 @@
+{
+  "name": "Circuit Forge",
+  "description": "A high-intensity interval training (HIIT) PWA with intelligent workout generation and offline capabilities.",
+  "requestFramePermissions": []
+}
