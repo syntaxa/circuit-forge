@@ -19,6 +19,7 @@ export interface Exercise {
   description: string;
   muscleGroup: MuscleGroup;
   difficulty: Difficulty;
+  biSided?: boolean;
 }
 
 export interface Settings {
