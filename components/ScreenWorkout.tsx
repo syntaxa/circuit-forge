@@ -31,8 +31,13 @@ export const ScreenWorkout: React.FC<ScreenWorkoutProps> = ({ playlist, muscleGr
   const [duration, setDuration] = useState(5);
   
   const intervalRef = useRef<number | null>(null);
+  // Use ref to track the exercise that should be displayed during PREP
+  const nextExerciseRef = useRef<Exercise | null>(null);
 
-  const currentExercise = playlist[currentExIndex];
+  // During PREP, show the next exercise if available, otherwise show current
+  const currentExercise = (state === WorkoutState.PREP && nextExerciseRef.current) 
+    ? nextExerciseRef.current 
+    : playlist[currentExIndex];
   const isLastExercise = currentExIndex === playlist.length - 1;
   const isLastCycle = currentCycle === settings.current.cycleCount;
 
@@ -60,7 +65,8 @@ export const ScreenWorkout: React.FC<ScreenWorkoutProps> = ({ playlist, muscleGr
 
   const handlePhaseChange = () => {
     if (state === WorkoutState.PREP) {
-      // Prep finished, Start Work
+      // Prep finished, Start Work - clear the ref since we're now showing the actual current exercise
+      nextExerciseRef.current = null;
       setState(WorkoutState.WORK);
       const workTime = settings.current.exerciseDuration;
       setDuration(workTime);
@@ -74,24 +80,31 @@ export const ScreenWorkout: React.FC<ScreenWorkoutProps> = ({ playlist, muscleGr
         } else {
           // Next Cycle
           setCurrentCycle(c => c + 1);
+          const firstEx = playlist[0];
           setCurrentExIndex(0);
-          startPrep(playlist[0]);
+          startPrep(firstEx);
         }
       } else {
-        // Next Exercise
-        const nextEx = playlist[currentExIndex + 1];
-        setCurrentExIndex(i => i + 1);
+        // Next Exercise - update index first, then start prep
+        const nextIndex = currentExIndex + 1;
+        const nextEx = playlist[nextIndex];
+        setCurrentExIndex(nextIndex);
         startPrep(nextEx);
       }
     }
   };
 
   const startPrep = (nextEx: Exercise) => {
+    // Store the next exercise in ref so it's immediately available for display
+    nextExerciseRef.current = nextEx;
     setState(WorkoutState.PREP);
     setDuration(5); // 5 seconds transition
     setTimeLeft(5);
     // Shortened phrase "Далее" (Next) to ensure it fits within the 5s window before "3..2..1"
-    speak(`Далее: ${nextEx.name}`);
+    // Speak Russian part first, then English exercise name
+    TTSService.speak("Далее:", settings.current.ttsVoiceURI, 'ru-RU', () => {
+      TTSService.speakEnglish(nextEx.name);
+    });
   };
 
   const finishWorkout = () => {
@@ -123,7 +136,9 @@ export const ScreenWorkout: React.FC<ScreenWorkoutProps> = ({ playlist, muscleGr
 
   // Initial announcement
   useEffect(() => {
-    speak(`Приготовьтесь. Первое упражнение: ${currentExercise.name}`);
+    TTSService.speak("Приготовьтесь. Первое упражнение:", settings.current.ttsVoiceURI, 'ru-RU', () => {
+      TTSService.speakEnglish(currentExercise.name);
+    });
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

@@ -20,6 +20,7 @@ export interface Exercise {
   muscleGroup: MuscleGroup;
   difficulty: Difficulty;
   biSided?: boolean;
+  steps: string;
 }
 
 export interface Settings {
