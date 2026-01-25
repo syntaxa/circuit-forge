@@ -7,6 +7,15 @@ export const DEFAULT_SETTINGS: Settings = {
   ttsVoiceURI: null,
 };
 
+export const ALL_MUSCLE_GROUPS: MuscleGroup[] = [
+  MuscleGroup.LEGS,
+  MuscleGroup.ABS,
+  MuscleGroup.BACK,
+  MuscleGroup.CHEST,
+  MuscleGroup.ARMS,
+  MuscleGroup.SHOULDERS,
+];
+
 export const SEED_EXERCISES: Exercise[] = [
   // НОГИ (LEGS)
   { 
@@ -80,16 +89,7 @@ export const SEED_EXERCISES: Exercise[] = [
     difficulty: Difficulty.MEDIUM, 
     biSided: false,
     steps: '1. Расставьте ноги широко, разверните носки в стороны (позиция плие).\n2. Присядьте, пока бедра не станут параллельны полу.\n3. Выпрыгните вверх, выпрямляя ноги.\n4. Мягко приземлитесь обратно в широкую стойку и сразу присядьте.'
-  },
-  { 
-    id: '9', 
-    name: 'Jumping Lunge', 
-    description: 'Взрывные прыжки с переменой ног в воздухе.', 
-    muscleGroup: MuscleGroup.LEGS, 
-    difficulty: Difficulty.HARD, 
-    biSided: false,
-    steps: '1. Сделайте выпад вперед.\n2. Мощно подпрыгните вверх.\n3. В воздухе поменяйте ноги местами.\n4. Приземлитесь в выпад, где впереди оказалась другая нога.\n5. Следите, чтобы колено сзади стоящей ноги не билось о пол.'
-  },
+  }, 
   { 
     id: '10', 
     name: 'Single Leg Calf Raise', 
@@ -132,7 +132,7 @@ export const SEED_EXERCISES: Exercise[] = [
     description: 'Прыжок в сторону с последующим приседанием и касанием пола противоположной рукой.', 
     muscleGroup: MuscleGroup.LEGS, 
     difficulty: Difficulty.MEDIUM, 
-    biSided: true,
+    biSided: false,
     steps: '1. Сделайте широкий прыжок в правую сторону.\n2. Приземлитесь на правую ногу в полуприсед.\n3. Коснитесь пола левой рукой перед собой.\n4. Сразу же сделайте прыжок влево и коснитесь пола правой рукой.'
   },
   { 
@@ -287,8 +287,8 @@ export const SEED_EXERCISES: Exercise[] = [
     description: 'Перемещение в сторону в положении упор лежа.', 
     muscleGroup: MuscleGroup.ARMS, 
     difficulty: Difficulty.MEDIUM, 
-    biSided: true,
-    steps: '1. Встаньте в планку на прямых руках.\n2. Одновременно переставьте правую руку и правую ногу в сторону.\n3. Приставьте левую сторону.\n4. Сделайте несколько шагов в одну сторону, затем в другую.'
+    biSided: false,
+    steps: '1. Встаньте в планку на прямых руках.\n2. Одновременно переставьте правую руку и правую ногу в сторону.\n3. Приставьте левую сторону.\n4. Теперь перемещайтесь в другую сторону, повторяя движение.'
   },
   { 
     id: '19', 
@@ -326,16 +326,7 @@ export const SEED_EXERCISES: Exercise[] = [
     biSided: false,
     steps: '1. Примите упор лежа.\n2. Опуститесь в нижнюю точку (грудь в паре сантиметров от пола).\n3. Зафиксируйте положение на максимально долгое время.\n4. Держите спину прямой.'
   },
-  { 
-    id: '23', 
-    name: 'Arm Circles', 
-    description: 'Изолирующая нагрузка на дельты в статико-динамике.', 
-    muscleGroup: MuscleGroup.ARMS, 
-    difficulty: Difficulty.MEDIUM, 
-    biSided: false,
-    steps: '1. Разведите прямые руки в стороны параллельно полу.\n2. Выполняйте мелкие круговые движения.\n3. Сначала 30 секунд вперед, затем 30 секунд назад.\n4. Не опускайте руки.'
-  },
-  { 
+    { 
     id: '24', 
     name: 'Plank Fist Raise', 
     description: 'Переход с ладоней на кулаки для укрепления кистей и рук.', 
@@ -561,7 +552,7 @@ export const SEED_EXERCISES: Exercise[] = [
     description: 'Перенос веса на одну руку во время спуска.', 
     muscleGroup: MuscleGroup.CHEST, 
     difficulty: Difficulty.HARD, 
-    biSided: true,
+    biSided: false,
     steps: '1. Широкая постановка рук.\n2. При спуске сгибайте только одну руку, вторая остается прямой.\n3. Перенесите весь вес на согнутую руку.\n4. Вернитесь в центр и смените сторону.'
   },
   { 
@@ -611,11 +602,11 @@ export const SEED_EXERCISES: Exercise[] = [
   },
   { 
     id: '45', 
-    name: 'Offset Push-Up', 
+    name: 'Plyo Push-Up', 
     description: 'Одна рука впереди, другая сзади, смена через прыжок.', 
     muscleGroup: MuscleGroup.CHEST, 
     difficulty: Difficulty.HARD, 
-    biSided: true,
+    biSided: false,
     steps: '1. Одна рука выше уровня плеча, другая ниже.\n2. Отжимание.\n3. Прыжком на руках смените положение рук.\n4. Снова отжимание.'
   },
   { 
@@ -734,7 +725,7 @@ export const SEED_EXERCISES: Exercise[] = [
     description: 'Поочередные махи разноименными руками и ногами лежа.', 
     muscleGroup: MuscleGroup.BACK, 
     difficulty: Difficulty.MEDIUM, 
-    biSided: true,
+    biSided: false,
     steps: '1. Лягте на живот.\n2. Поочередно поднимайте правую руку/левую ногу и наоборот.\n3. Двигайтесь быстро.\n4. Взгляд в пол.'
   },
   { 
