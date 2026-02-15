@@ -33,6 +33,13 @@ export const ScreenWorkout: React.FC<ScreenWorkoutProps> = ({ playlist, muscleGr
   const intervalRef = useRef<number | null>(null);
   // Use ref to track the exercise that should be displayed during PREP
   const nextExerciseRef = useRef<Exercise | null>(null);
+  // Refs for phase change logic so timer callback always sees current values (avoids stale closure)
+  const stateRef = useRef(state);
+  const currentExIndexRef = useRef(currentExIndex);
+  const currentCycleRef = useRef(currentCycle);
+  stateRef.current = state;
+  currentExIndexRef.current = currentExIndex;
+  currentCycleRef.current = currentCycle;
 
   // During PREP, show the next exercise if available, otherwise show current
   const currentExercise = (state === WorkoutState.PREP && nextExerciseRef.current) 
@@ -61,10 +68,18 @@ export const ScreenWorkout: React.FC<ScreenWorkoutProps> = ({ playlist, muscleGr
       }
       return next;
     });
-  }, [state, currentExIndex, currentCycle]);
+  // Empty deps: handlePhaseChange reads current indices from refs to avoid stale closure
+  }, []);
 
   const handlePhaseChange = () => {
-    if (state === WorkoutState.PREP) {
+    const currentState = stateRef.current;
+    const exIndex = currentExIndexRef.current;
+    const cycle = currentCycleRef.current;
+    const cycleCount = Number(settings.current.cycleCount);
+    const lastEx = exIndex === playlist.length - 1;
+    const lastCycle = cycle === cycleCount;
+
+    if (currentState === WorkoutState.PREP) {
       // Prep finished, Start Work - clear the ref since we're now showing the actual current exercise
       nextExerciseRef.current = null;
       setState(WorkoutState.WORK);
@@ -72,10 +87,17 @@ export const ScreenWorkout: React.FC<ScreenWorkoutProps> = ({ playlist, muscleGr
       setDuration(workTime);
       setTimeLeft(workTime);
       speak("Начали!");
-    } else if (state === WorkoutState.WORK) {
-      // Work finished
-      if (isLastExercise) {
-        if (isLastCycle) {
+    } else if (currentState === WorkoutState.WORK) {
+      // Play end-of-exercise sound
+      try {
+        const audio = new Audio('/assets/268756__morrisjm__dingaling.mp3');
+        audio.play().catch(() => {});
+      } catch {
+        // ignore if audio fails
+      }
+      // Work finished — use refs so timer callback always sees current indices
+      if (lastEx) {
+        if (lastCycle) {
           finishWorkout();
         } else {
           // Next Cycle
@@ -86,7 +108,7 @@ export const ScreenWorkout: React.FC<ScreenWorkoutProps> = ({ playlist, muscleGr
         }
       } else {
         // Next Exercise - update index first, then start prep
-        const nextIndex = currentExIndex + 1;
+        const nextIndex = exIndex + 1;
         const nextEx = playlist[nextIndex];
         setCurrentExIndex(nextIndex);
         startPrep(nextEx);
@@ -111,6 +133,14 @@ export const ScreenWorkout: React.FC<ScreenWorkoutProps> = ({ playlist, muscleGr
     if (intervalRef.current) clearInterval(intervalRef.current);
     setState(WorkoutState.FINISHED);
     speak("Тренировка завершена. Отличная работа!");
+
+    // Play workout complete sound
+    try {
+      const audio = new Audio('/assets/708541__rezidentevil__girl-says-uwu.mp3');
+      audio.play().catch(() => {});
+    } catch {
+      // ignore if audio fails
+    }
     
     // Save history
     StorageService.addLog({
