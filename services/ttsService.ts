@@ -17,34 +17,22 @@ export const TTSService = {
     const utterance = new SpeechSynthesisUtterance(text);
     utterance.lang = lang;
 
-    // Attempt to match voice
+    // Attempt to match voice — single setting: prefer user's chosen voice for all announcements
     const voices = window.speechSynthesis.getVoices();
-    let selectedVoice = null;
-    
-    if (lang === 'en-US') {
-      // For English, prefer US English voices
-      // 1. Try to find US English voice
-      selectedVoice = voices.find(v => 
-        v.lang === 'en-US' || 
-        (v.lang.startsWith('en') && v.name.toLowerCase().includes('us'))
-      );
-      // 2. Fallback to any English voice
-      if (!selectedVoice) {
-        selectedVoice = voices.find(v => v.lang.startsWith('en'));
-      }
-    } else {
-      // For Russian (or when user chose a voice)
-      // 1. Try specific voice URI if user saved a preference
-      if (voiceURI) {
-        selectedVoice = voices.find(v => v.voiceURI === voiceURI);
-      }
-      // 2. If no saved preference: use default voice "Microsoft David" if available
-      if (!selectedVoice) {
+    let selectedVoice: SpeechSynthesisVoice | null = null;
+
+    // 1. If user saved a voice preference, use it for any language
+    if (voiceURI) {
+      selectedVoice = voices.find(v => v.voiceURI === voiceURI) ?? null;
+    }
+    // 2. No preference or voice not found — choose by language
+    if (!selectedVoice) {
+      if (lang === 'en-US') {
+        selectedVoice = voices.find(v => v.lang === 'en-US' || (v.lang.startsWith('en') && v.name.toLowerCase().includes('us'))) ?? null;
+        if (!selectedVoice) selectedVoice = voices.find(v => v.lang.startsWith('en')) ?? null;
+      } else {
         selectedVoice = findDefaultVoice(voices);
-      }
-      // 3. Fallback: any Russian voice
-      if (!selectedVoice) {
-        selectedVoice = voices.find(v => v.lang === 'ru-RU' || v.lang.startsWith('ru'));
+        if (!selectedVoice) selectedVoice = voices.find(v => v.lang === 'ru-RU' || v.lang.startsWith('ru')) ?? null;
       }
     }
 
@@ -62,12 +50,17 @@ export const TTSService = {
     window.speechSynthesis.speak(utterance);
   },
 
-  speakEnglish: (text: string, onEnd?: () => void) => {
-    TTSService.speak(text, null, 'en-US', onEnd);
+  speakEnglish: (text: string, voiceURI: string | null, onEnd?: () => void) => {
+    TTSService.speak(text, voiceURI, 'en-US', onEnd);
   },
 
   getVoices: (): SpeechSynthesisVoice[] => {
     if (!('speechSynthesis' in window)) return [];
     return window.speechSynthesis.getVoices();
+  },
+
+  getDefaultVoice: (): SpeechSynthesisVoice | null => {
+    if (!('speechSynthesis' in window)) return null;
+    return findDefaultVoice(window.speechSynthesis.getVoices());
   }
 };

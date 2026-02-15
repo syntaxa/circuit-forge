@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { Settings } from '../types';
 import { StorageService } from '../services/storageService';
 import { TTSService } from '../services/ttsService';
@@ -12,6 +12,11 @@ export const ScreenSettings: React.FC<ScreenSettingsProps> = ({ onBack }) => {
   const [settings, setSettings] = useState<Settings>(StorageService.getSettings());
   const [voices, setVoices] = useState<SpeechSynthesisVoice[]>([]);
   const [lastLog, setLastLog] = useState<ReturnType<typeof StorageService.getLastLog>>(StorageService.getLastLog());
+
+  const defaultVoiceName = useMemo(
+    () => TTSService.getDefaultVoice()?.name ?? null,
+    [voices]
+  );
 
   useEffect(() => {
     const loadVoices = () => {
@@ -94,7 +99,9 @@ export const ScreenSettings: React.FC<ScreenSettingsProps> = ({ onBack }) => {
             onChange={(e) => setSettings({...settings, ttsVoiceURI: e.target.value})}
             className="w-full bg-dark text-white p-3 rounded-lg border border-slate-600 focus:border-primary outline-none"
           >
-            <option value="">По умолчанию (Русский)</option>
+            <option value="">
+              {defaultVoiceName ?? 'По умолчанию (Русский)'}
+            </option>
             {voices.map(v => (
               <option key={v.voiceURI} value={v.voiceURI}>{v.name} ({v.lang})</option>
             ))}

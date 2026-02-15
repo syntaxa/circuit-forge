@@ -125,7 +125,7 @@ export const ScreenWorkout: React.FC<ScreenWorkoutProps> = ({ playlist, muscleGr
     // Shortened phrase "Далее" (Next) to ensure it fits within the 5s window before "3..2..1"
     // Speak Russian part first, then English exercise name
     TTSService.speak("Далее:", settings.current.ttsVoiceURI, 'ru-RU', () => {
-      TTSService.speakEnglish(nextEx.name);
+      TTSService.speakEnglish(nextEx.name, settings.current.ttsVoiceURI, () => {});
     });
   };
 
@@ -167,7 +167,7 @@ export const ScreenWorkout: React.FC<ScreenWorkoutProps> = ({ playlist, muscleGr
   // Initial announcement
   useEffect(() => {
     TTSService.speak("Приготовьтесь. Первое упражнение:", settings.current.ttsVoiceURI, 'ru-RU', () => {
-      TTSService.speakEnglish(currentExercise.name);
+      TTSService.speakEnglish(currentExercise.name, settings.current.ttsVoiceURI, () => {});
     });
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
