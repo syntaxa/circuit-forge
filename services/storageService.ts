@@ -49,5 +49,12 @@ export const StorageService = {
   getLastLog: (): WorkoutLog | null => {
     const history = StorageService.getHistory();
     return history.length > 0 ? history[0] : null;
-  }
+  },
+
+  clearLastLog: (): void => {
+    const history = StorageService.getHistory();
+    if (history.length === 0) return;
+    const rest = history.slice(1);
+    localStorage.setItem(KEYS.HISTORY, JSON.stringify(rest));
+  },
 };

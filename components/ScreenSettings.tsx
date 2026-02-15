@@ -11,6 +11,7 @@ interface ScreenSettingsProps {
 export const ScreenSettings: React.FC<ScreenSettingsProps> = ({ onBack }) => {
   const [settings, setSettings] = useState<Settings>(StorageService.getSettings());
   const [voices, setVoices] = useState<SpeechSynthesisVoice[]>([]);
+  const [lastLog, setLastLog] = useState<ReturnType<typeof StorageService.getLastLog>>(StorageService.getLastLog());
 
   useEffect(() => {
     const loadVoices = () => {
@@ -42,6 +43,11 @@ export const ScreenSettings: React.FC<ScreenSettingsProps> = ({ onBack }) => {
   const handleSave = () => {
     StorageService.saveSettings(settings);
     onBack();
+  };
+
+  const handleClearLastWorkout = () => {
+    StorageService.clearLastLog();
+    setLastLog(StorageService.getLastLog());
   };
 
   return (
@@ -93,6 +99,23 @@ export const ScreenSettings: React.FC<ScreenSettingsProps> = ({ onBack }) => {
               <option key={v.voiceURI} value={v.voiceURI}>{v.name} ({v.lang})</option>
             ))}
           </select>
+        </div>
+
+        <div className="bg-surface p-4 rounded-xl border border-slate-700">
+          <h3 className="text-sm font-medium text-slate-400 mb-2">Сохранённые данные</h3>
+          <p className="text-xs text-slate-500 mb-2">Группы мышц в последней полностью завершённой тренировке (используются для подбора следующих упражнений):</p>
+          {lastLog ? (
+            <>
+              <p className="text-white mb-3">
+                {lastLog.muscleGroupsUsed.join(', ')}
+              </p>
+              <Button variant="secondary" onClick={handleClearLastWorkout} fullWidth>
+                Очистить данные последней тренировки
+              </Button>
+            </>
+          ) : (
+            <p className="text-slate-500 text-sm">Нет данных о завершённых тренировках.</p>
+          )}
         </div>
 
         <div className="pt-4 flex gap-3">

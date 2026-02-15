@@ -28,12 +28,11 @@ export const ScreenSetup: React.FC<ScreenSetupProps> = ({ onStart, onNavigate })
   const handleRefresh = () => {
     setLoading(true);
     setTimeout(() => {
-      // Force random re-selection logic manually or just re-run algo
-      // Ideally we might want a 'force refresh' method, but calling the algo again usually yields different results if random seeds involved
-      // For MVP, we stick to the algo, maybe shuffle the playlist
+      // Новый выбор групп мышц с учётом последней тренировки (2 из прошлых + 1 новая)
+      const selectedMuscles = WorkoutGenerator.selectMuscleGroups();
+      setMuscles(selectedMuscles);
       const settings = StorageService.getSettings();
-      // Keep muscles, just regen playlist for variety
-      const newPlaylist = WorkoutGenerator.generatePlaylist(muscles, settings.exercisesPerCycle);
+      const newPlaylist = WorkoutGenerator.generatePlaylist(selectedMuscles, settings.exercisesPerCycle);
       setPlaylist(newPlaylist);
       setLoading(false);
     }, 300);
