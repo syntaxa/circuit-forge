@@ -1,3 +1,9 @@
+const DEFAULT_VOICE_NAME_SUBSTRING = 'microsoft david';
+
+function findDefaultVoice(voices: SpeechSynthesisVoice[]): SpeechSynthesisVoice | null {
+  return voices.find(v => v.name.toLowerCase().includes(DEFAULT_VOICE_NAME_SUBSTRING)) ?? null;
+}
+
 export const TTSService = {
   speak: (text: string, voiceURI: string | null, lang: 'ru-RU' | 'en-US' = 'ru-RU', onEnd?: () => void) => {
     if (!('speechSynthesis' in window)) {
@@ -27,13 +33,16 @@ export const TTSService = {
         selectedVoice = voices.find(v => v.lang.startsWith('en'));
       }
     } else {
-      // For Russian, use existing logic
-      // 1. Try specific voice URI
+      // For Russian (or when user chose a voice)
+      // 1. Try specific voice URI if user saved a preference
       if (voiceURI) {
         selectedVoice = voices.find(v => v.voiceURI === voiceURI);
       }
-      
-      // 2. Fallback: Try to find a Russian voice
+      // 2. If no saved preference: use default voice "Microsoft David" if available
+      if (!selectedVoice) {
+        selectedVoice = findDefaultVoice(voices);
+      }
+      // 3. Fallback: any Russian voice
       if (!selectedVoice) {
         selectedVoice = voices.find(v => v.lang === 'ru-RU' || v.lang.startsWith('ru'));
       }

@@ -90,7 +90,7 @@ export const ScreenWorkout: React.FC<ScreenWorkoutProps> = ({ playlist, muscleGr
     } else if (currentState === WorkoutState.WORK) {
       // Play end-of-exercise sound
       try {
-        const audio = new Audio('/assets/268756__morrisjm__dingaling.mp3');
+        const audio = new Audio(`${import.meta.env.BASE_URL}assets/268756__morrisjm__dingaling.mp3`);
         audio.play().catch(() => {});
       } catch {
         // ignore if audio fails
@@ -136,7 +136,7 @@ export const ScreenWorkout: React.FC<ScreenWorkoutProps> = ({ playlist, muscleGr
 
     // Play workout complete sound
     try {
-      const audio = new Audio('/assets/708541__rezidentevil__girl-says-uwu.mp3');
+      const audio = new Audio(`${import.meta.env.BASE_URL}assets/708541__rezidentevil__girl-says-uwu.mp3`);
       audio.play().catch(() => {});
     } catch {
       // ignore if audio fails
