@@ -1,7 +1,14 @@
-const DEFAULT_VOICE_NAME_SUBSTRING = 'microsoft david';
-
-function findDefaultVoice(voices: SpeechSynthesisVoice[]): SpeechSynthesisVoice | null {
-  return voices.find(v => v.name.toLowerCase().includes(DEFAULT_VOICE_NAME_SUBSTRING)) ?? null;
+function findDefaultEnglishVoice(voices: SpeechSynthesisVoice[]): SpeechSynthesisVoice | null {
+  // Filter only English voices
+  const englishVoices = voices.filter(v => v.lang.startsWith('en'));
+  if (englishVoices.length === 0) return null;
+  
+  // Prefer en-US voices
+  const usVoice = englishVoices.find(v => v.lang === 'en-US' || (v.lang.startsWith('en') && v.name.toLowerCase().includes('us')));
+  if (usVoice) return usVoice;
+  
+  // Fallback to any English voice
+  return englishVoices[0];
 }
 
 export const TTSService = {
@@ -15,25 +22,25 @@ export const TTSService = {
     window.speechSynthesis.cancel();
 
     const utterance = new SpeechSynthesisUtterance(text);
-    utterance.lang = lang;
+    utterance.lang = 'en-US'; // Always use English language
 
-    // Attempt to match voice — single setting: prefer user's chosen voice for all announcements
-    const voices = window.speechSynthesis.getVoices();
+    // Filter only English voices
+    const allVoices = window.speechSynthesis.getVoices();
+    const englishVoices = allVoices.filter(v => v.lang.startsWith('en'));
+    
     let selectedVoice: SpeechSynthesisVoice | null = null;
 
-    // 1. If user saved a voice preference, use it for any language
+    // 1. If user saved a voice preference, use it only if it's an English voice
     if (voiceURI) {
-      selectedVoice = voices.find(v => v.voiceURI === voiceURI) ?? null;
-    }
-    // 2. No preference or voice not found — choose by language
-    if (!selectedVoice) {
-      if (lang === 'en-US') {
-        selectedVoice = voices.find(v => v.lang === 'en-US' || (v.lang.startsWith('en') && v.name.toLowerCase().includes('us'))) ?? null;
-        if (!selectedVoice) selectedVoice = voices.find(v => v.lang.startsWith('en')) ?? null;
-      } else {
-        selectedVoice = findDefaultVoice(voices);
-        if (!selectedVoice) selectedVoice = voices.find(v => v.lang === 'ru-RU' || v.lang.startsWith('ru')) ?? null;
+      const userVoice = englishVoices.find(v => v.voiceURI === voiceURI);
+      if (userVoice) {
+        selectedVoice = userVoice;
       }
+    }
+    
+    // 2. No preference or voice not found — use default English voice
+    if (!selectedVoice) {
+      selectedVoice = findDefaultEnglishVoice(englishVoices);
     }
 
     if (selectedVoice) {
@@ -56,11 +63,12 @@ export const TTSService = {
 
   getVoices: (): SpeechSynthesisVoice[] => {
     if (!('speechSynthesis' in window)) return [];
-    return window.speechSynthesis.getVoices();
+    // Return only English voices
+    return window.speechSynthesis.getVoices().filter(v => v.lang.startsWith('en'));
   },
 
   getDefaultVoice: (): SpeechSynthesisVoice | null => {
     if (!('speechSynthesis' in window)) return null;
-    return findDefaultVoice(window.speechSynthesis.getVoices());
+    return findDefaultEnglishVoice(window.speechSynthesis.getVoices());
   }
 };

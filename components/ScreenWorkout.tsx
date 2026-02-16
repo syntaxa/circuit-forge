@@ -48,18 +48,14 @@ export const ScreenWorkout: React.FC<ScreenWorkoutProps> = ({ playlist, muscleGr
   const isLastExercise = currentExIndex === playlist.length - 1;
   const isLastCycle = currentCycle === settings.current.cycleCount;
 
-  const speak = (text: string) => {
-    TTSService.speak(text, settings.current.ttsVoiceURI);
-  };
-
   // Main Loop
   const tick = useCallback(() => {
     setTimeLeft(prev => {
       const next = prev - 1;
       
-      // Countdown handling (3, 2, 1)
+      // Countdown handling (3, 2, 1) - speak in English
       if (next <= 3 && next > 0) {
-        speak(String(next));
+        TTSService.speakEnglish(String(next), settings.current.ttsVoiceURI);
       }
 
       if (next < 0) {
@@ -86,7 +82,6 @@ export const ScreenWorkout: React.FC<ScreenWorkoutProps> = ({ playlist, muscleGr
       const workTime = settings.current.exerciseDuration;
       setDuration(workTime);
       setTimeLeft(workTime);
-      speak("Начали!");
     } else if (currentState === WorkoutState.WORK) {
       // Play end-of-exercise sound
       try {
@@ -122,17 +117,13 @@ export const ScreenWorkout: React.FC<ScreenWorkoutProps> = ({ playlist, muscleGr
     setState(WorkoutState.PREP);
     setDuration(5); // 5 seconds transition
     setTimeLeft(5);
-    // Shortened phrase "Далее" (Next) to ensure it fits within the 5s window before "3..2..1"
-    // Speak Russian part first, then English exercise name
-    TTSService.speak("Далее:", settings.current.ttsVoiceURI, 'ru-RU', () => {
-      TTSService.speakEnglish(nextEx.name, settings.current.ttsVoiceURI, () => {});
-    });
+    // Speak only the exercise name
+    TTSService.speakEnglish(nextEx.name, settings.current.ttsVoiceURI, () => {});
   };
 
   const finishWorkout = () => {
     if (intervalRef.current) clearInterval(intervalRef.current);
     setState(WorkoutState.FINISHED);
-    speak("Тренировка завершена. Отличная работа!");
 
     // Play workout complete sound
     try {
@@ -164,11 +155,9 @@ export const ScreenWorkout: React.FC<ScreenWorkoutProps> = ({ playlist, muscleGr
     };
   }, [state, tick]);
 
-  // Initial announcement
+  // Initial announcement - speak only the exercise name
   useEffect(() => {
-    TTSService.speak("Приготовьтесь. Первое упражнение:", settings.current.ttsVoiceURI, 'ru-RU', () => {
-      TTSService.speakEnglish(currentExercise.name, settings.current.ttsVoiceURI, () => {});
-    });
+    TTSService.speakEnglish(currentExercise.name, settings.current.ttsVoiceURI, () => {});
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -177,7 +166,6 @@ export const ScreenWorkout: React.FC<ScreenWorkoutProps> = ({ playlist, muscleGr
       setState(WorkoutState.WORK); // Resume (simplified, returns to WORK even if was PREP to avoid complexity)
     } else {
       setState(WorkoutState.PAUSED);
-      speak("Пауза");
     }
   };
 

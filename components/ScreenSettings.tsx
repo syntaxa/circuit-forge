@@ -20,15 +20,10 @@ export const ScreenSettings: React.FC<ScreenSettingsProps> = ({ onBack }) => {
 
   useEffect(() => {
     const loadVoices = () => {
+      // getVoices() already returns only English voices
       const v = TTSService.getVoices();
-      // Sort voices: Russian first, then others alphabetically
-      v.sort((a, b) => {
-        const aIsRu = a.lang.toLowerCase().includes('ru');
-        const bIsRu = b.lang.toLowerCase().includes('ru');
-        if (aIsRu && !bIsRu) return -1;
-        if (!aIsRu && bIsRu) return 1;
-        return a.name.localeCompare(b.name);
-      });
+      // Sort voices alphabetically
+      v.sort((a, b) => a.name.localeCompare(b.name));
       setVoices(v);
     };
 
@@ -100,7 +95,7 @@ export const ScreenSettings: React.FC<ScreenSettingsProps> = ({ onBack }) => {
             className="w-full bg-dark text-white p-3 rounded-lg border border-slate-600 focus:border-primary outline-none"
           >
             <option value="">
-              {defaultVoiceName ?? 'По умолчанию (Русский)'}
+              {defaultVoiceName ?? 'По умолчанию (English)'}
             </option>
             {voices.map(v => (
               <option key={v.voiceURI} value={v.voiceURI}>{v.name} ({v.lang})</option>
