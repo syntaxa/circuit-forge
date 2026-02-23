@@ -59,6 +59,11 @@ export const ScreenWorkout: React.FC<ScreenWorkoutProps> = ({ playlist, muscleGr
       }
 
       if (next < 0) {
+        // Stop interval immediately so we don't get a second tick (prev=0) and double handlePhaseChange
+        if (intervalRef.current) {
+          clearInterval(intervalRef.current);
+          intervalRef.current = null;
+        }
         handlePhaseChange();
         return 0; // Will be reset by handlePhaseChange logic
       }
