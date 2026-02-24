@@ -45,6 +45,8 @@ export const ScreenWorkout: React.FC<ScreenWorkoutProps> = ({ playlist, muscleGr
   // Preloaded audio — created once so first playback has no delay
   const dingAudioRef = useRef<HTMLAudioElement | null>(null);
   const completeAudioRef = useRef<HTMLAudioElement | null>(null);
+  // One "Switch side" announcement per bilateral exercise, at midpoint
+  const sideSwitchAnnouncedRef = useRef(false);
 
   // During PREP, show the next exercise if available, otherwise show current
   const currentExercise = (state === WorkoutState.PREP && nextExerciseRef.current) 
@@ -61,7 +63,18 @@ export const ScreenWorkout: React.FC<ScreenWorkoutProps> = ({ playlist, muscleGr
       }
 
       const next = prev - 1;
-      
+
+      // Bilateral exercise: announce "Switch side" once at midpoint
+      if (stateRef.current === WorkoutState.WORK) {
+        const ex = playlist[currentExIndexRef.current];
+        const workDuration = settings.current.exerciseDuration;
+        const mid = Math.ceil(workDuration / 2);
+        if (ex?.biSided && next <= mid && !sideSwitchAnnouncedRef.current) {
+          sideSwitchAnnouncedRef.current = true;
+          TTSService.speakEnglish('Switch side', settings.current.ttsVoiceURI);
+        }
+      }
+
       // Countdown handling (3, 2, 1) - speak in English
       if (next <= 3 && next > 0) {
         TTSService.speakEnglish(String(next), settings.current.ttsVoiceURI);
@@ -97,6 +110,7 @@ export const ScreenWorkout: React.FC<ScreenWorkoutProps> = ({ playlist, muscleGr
     if (currentState === WorkoutState.PREP) {
       // Prep finished, Start Work - clear the ref since we're now showing the actual current exercise
       nextExerciseRef.current = null;
+      sideSwitchAnnouncedRef.current = false; // allow one "Switch side" per exercise block
       setState(WorkoutState.WORK);
       const workTime = settings.current.exerciseDuration;
       setDuration(workTime);
@@ -206,6 +220,11 @@ export const ScreenWorkout: React.FC<ScreenWorkoutProps> = ({ playlist, muscleGr
   };
 
   const progressValue = timeLeft / duration;
+  const workDuration = settings.current.exerciseDuration;
+  const mid = Math.ceil(workDuration / 2);
+  const isBilateral = currentExercise.biSided === true;
+  const isWorkPhase = state === WorkoutState.WORK;
+  const leftHalfActive = isWorkPhase && isBilateral && timeLeft > mid;
 
   return (
     <div className="h-screen flex flex-col items-center justify-between p-6 bg-dark animate-fade-in relative overflow-hidden">
@@ -230,8 +249,10 @@ export const ScreenWorkout: React.FC<ScreenWorkoutProps> = ({ playlist, muscleGr
         <CircularTimer 
           progress={progressValue} 
           label={state === WorkoutState.PREP ? 'ГОТОВЬСЯ' : String(timeLeft)} 
-          subLabel={state === WorkoutState.PREP ? 'СЕК' : 'ОСТАЛОСЬ'}
+          subLabel={state === WorkoutState.PREP ? undefined : 'ОСТАЛОСЬ'}
           color={state === WorkoutState.PREP ? '#f97316' : '#10b981'}
+          biSided={isWorkPhase && isBilateral}
+          leftHalfActive={leftHalfActive}
         />
 
         <div className="mt-8 text-center max-w-md">
