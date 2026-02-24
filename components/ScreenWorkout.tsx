@@ -31,6 +31,7 @@ export const ScreenWorkout: React.FC<ScreenWorkoutProps> = ({ playlist, muscleGr
   const [duration, setDuration] = useState(5);
   
   const intervalRef = useRef<number | null>(null);
+  const phaseTransitionLockRef = useRef(false);
   // Use ref to track the exercise that should be displayed during PREP
   const nextExerciseRef = useRef<Exercise | null>(null);
   // Refs for phase change logic so timer callback always sees current values (avoids stale closure)
@@ -40,6 +41,10 @@ export const ScreenWorkout: React.FC<ScreenWorkoutProps> = ({ playlist, muscleGr
   stateRef.current = state;
   currentExIndexRef.current = currentExIndex;
   currentCycleRef.current = currentCycle;
+
+  // Preloaded audio — created once so first playback has no delay
+  const dingAudioRef = useRef<HTMLAudioElement | null>(null);
+  const completeAudioRef = useRef<HTMLAudioElement | null>(null);
 
   // During PREP, show the next exercise if available, otherwise show current
   const currentExercise = (state === WorkoutState.PREP && nextExerciseRef.current) 
@@ -51,6 +56,10 @@ export const ScreenWorkout: React.FC<ScreenWorkoutProps> = ({ playlist, muscleGr
   // Main Loop
   const tick = useCallback(() => {
     setTimeLeft(prev => {
+      if (phaseTransitionLockRef.current) {
+        return prev;
+      }
+
       const next = prev - 1;
       
       // Countdown handling (3, 2, 1) - speak in English
@@ -58,12 +67,13 @@ export const ScreenWorkout: React.FC<ScreenWorkoutProps> = ({ playlist, muscleGr
         TTSService.speakEnglish(String(next), settings.current.ttsVoiceURI);
       }
 
-      if (next < 0) {
+      if (next <= 0) {
         // Stop interval immediately so we don't get a second tick (prev=0) and double handlePhaseChange
         if (intervalRef.current) {
           clearInterval(intervalRef.current);
           intervalRef.current = null;
         }
+        phaseTransitionLockRef.current = true;
         handlePhaseChange();
         return 0; // Will be reset by handlePhaseChange logic
       }
@@ -73,6 +83,10 @@ export const ScreenWorkout: React.FC<ScreenWorkoutProps> = ({ playlist, muscleGr
   }, []);
 
   const handlePhaseChange = () => {
+    if (phaseTransitionLockRef.current === false) {
+      phaseTransitionLockRef.current = true;
+    }
+
     const currentState = stateRef.current;
     const exIndex = currentExIndexRef.current;
     const cycle = currentCycleRef.current;
@@ -88,10 +102,13 @@ export const ScreenWorkout: React.FC<ScreenWorkoutProps> = ({ playlist, muscleGr
       setDuration(workTime);
       setTimeLeft(workTime);
     } else if (currentState === WorkoutState.WORK) {
-      // Play end-of-exercise sound
+      // Play end-of-exercise sound (preloaded)
       try {
-        const audio = new Audio(`${import.meta.env.BASE_URL}assets/268756__morrisjm__dingaling.mp3`);
-        audio.play().catch(() => {});
+        const audio = dingAudioRef.current;
+        if (audio) {
+          audio.currentTime = 0;
+          audio.play().catch(() => {});
+        }
       } catch {
         // ignore if audio fails
       }
@@ -130,10 +147,13 @@ export const ScreenWorkout: React.FC<ScreenWorkoutProps> = ({ playlist, muscleGr
     if (intervalRef.current) clearInterval(intervalRef.current);
     setState(WorkoutState.FINISHED);
 
-    // Play workout complete sound
+    // Play workout complete sound (preloaded)
     try {
-      const audio = new Audio(`${import.meta.env.BASE_URL}assets/708541__rezidentevil__girl-says-uwu.mp3`);
-      audio.play().catch(() => {});
+      const audio = completeAudioRef.current;
+      if (audio) {
+        audio.currentTime = 0;
+        audio.play().catch(() => {});
+      }
     } catch {
       // ignore if audio fails
     }
@@ -154,11 +174,22 @@ export const ScreenWorkout: React.FC<ScreenWorkoutProps> = ({ playlist, muscleGr
       return;
     }
 
+    // Unlock only when a new phase interval is armed.
+    phaseTransitionLockRef.current = false;
     intervalRef.current = window.setInterval(tick, 1000);
     return () => {
       if (intervalRef.current) clearInterval(intervalRef.current);
     };
   }, [state, tick]);
+
+  // Preload audio files on mount so first playback has no delay
+  useEffect(() => {
+    const base = import.meta.env.BASE_URL;
+    dingAudioRef.current = new Audio(`${base}assets/268756__morrisjm__dingaling.mp3`);
+    completeAudioRef.current = new Audio(`${base}assets/708541__rezidentevil__girl-says-uwu.mp3`);
+    dingAudioRef.current.load();
+    completeAudioRef.current.load();
+  }, []);
 
   // Initial announcement - speak only the exercise name
   useEffect(() => {
