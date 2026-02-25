@@ -10,6 +10,8 @@ interface ScreenWorkoutProps {
   muscleGroups: MuscleGroup[];
   onFinish: () => void;
   onCancel: () => void;
+  onOpenExerciseDetail?: (exercise: Exercise) => void;
+  isPausedByOverlay?: boolean;
 }
 
 enum WorkoutState {
@@ -19,7 +21,7 @@ enum WorkoutState {
   FINISHED = 'FINISHED'
 }
 
-export const ScreenWorkout: React.FC<ScreenWorkoutProps> = ({ playlist, muscleGroups, onFinish, onCancel }) => {
+export const ScreenWorkout: React.FC<ScreenWorkoutProps> = ({ playlist, muscleGroups, onFinish, onCancel, onOpenExerciseDetail, isPausedByOverlay = false }) => {
   const settings = useRef<Settings>(StorageService.getSettings());
   
   const [state, setState] = useState<WorkoutState>(WorkoutState.PREP);
@@ -181,9 +183,9 @@ export const ScreenWorkout: React.FC<ScreenWorkoutProps> = ({ playlist, muscleGr
     setTimeout(onFinish, 3000);
   };
 
-  // Effect to manage interval
+  // Effect to manage interval (also stop when description overlay is open)
   useEffect(() => {
-    if (state === WorkoutState.PAUSED || state === WorkoutState.FINISHED) {
+    if (state === WorkoutState.PAUSED || state === WorkoutState.FINISHED || isPausedByOverlay) {
       if (intervalRef.current) clearInterval(intervalRef.current);
       return;
     }
@@ -194,7 +196,7 @@ export const ScreenWorkout: React.FC<ScreenWorkoutProps> = ({ playlist, muscleGr
     return () => {
       if (intervalRef.current) clearInterval(intervalRef.current);
     };
-  }, [state, tick]);
+  }, [state, tick, isPausedByOverlay]);
 
   // Preload audio files on mount so first playback has no delay
   useEffect(() => {
@@ -256,9 +258,17 @@ export const ScreenWorkout: React.FC<ScreenWorkoutProps> = ({ playlist, muscleGr
         />
 
         <div className="mt-8 text-center max-w-md">
-          <h1 className="text-3xl font-black text-white mb-2 leading-tight">
-            {currentExercise.name}
-          </h1>
+          <button
+            type="button"
+            onClick={() => onOpenExerciseDetail?.(currentExercise)}
+            className="inline-flex items-center justify-center gap-1.5 text-center mb-2 hover:opacity-90 transition-opacity focus:outline-none focus:ring-2 focus:ring-primary/50 rounded-lg"
+            aria-label={`Подробнее об упражнении ${currentExercise.name}`}
+          >
+            <h1 className="text-3xl font-black text-white leading-tight">
+              {currentExercise.name}
+            </h1>
+            <span className="text-slate-400 text-lg font-normal" aria-hidden>ⓘ</span>
+          </button>
           <p className="text-slate-400">{currentExercise.description}</p>
           <div className="mt-4 inline-flex items-center px-3 py-1 rounded-full bg-slate-800 border border-slate-700 text-xs font-bold text-slate-300">
              {currentExercise.muscleGroup} • {currentExercise.difficulty}

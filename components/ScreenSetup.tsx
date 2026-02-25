@@ -7,9 +7,10 @@ import { Button } from './Button';
 interface ScreenSetupProps {
   onStart: (playlist: Exercise[], muscles: MuscleGroup[]) => void;
   onNavigate: (screen: AppScreen) => void;
+  onOpenExerciseDetail: (exercise: Exercise) => void;
 }
 
-export const ScreenSetup: React.FC<ScreenSetupProps> = ({ onStart, onNavigate }) => {
+export const ScreenSetup: React.FC<ScreenSetupProps> = ({ onStart, onNavigate, onOpenExerciseDetail }) => {
   const [muscles, setMuscles] = useState<MuscleGroup[]>([]);
   const [playlist, setPlaylist] = useState<Exercise[]>([]);
   const [loading, setLoading] = useState(true);
@@ -85,10 +86,16 @@ export const ScreenSetup: React.FC<ScreenSetupProps> = ({ onStart, onNavigate })
             ) : (
                 <div className="max-h-60 overflow-y-auto pr-2 space-y-2 custom-scrollbar">
                 {playlist.map((ex, idx) => (
-                    <div key={idx} className="bg-dark/50 p-3 rounded-lg flex justify-between items-center border border-slate-800">
-                    <span className="font-medium text-slate-200">{idx + 1}. {ex.name}</span>
-                    <span className="text-xs px-2 py-1 rounded bg-slate-800 text-slate-400">{ex.difficulty}</span>
-                    </div>
+                    <button
+                      key={idx}
+                      type="button"
+                      onClick={() => onOpenExerciseDetail(ex)}
+                      className="w-full text-left bg-dark/50 p-3 rounded-lg flex justify-between items-center border border-slate-800 hover:border-slate-600 hover:bg-slate-800/50 transition-colors cursor-pointer"
+                      aria-label={`Подробнее об упражнении ${ex.name}`}
+                    >
+                      <span className="font-medium text-slate-200">{idx + 1}. {ex.name} <span className="text-slate-400 text-sm font-normal">ⓘ</span></span>
+                      <span className="text-xs px-2 py-1 rounded bg-slate-800 text-slate-400">{ex.difficulty}</span>
+                    </button>
                 ))}
                 </div>
             )}

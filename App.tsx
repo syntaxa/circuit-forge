@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { createPortal } from 'react-dom';
 import { AppScreen, Exercise, MuscleGroup } from './types';
 import { ScreenSetup } from './components/ScreenSetup';
 import { ScreenWorkout } from './components/ScreenWorkout';
+import { ScreenExerciseDetail } from './components/ScreenExerciseDetail';
 import { ScreenSettings } from './components/ScreenSettings';
 import { ScreenDatabase } from './components/ScreenDatabase';
 
@@ -9,6 +11,7 @@ function App() {
   const [currentScreen, setCurrentScreen] = useState<AppScreen>(AppScreen.SETUP);
   const [activePlaylist, setActivePlaylist] = useState<Exercise[]>([]);
   const [activeMuscles, setActiveMuscles] = useState<MuscleGroup[]>([]);
+  const [exerciseDetail, setExerciseDetail] = useState<Exercise | null>(null);
 
   const handleStartWorkout = (playlist: Exercise[], muscles: MuscleGroup[]) => {
     setActivePlaylist(playlist);
@@ -23,6 +26,7 @@ function App() {
           <ScreenSetup 
             onStart={handleStartWorkout}
             onNavigate={setCurrentScreen}
+            onOpenExerciseDetail={setExerciseDetail}
           />
         );
       case AppScreen.WORKOUT:
@@ -32,6 +36,8 @@ function App() {
             muscleGroups={activeMuscles}
             onFinish={() => setCurrentScreen(AppScreen.SETUP)}
             onCancel={() => setCurrentScreen(AppScreen.SETUP)}
+            onOpenExerciseDetail={setExerciseDetail}
+            isPausedByOverlay={currentScreen === AppScreen.WORKOUT && exerciseDetail !== null}
           />
         );
       case AppScreen.SETTINGS:
@@ -54,6 +60,25 @@ function App() {
   return (
     <div className="min-h-screen bg-dark text-white font-sans selection:bg-primary selection:text-white">
       {renderScreen()}
+      {exerciseDetail !== null &&
+        createPortal(
+          <div
+            style={{
+              position: 'fixed',
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              zIndex: 99999,
+            }}
+          >
+            <ScreenExerciseDetail
+              exercise={exerciseDetail}
+              onBack={() => setExerciseDetail(null)}
+            />
+          </div>,
+          document.body
+        )}
     </div>
   );
 }
