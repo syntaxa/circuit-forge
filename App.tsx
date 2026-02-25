@@ -12,6 +12,13 @@ function App() {
   const [activePlaylist, setActivePlaylist] = useState<Exercise[]>([]);
   const [activeMuscles, setActiveMuscles] = useState<MuscleGroup[]>([]);
   const [exerciseDetail, setExerciseDetail] = useState<Exercise | null>(null);
+  /** Увеличивается при каждом возврате на SETUP, чтобы плейлист пересобирался из актуальной базы (после редактирования в базе). */
+  const [setupRefreshKey, setSetupRefreshKey] = useState(0);
+
+  const navigateToSetup = () => {
+    setCurrentScreen(AppScreen.SETUP);
+    setSetupRefreshKey((k) => k + 1);
+  };
 
   const handleStartWorkout = (playlist: Exercise[], muscles: MuscleGroup[]) => {
     setActivePlaylist(playlist);
@@ -24,6 +31,7 @@ function App() {
       case AppScreen.SETUP:
         return (
           <ScreenSetup 
+            key={setupRefreshKey}
             onStart={handleStartWorkout}
             onNavigate={setCurrentScreen}
             onOpenExerciseDetail={setExerciseDetail}
@@ -34,8 +42,8 @@ function App() {
           <ScreenWorkout 
             playlist={activePlaylist}
             muscleGroups={activeMuscles}
-            onFinish={() => setCurrentScreen(AppScreen.SETUP)}
-            onCancel={() => setCurrentScreen(AppScreen.SETUP)}
+            onFinish={navigateToSetup}
+            onCancel={navigateToSetup}
             onOpenExerciseDetail={setExerciseDetail}
             isPausedByOverlay={currentScreen === AppScreen.WORKOUT && exerciseDetail !== null}
           />
@@ -43,13 +51,13 @@ function App() {
       case AppScreen.SETTINGS:
         return (
           <ScreenSettings 
-            onBack={() => setCurrentScreen(AppScreen.SETUP)}
+            onBack={navigateToSetup}
           />
         );
       case AppScreen.DATABASE:
         return (
           <ScreenDatabase 
-            onBack={() => setCurrentScreen(AppScreen.SETUP)}
+            onBack={navigateToSetup}
           />
         );
       default:

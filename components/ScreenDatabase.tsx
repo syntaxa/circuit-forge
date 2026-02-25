@@ -30,8 +30,10 @@ export const ScreenDatabase: React.FC<ScreenDatabaseProps> = ({ onBack }) => {
     setCurrentEx({
       name: '',
       description: '',
+      steps: '',
       muscleGroup: MuscleGroup.LEGS,
-      difficulty: Difficulty.MEDIUM
+      difficulty: Difficulty.MEDIUM,
+      biSided: false
     });
     setIsEditing(true);
   };
@@ -39,14 +41,22 @@ export const ScreenDatabase: React.FC<ScreenDatabaseProps> = ({ onBack }) => {
   const handleSave = () => {
     if (!currentEx.name || !currentEx.muscleGroup || !currentEx.difficulty) return;
 
+    const fullEx: Exercise = {
+      ...currentEx,
+      id: currentEx.id ?? Date.now().toString(),
+      name: currentEx.name,
+      description: currentEx.description ?? '',
+      steps: currentEx.steps ?? '',
+      muscleGroup: currentEx.muscleGroup,
+      difficulty: currentEx.difficulty,
+      biSided: currentEx.biSided ?? false
+    };
+
     let updated: Exercise[];
     if (currentEx.id) {
-      // Update existing
-      updated = exercises.map(e => e.id === currentEx.id ? currentEx as Exercise : e);
+      updated = exercises.map(e => e.id === currentEx.id ? fullEx : e);
     } else {
-      // Create new
-      const newEx = { ...currentEx, id: Date.now().toString() } as Exercise;
-      updated = [...exercises, newEx];
+      updated = [...exercises, fullEx];
     }
     
     setExercises(updated);
@@ -74,6 +84,25 @@ export const ScreenDatabase: React.FC<ScreenDatabaseProps> = ({ onBack }) => {
               value={currentEx.description || ''}
               onChange={e => setCurrentEx({...currentEx, description: e.target.value})}
             />
+          </div>
+          <div>
+            <label className="text-slate-400 text-sm">Шаги исполнения</label>
+            <textarea 
+              className="w-full bg-surface border border-slate-600 rounded-lg p-3 text-white focus:border-primary outline-none h-32 resize-y"
+              value={currentEx.steps ?? ''}
+              onChange={e => setCurrentEx({...currentEx, steps: e.target.value})}
+              placeholder="Например: 1. Шаг один. 2. Шаг два. (каждый шаг с новой строки)"
+            />
+          </div>
+          <div className="flex items-center gap-3">
+            <input
+              type="checkbox"
+              id="biSided"
+              checked={currentEx.biSided ?? false}
+              onChange={e => setCurrentEx({...currentEx, biSided: e.target.checked})}
+              className="w-4 h-4 rounded border-slate-600 bg-surface text-primary focus:ring-primary"
+            />
+            <label htmlFor="biSided" className="text-slate-300 text-sm cursor-pointer">Двухстороннее упражнение</label>
           </div>
           <div>
             <label className="text-slate-400 text-sm">Группа мышц</label>
