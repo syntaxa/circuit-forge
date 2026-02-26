@@ -56,6 +56,11 @@ export const ScreenSetup: React.FC<ScreenSetupProps> = ({ onStart, onNavigate, o
     }, 300);
   };
 
+  const handleForgetHistoryAndRefresh = () => {
+    StorageService.clearHistory();
+    handleRefresh();
+  };
+
   return (
     <div className="flex flex-col h-screen min-h-0 overflow-hidden p-4 sm:p-6 animate-fade-in max-w-lg mx-auto">
       <div className="flex-1 min-h-0 flex flex-col overflow-hidden">
@@ -74,7 +79,7 @@ export const ScreenSetup: React.FC<ScreenSetupProps> = ({ onStart, onNavigate, o
             {fromPreviousGroups.length > 0 && (
               <div className="flex flex-col gap-1 min-w-0">
                 <p className="uppercase tracking-wider text-amber-400/80 text-center" style={{ fontSize: '9px' }}>из последней тренировки</p>
-                <div className="flex justify-center gap-2">
+                <div className="flex items-center justify-center gap-2">
                   {fromPreviousGroups.map(({ group }) => (
                     <span
                       key={group}
@@ -84,12 +89,23 @@ export const ScreenSetup: React.FC<ScreenSetupProps> = ({ onStart, onNavigate, o
                       {group.toUpperCase()}
                     </span>
                   ))}
+                  <button
+                    type="button"
+                    onClick={handleForgetHistoryAndRefresh}
+                    className="shrink-0 px-2 py-2 rounded-lg border border-slate-700 bg-dark/40 text-slate-200 hover:bg-slate-800/60 hover:border-slate-600 transition-colors"
+                    title="Забыть историю и сгенерировать полностью случайно"
+                    aria-label="Забыть историю тренировок и сгенерировать новую тренировку"
+                  >
+                    🗑️
+                  </button>
                 </div>
               </div>
             )}
             {newGroups.length > 0 && (
               <div className="flex flex-col gap-1 min-w-0">
-                <p className="uppercase tracking-wider text-primary text-center" style={{ fontSize: '9px' }}>новое</p>
+                {fromPreviousGroups.length > 0 && (
+                  <p className="uppercase tracking-wider text-primary text-center" style={{ fontSize: '9px' }}>новое</p>
+                )}
                 <div className="flex flex-wrap gap-1">
                   {newGroups.map(({ group }) => (
                     <span

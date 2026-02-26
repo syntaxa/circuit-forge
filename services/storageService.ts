@@ -57,4 +57,8 @@ export const StorageService = {
     const rest = history.slice(1);
     localStorage.setItem(KEYS.HISTORY, JSON.stringify(rest));
   },
+
+  clearHistory: (): void => {
+    localStorage.removeItem(KEYS.HISTORY);
+  },
 };
