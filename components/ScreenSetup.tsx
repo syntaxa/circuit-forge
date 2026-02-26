@@ -10,6 +10,19 @@ interface ScreenSetupProps {
   onOpenExerciseDetail: (exercise: Exercise) => void;
 }
 
+function getDisplayMuscles(muscles: MuscleGroup[]): { group: MuscleGroup; fromPrevious: boolean }[] {
+  const lastLog = StorageService.getLastLog();
+  if (!lastLog?.muscleGroupsUsed?.length) {
+    return muscles.map(m => ({ group: m, fromPrevious: false }));
+  }
+  const previousGroups = lastLog.muscleGroupsUsed;
+  const fromPreviousInCurrent = muscles.filter(m => previousGroups.includes(m));
+  fromPreviousInCurrent.sort((a, b) => previousGroups.indexOf(a) - previousGroups.indexOf(b));
+  const rest = muscles.filter(m => !previousGroups.includes(m));
+  const displayOrder = [...fromPreviousInCurrent, ...rest];
+  return displayOrder.map(m => ({ group: m, fromPrevious: previousGroups.includes(m) }));
+}
+
 export const ScreenSetup: React.FC<ScreenSetupProps> = ({ onStart, onNavigate, onOpenExerciseDetail }) => {
   const [muscles, setMuscles] = useState<MuscleGroup[]>([]);
   const [playlist, setPlaylist] = useState<Exercise[]>([]);
@@ -25,6 +38,8 @@ export const ScreenSetup: React.FC<ScreenSetupProps> = ({ onStart, onNavigate, o
     setPlaylist(generatedPlaylist);
     setLoading(false);
   }, []);
+
+  const displayMuscles = getDisplayMuscles(muscles);
 
   const handleRefresh = () => {
     setLoading(true);
@@ -54,9 +69,17 @@ export const ScreenSetup: React.FC<ScreenSetupProps> = ({ onStart, onNavigate, o
         <div className="bg-surface rounded-2xl p-6 border border-slate-700 shadow-xl mb-6">
           <h2 className="text-sm uppercase tracking-widest text-slate-400 font-bold mb-4">Цель на сегодня</h2>
           <div className="flex flex-wrap gap-2 mb-6">
-            {muscles.map(m => (
-              <span key={m} className="px-4 py-2 rounded-lg bg-primary/10 text-primary border border-primary/20 font-bold text-sm">
-                {m.toUpperCase()}
+            {displayMuscles.map(({ group, fromPrevious }) => (
+              <span
+                key={group}
+                className={`px-4 py-2 rounded-lg font-bold text-sm border ${
+                  fromPrevious
+                    ? 'bg-amber-500/15 text-amber-400 border-amber-400/40 ring-1 ring-amber-400/30'
+                    : 'bg-primary/10 text-primary border-primary/20'
+                }`}
+                title={fromPrevious ? 'Было в прошлой тренировке' : undefined}
+              >
+                {group.toUpperCase()}
               </span>
             ))}
           </div>
