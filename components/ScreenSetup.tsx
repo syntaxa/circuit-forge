@@ -55,24 +55,24 @@ export const ScreenSetup: React.FC<ScreenSetupProps> = ({ onStart, onNavigate, o
   };
 
   return (
-    <div className="flex flex-col h-full p-6 animate-fade-in max-w-lg mx-auto">
-      <div className="flex-1">
-        <div className="flex justify-between items-center mb-8">
-          <h1 className="text-3xl font-black italic text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">
+    <div className="flex flex-col h-full p-4 sm:p-6 animate-fade-in max-w-lg mx-auto">
+      <div className="flex-none sm:flex-1">
+        <div className="flex justify-between items-center mb-2 sm:mb-3">
+          <h1 className="text-2xl sm:text-3xl font-black italic text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">
             CIRCUIT FORGE
           </h1>
-          <button onClick={() => onNavigate(AppScreen.SETTINGS)} className="p-2 text-slate-400 hover:text-white">
+          <button onClick={() => onNavigate(AppScreen.SETTINGS)} className="p-1.5 text-slate-400 hover:text-white">
             ⚙️
           </button>
         </div>
 
-        <div className="bg-surface rounded-2xl p-6 border border-slate-700 shadow-xl mb-6">
-          <h2 className="text-sm uppercase tracking-widest text-slate-400 font-bold mb-4">Цель на сегодня</h2>
-          <div className="flex flex-wrap gap-2 mb-6">
+        <div className="bg-surface rounded-xl p-3 sm:p-4 border border-slate-700 shadow-xl mb-2 sm:mb-3">
+          <h2 className="text-xs uppercase tracking-widest text-slate-400 font-bold mb-2">Цель на сегодня</h2>
+          <div className="flex flex-wrap gap-1.5 mb-3">
             {displayMuscles.map(({ group, fromPrevious }) => (
               <span
                 key={group}
-                className={`px-4 py-2 rounded-lg font-bold text-sm border ${
+                className={`px-3 py-1.5 rounded-lg font-bold text-xs border ${
                   fromPrevious
                     ? 'bg-amber-500/15 text-amber-400 border-amber-400/40 ring-1 ring-amber-400/30'
                     : 'bg-primary/10 text-primary border-primary/20'
@@ -84,24 +84,23 @@ export const ScreenSetup: React.FC<ScreenSetupProps> = ({ onStart, onNavigate, o
             ))}
           </div>
           
-          <div className="flex justify-between items-end">
+          <div className="flex justify-between items-end gap-2">
              <div>
-               <p className="text-3xl font-bold text-white">{playlist.length}</p>
+               <p className="text-2xl font-bold text-white">{playlist.length}</p>
                <p className="text-xs text-slate-400">Упражнений</p>
              </div>
              <div>
-                <p className="text-3xl font-bold text-white">{StorageService.getSettings().cycleCount}</p>
+                <p className="text-2xl font-bold text-white">{StorageService.getSettings().cycleCount}</p>
                 <p className="text-xs text-slate-400">Круга</p>
              </div>
              <div>
-                <p className="text-3xl font-bold text-white">~{Math.ceil((playlist.length * StorageService.getSettings().exerciseDuration * StorageService.getSettings().cycleCount) / 60)}</p>
+                <p className="text-2xl font-bold text-white">~{Math.ceil((playlist.length * StorageService.getSettings().exerciseDuration * StorageService.getSettings().cycleCount) / 60)}</p>
                 <p className="text-xs text-slate-400">Минут</p>
              </div>
           </div>
         </div>
 
-        <div className="space-y-2 mb-8">
-            <h3 className="text-slate-400 text-sm font-bold mb-2">Предпросмотр:</h3>
+        <div className="space-y-2 mb-4 sm:mb-8">
             {playlist.length === 0 ? (
                  <div className="text-center text-red-400 p-4 border border-red-900/50 rounded-lg bg-red-900/10">
                     Не найдено упражнений для этих групп мышц. Добавьте их в базу!
@@ -125,16 +124,16 @@ export const ScreenSetup: React.FC<ScreenSetupProps> = ({ onStart, onNavigate, o
         </div>
       </div>
 
-      <div className="space-y-3">
+      <div className="space-y-2 sm:space-y-3">
         <Button 
             fullWidth 
             onClick={() => onStart(playlist, muscles)}
             disabled={playlist.length === 0}
-            className="text-lg py-4 shadow-emerald-500/20"
+            className="text-lg py-3 sm:py-4 shadow-emerald-500/20"
         >
             Начать тренировку
         </Button>
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-2 gap-2 sm:gap-3">
             <Button variant="secondary" onClick={handleRefresh}>↻ Обновить план</Button>
             <Button variant="secondary" onClick={() => onNavigate(AppScreen.DATABASE)}>База упражнений</Button>
         </div>
