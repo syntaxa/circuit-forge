@@ -40,6 +40,8 @@ export const ScreenSetup: React.FC<ScreenSetupProps> = ({ onStart, onNavigate, o
   }, []);
 
   const displayMuscles = getDisplayMuscles(muscles);
+  const fromPreviousGroups = displayMuscles.filter(m => m.fromPrevious);
+  const newGroups = displayMuscles.filter(m => !m.fromPrevious);
 
   const handleRefresh = () => {
     setLoading(true);
@@ -55,8 +57,8 @@ export const ScreenSetup: React.FC<ScreenSetupProps> = ({ onStart, onNavigate, o
   };
 
   return (
-    <div className="flex flex-col h-full p-4 sm:p-6 animate-fade-in max-w-lg mx-auto">
-      <div className="flex-none sm:flex-1">
+    <div className="flex flex-col h-screen min-h-0 overflow-hidden p-4 sm:p-6 animate-fade-in max-w-lg mx-auto">
+      <div className="flex-1 min-h-0 flex flex-col overflow-hidden">
         <div className="flex justify-between items-center mb-2 sm:mb-3">
           <h1 className="text-2xl sm:text-3xl font-black italic text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">
             CIRCUIT FORGE
@@ -68,20 +70,38 @@ export const ScreenSetup: React.FC<ScreenSetupProps> = ({ onStart, onNavigate, o
 
         <div className="bg-surface rounded-xl p-3 sm:p-4 border border-slate-700 shadow-xl mb-2 sm:mb-3">
           <h2 className="text-xs uppercase tracking-widest text-slate-400 font-bold mb-2">Цель на сегодня</h2>
-          <div className="flex flex-wrap gap-1.5 mb-3">
-            {displayMuscles.map(({ group, fromPrevious }) => (
-              <span
-                key={group}
-                className={`px-3 py-1.5 rounded-lg font-bold text-xs border ${
-                  fromPrevious
-                    ? 'bg-amber-500/15 text-amber-400 border-amber-400/40 ring-1 ring-amber-400/30'
-                    : 'bg-primary/10 text-primary border-primary/20'
-                }`}
-                title={fromPrevious ? 'Было в прошлой тренировке' : undefined}
-              >
-                {group.toUpperCase()}
-              </span>
-            ))}
+          <div className="flex flex-wrap items-end gap-x-10 gap-y-1 mb-3">
+            {fromPreviousGroups.length > 0 && (
+              <div className="flex flex-col gap-1 min-w-0">
+                <p className="uppercase tracking-wider text-amber-400/80 text-center" style={{ fontSize: '9px' }}>из последней тренировки</p>
+                <div className="flex justify-center gap-2">
+                  {fromPreviousGroups.map(({ group }) => (
+                    <span
+                      key={group}
+                      className="shrink-0 px-3 py-3 rounded-lg font-bold text-xs border bg-amber-500/15 text-amber-400 border-amber-400/40 ring-1 ring-amber-400/30"
+                      title="Было в прошлой тренировке"
+                    >
+                      {group.toUpperCase()}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            )}
+            {newGroups.length > 0 && (
+              <div className="flex flex-col gap-1 min-w-0">
+                <p className="uppercase tracking-wider text-slate-500 text-center" style={{ fontSize: '9px' }}>новое</p>
+                <div className="flex flex-wrap gap-1">
+                  {newGroups.map(({ group }) => (
+                    <span
+                      key={group}
+                      className="px-3 py-3 rounded-lg font-bold text-xs border bg-primary/10 text-primary border-primary/20"
+                    >
+                      {group.toUpperCase()}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
           
           <div className="flex justify-between items-end gap-2">
@@ -100,13 +120,13 @@ export const ScreenSetup: React.FC<ScreenSetupProps> = ({ onStart, onNavigate, o
           </div>
         </div>
 
-        <div className="space-y-2 mb-4 sm:mb-8">
+        <div className="flex-1 min-h-0 flex flex-col overflow-hidden">
             {playlist.length === 0 ? (
                  <div className="text-center text-red-400 p-4 border border-red-900/50 rounded-lg bg-red-900/10">
                     Не найдено упражнений для этих групп мышц. Добавьте их в базу!
                  </div>
             ) : (
-                <div className="max-h-60 overflow-y-auto pr-2 space-y-2 custom-scrollbar">
+                <div className="flex-1 min-h-0 overflow-y-auto pr-2 space-y-2 custom-scrollbar">
                 {playlist.map((ex, idx) => (
                     <button
                       key={idx}
@@ -124,7 +144,7 @@ export const ScreenSetup: React.FC<ScreenSetupProps> = ({ onStart, onNavigate, o
         </div>
       </div>
 
-      <div className="space-y-2 sm:space-y-3">
+      <div className="flex-shrink-0 space-y-2 sm:space-y-3 pt-2 sm:pt-4">
         <Button 
             fullWidth 
             onClick={() => onStart(playlist, muscles)}
