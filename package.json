@@ -5,10 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "npm run build:css && vite build",
-    "preview": "vite preview",
-    "dev:css": "tailwindcss -i ./tailwind.css -o ./public/output.css --watch",
-    "build:css": "tailwindcss -i ./tailwind.css -o ./public/output.css --minify"
+    "build": "vite build",
+    "preview": "vite preview"
   },
   "dependencies": {
     "react": "^19.2.0",

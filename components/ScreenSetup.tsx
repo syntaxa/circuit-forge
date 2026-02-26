@@ -89,7 +89,7 @@ export const ScreenSetup: React.FC<ScreenSetupProps> = ({ onStart, onNavigate, o
             )}
             {newGroups.length > 0 && (
               <div className="flex flex-col gap-1 min-w-0">
-                <p className="uppercase tracking-wider text-slate-500 text-center" style={{ fontSize: '9px' }}>новое</p>
+                <p className="uppercase tracking-wider text-primary text-center" style={{ fontSize: '9px' }}>новое</p>
                 <div className="flex flex-wrap gap-1">
                   {newGroups.map(({ group }) => (
                     <span
