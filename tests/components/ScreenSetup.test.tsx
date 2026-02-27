@@ -90,7 +90,7 @@ describe('ScreenSetup', () => {
       expect(screen.getByText(/Push-ups/i)).toBeInTheDocument();
     });
     expect(screen.getByText('Упражнений')).toBeInTheDocument();
-    expect(screen.getByText('Круга')).toBeInTheDocument();
+    expect(screen.getByText('Кругов')).toBeInTheDocument();
     expect(screen.getByText('Минут')).toBeInTheDocument();
   });
 
