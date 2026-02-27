@@ -43,24 +43,41 @@ export const WorkoutGenerator = {
     const candidates = allExercises.filter(ex => targetMuscles.includes(ex.muscleGroup));
 
     if (candidates.length === 0) {
-      // Fallback if database is empty for these muscles
-      return []; 
+      return [];
     }
 
+    // Distinct exercises (by id) — use these first so duplicates appear only when necessary
+    const distinctList = shuffle([...new Map(candidates.map((e) => [e.id, e])).values()]);
+    const usedIds = new Set<string>();
     let playlist: Exercise[] = [];
-    
-    // Ensure at least one from each target group exists in the playlist (if available)
-    targetMuscles.forEach(muscle => {
-      const muscleSpecific = candidates.filter(ex => ex.muscleGroup === muscle);
-      if (muscleSpecific.length > 0) {
-        playlist.push(muscleSpecific[Math.floor(Math.random() * muscleSpecific.length)]);
-      }
-    });
 
-    // Fill the rest
+    // At least one from each target group (from distinct, without replacement)
+    for (const muscle of targetMuscles) {
+      const option = distinctList.find((ex) => ex.muscleGroup === muscle && !usedIds.has(ex.id));
+      if (option) {
+        playlist.push(option);
+        usedIds.add(option.id);
+      }
+    }
+
+    // Fill with distinct exercises (no duplicates) until we have count or run out
     while (playlist.length < count) {
-      const randomEx = candidates[Math.floor(Math.random() * candidates.length)];
-      playlist.push(randomEx);
+      const available = distinctList.filter((ex) => !usedIds.has(ex.id));
+      if (available.length === 0) break;
+      const lastId = playlist.length > 0 ? playlist[playlist.length - 1].id : null;
+      const pickFrom = lastId ? available.filter((c) => c.id !== lastId) : available;
+      const pool = pickFrom.length > 0 ? pickFrom : available;
+      const ex = pool[Math.floor(Math.random() * pool.length)];
+      playlist.push(ex);
+      usedIds.add(ex.id);
+    }
+
+    // Only when not enough distinct: fill with repeats, never same as last (no consecutive duplicates)
+    while (playlist.length < count) {
+      const lastId = playlist[playlist.length - 1].id;
+      const pickFrom = candidates.filter((c) => c.id !== lastId);
+      const pool = pickFrom.length > 0 ? pickFrom : candidates;
+      playlist.push(pool[Math.floor(Math.random() * pool.length)]);
     }
 
     // Apply difficulty constraint: No HARD followed immediately by HARD.
@@ -89,6 +106,38 @@ export const WorkoutGenerator = {
       playlist = shuffle(playlist);
     }
 
+    // Ensure no two identical exercises in a row (difficulty reorder may have created duplicates)
+    playlist = avoidConsecutiveDuplicates(playlist);
+
     return playlist;
   }
 };
+
+/** Swap elements so that no two adjacent exercises have the same id. */
+function avoidConsecutiveDuplicates(list: Exercise[]): Exercise[] {
+  const arr = [...list];
+  let changed = true;
+  let iterations = 0;
+  const maxIterations = arr.length * arr.length;
+  while (changed && iterations < maxIterations) {
+    changed = false;
+    iterations++;
+    for (let i = 1; i < arr.length; i++) {
+      if (arr[i].id !== arr[i - 1].id) continue;
+      const duplicateId = arr[i].id;
+      let found = false;
+      for (let j = 0; j < arr.length && !found; j++) {
+        if (j === i || j === i - 1) continue;
+        if (arr[j].id === duplicateId) continue;
+        const prevId = j > 0 ? arr[j - 1].id : null;
+        const nextId = j < arr.length - 1 ? arr[j + 1].id : null;
+        if (prevId === duplicateId || nextId === duplicateId) continue;
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+        found = true;
+        changed = true;
+      }
+      if (found) break;
+    }
+  }
+  return arr;
+}

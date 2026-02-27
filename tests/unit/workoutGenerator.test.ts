@@ -145,5 +145,39 @@ describe('WorkoutGenerator', () => {
       expect(result).toHaveLength(3);
       result.forEach((ex) => expect(ex.muscleGroup).toBe(MuscleGroup.ABS));
     });
+
+    it('при достатке уникальных — дубликатов нет', () => {
+      const targetMuscles = [MuscleGroup.ARMS, MuscleGroup.LEGS];
+      const exercises = [
+        createExercise({ id: '1', muscleGroup: MuscleGroup.ARMS }),
+        createExercise({ id: '2', muscleGroup: MuscleGroup.ARMS }),
+        createExercise({ id: '3', muscleGroup: MuscleGroup.LEGS }),
+        createExercise({ id: '4', muscleGroup: MuscleGroup.LEGS }),
+      ];
+      vi.mocked(StorageService.getExercises).mockReturnValue(exercises);
+
+      const result = WorkoutGenerator.generatePlaylist(targetMuscles, 4);
+
+      expect(result).toHaveLength(4);
+      const ids = result.map((e) => e.id);
+      expect(new Set(ids).size).toBe(4);
+    });
+
+    it('при нехватке уникальных — дубликаты только не подряд', () => {
+      const targetMuscles = [MuscleGroup.ARMS, MuscleGroup.LEGS];
+      const exercises = [
+        createExercise({ id: '1', name: 'A', muscleGroup: MuscleGroup.ARMS }),
+        createExercise({ id: '2', name: 'B', muscleGroup: MuscleGroup.LEGS }),
+        createExercise({ id: '3', name: 'C', muscleGroup: MuscleGroup.ARMS }),
+      ];
+      vi.mocked(StorageService.getExercises).mockReturnValue(exercises);
+
+      const result = WorkoutGenerator.generatePlaylist(targetMuscles, 6);
+
+      expect(result).toHaveLength(6);
+      for (let i = 0; i < result.length - 1; i++) {
+        expect(result[i].id).not.toBe(result[i + 1].id);
+      }
+    });
   });
 });
