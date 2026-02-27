@@ -91,65 +91,79 @@ export const ScreenSetup: React.FC<ScreenSetupProps> = ({ onStart, onNavigate, o
           </button>
         </div>
 
-        <div className="bg-surface rounded-xl px-3 pt-[9px] pb-3 sm:px-4 sm:pt-[13px] sm:pb-4 border border-slate-700 shadow-xl mb-2 sm:mb-3">
-          <div className="flex justify-between items-start gap-2 w-4/5 mx-auto mb-3">
-             <div>
-               <p className="text-xs text-slate-400">Упражнений</p>
-               <p className="text-2xl font-bold text-white">{playlist.length}</p>
-             </div>
-             <div>
-                <p className="text-xs text-slate-400">Кругов</p>
-                <p className="text-2xl font-bold text-white">{StorageService.getSettings().cycleCount}</p>
-             </div>
-             <div>
-                <p className="text-xs text-slate-400">Минут</p>
-                <p className="text-2xl font-bold text-white">~{Math.ceil((playlist.length * StorageService.getSettings().exerciseDuration * StorageService.getSettings().cycleCount) / 60)}</p>
-             </div>
+        <div className="bg-surface rounded-xl border border-slate-700 shadow-xl mb-2 sm:mb-3 overflow-hidden">
+          {/* ВЕРХНЯЯ ЧАСТЬ: Статистика */}
+          <div className="flex justify-between items-center px-4 py-4 sm:px-6 sm:py-5">
+            <div className="flex flex-col items-center flex-1">
+              <span className="text-[14px] text-slate-400 font-semibold mb-1">Упражнений</span>
+              <span className="text-2xl sm:text-3xl font-extrabold text-slate-50 tracking-tight">{playlist.length}</span>
+            </div>
+            <div className="flex flex-col items-center flex-1">
+              <span className="text-[14px] text-slate-400 font-semibold mb-1">Кругов</span>
+              <span className="text-2xl sm:text-3xl font-extrabold text-slate-50 tracking-tight">{StorageService.getSettings().cycleCount}</span>
+            </div>
+            <div className="flex flex-col items-center flex-1">
+              <span className="text-[14px] text-slate-400 font-semibold mb-1">Минут</span>
+              <span className="text-2xl sm:text-3xl font-extrabold text-slate-50 tracking-tight">
+                ~{Math.ceil((playlist.length * StorageService.getSettings().exerciseDuration * StorageService.getSettings().cycleCount) / 60)}
+              </span>
+            </div>
           </div>
 
-          <div className="flex flex-wrap items-end gap-x-10 gap-y-1 w-fit mx-auto">
+          {/* Разделитель */}
+          <div className="h-px w-full bg-slate-700/50"></div>
+
+          {/* НИЖНЯЯ ЧАСТЬ: Теги мышц */}
+          <div className="flex flex-wrap items-center px-4 py-3 sm:px-6 sm:py-4 gap-2 sm:gap-2.5 min-h-[60px]">
+            
+            {/* Группа прошлой тренировки */}
             {fromPreviousGroups.length > 0 && (
-              <div className="flex flex-col gap-1 min-w-0">
-                <p className="uppercase tracking-wider text-amber-400/80 text-center" style={{ fontSize: '9px' }}>из последней тренировки</p>
-                <div className="flex items-center justify-center gap-2">
-                  {fromPreviousGroups.map(({ group }) => (
-                    <span
-                      key={group}
-                      className="shrink-0 px-3 py-3 rounded-lg font-bold text-xs border bg-amber-500/15 text-amber-400 border-amber-400/40 ring-1 ring-amber-400/30"
-                      title="Было в прошлой тренировке"
-                    >
-                      {group.toUpperCase()}
-                    </span>
-                  ))}
-                  <button
-                    type="button"
-                    onClick={handleForgetHistoryAndRefresh}
-                    className="shrink-0 px-2 py-2 rounded-lg border border-slate-700 bg-dark/40 text-slate-200 hover:bg-slate-800/60 hover:border-slate-600 transition-colors"
-                    title="Забыть историю и сгенерировать полностью случайно"
-                    aria-label="Забыть историю тренировок и сгенерировать новую тренировку"
+              <div className="flex items-center bg-white/5 border border-white/10 rounded-full pl-3 pr-1 py-1 gap-1.5 sm:gap-2">
+                <span className="text-[9px] sm:text-[10px] font-semibold text-slate-400 uppercase tracking-wide">
+                  Прошлая:
+                </span>
+                {fromPreviousGroups.map(({ group }) => (
+                  <span
+                    key={group}
+                    className="px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-full text-[10px] sm:text-[11px] font-bold uppercase tracking-wide bg-amber-500/15 text-amber-500"
+                    title="Было в прошлой тренировке"
                   >
-                    🗑️
-                  </button>
-                </div>
+                    {group}
+                  </span>
+                ))}
+                
+                {/* Кнопка сброса истории (Крестик) */}
+                <button
+                  type="button"
+                  onClick={handleForgetHistoryAndRefresh}
+                  className="w-6 h-6 sm:w-7 sm:h-7 rounded-full flex items-center justify-center text-slate-400 hover:bg-red-500/20 hover:text-red-400 transition-colors ml-0.5"
+                  title="Не учитывать прошлую тренировку"
+                  aria-label="Забыть историю тренировок"
+                >
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                  </svg>
+                </button>
               </div>
             )}
-            {newGroups.length > 0 && (
-              <div className="flex flex-col gap-1 min-w-0">
-                {fromPreviousGroups.length > 0 && (
-                  <p className="uppercase tracking-wider text-primary text-center" style={{ fontSize: '9px' }}>новое</p>
-                )}
-                <div className="flex flex-wrap gap-1">
-                  {newGroups.map(({ group }) => (
-                    <span
-                      key={group}
-                      className="px-3 py-3 rounded-lg font-bold text-xs border bg-primary/10 text-primary border-primary/20"
-                    >
-                      {group.toUpperCase()}
-                    </span>
-                  ))}
-                </div>
-              </div>
+
+            {/* Лейбл для полностью новых мышц (показывается только если нет истории) */}
+            {fromPreviousGroups.length === 0 && newGroups.length > 0 && (
+               <span className="text-[11px] sm:text-xs font-medium text-slate-400 mr-1">
+                 Мышцы:
+               </span>
             )}
+
+            {/* Новые группы мышц */}
+            {newGroups.map(({ group }) => (
+              <span
+                key={group}
+                className="px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-full text-[10px] sm:text-[11px] font-bold uppercase tracking-wide bg-emerald-500 text-emerald-950 shadow-[0_0_10px_rgba(16,185,129,0.15)]"
+              >
+                {group}
+              </span>
+            ))}
           </div>
         </div>
 

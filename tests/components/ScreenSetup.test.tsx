@@ -59,7 +59,7 @@ describe('ScreenSetup', () => {
     });
   });
 
-  it('показывает бейджи групп мышц (amber для повторных, primary для новых)', async () => {
+  it('показывает бейджи групп мышц (amber для повторных, emerald для новых)', async () => {
     vi.mocked(StorageService.getLastLog).mockReturnValue(
       createWorkoutLog({ muscleGroupsUsed: [MuscleGroup.CHEST, MuscleGroup.LEGS] })
     );
@@ -71,11 +71,11 @@ describe('ScreenSetup', () => {
       />
     );
     await waitFor(() => {
-      expect(screen.getByText(/из последней тренировки/i)).toBeInTheDocument();
+      expect(screen.getByText(/Прошлая:/i)).toBeInTheDocument();
     });
-    expect(screen.getByText('ГРУДЬ')).toBeInTheDocument();
-    expect(screen.getByText('НОГИ')).toBeInTheDocument();
-    expect(screen.getByText('ПРЕСС')).toBeInTheDocument();
+    expect(screen.getByText('грудь')).toBeInTheDocument();
+    expect(screen.getByText('ноги')).toBeInTheDocument();
+    expect(screen.getByText('пресс')).toBeInTheDocument();
   });
 
   it('показывает статистику: кол-во упражнений, циклы, длительность', async () => {
@@ -158,10 +158,8 @@ describe('ScreenSetup', () => {
         onOpenExerciseDetail={onOpenExerciseDetail}
       />
     );
-    await waitFor(() => expect(screen.getByText(/из последней тренировки/i)).toBeInTheDocument());
-    const forgetButton = screen.getByRole('button', {
-      name: /забыть историю тренировок и сгенерировать новую тренировку/i,
-    });
+    await waitFor(() => expect(screen.getByText(/Прошлая:/i)).toBeInTheDocument());
+    const forgetButton = screen.getByRole('button', { name: /забыть историю тренировок/i });
     await user.click(forgetButton);
     expect(StorageService.clearHistory).toHaveBeenCalled();
   });
