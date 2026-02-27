@@ -63,21 +63,30 @@ export const WorkoutGenerator = {
       playlist.push(randomEx);
     }
 
-    // Apply difficulty constraint: No HARD followed immediately by HARD
-    // We try to shuffle until it satisfies, or limited retries.
-    let validShuffle = false;
-    let attempts = 0;
-    
-    while (!validShuffle && attempts < 10) {
+    // Apply difficulty constraint: No HARD followed immediately by HARD.
+    // Partition into HARD and non-HARD; if we have enough non-HARD to separate (notHard.length >= hard.length - 1), interleave.
+    const hard = playlist.filter(ex => ex.difficulty === Difficulty.HARD);
+    const notHard = playlist.filter(ex => ex.difficulty !== Difficulty.HARD);
+    const canSeparate = hard.length <= 1 || notHard.length >= hard.length - 1;
+    if (!canSeparate) {
       playlist = shuffle(playlist);
-      validShuffle = true;
-      for (let i = 0; i < playlist.length - 1; i++) {
-        if (playlist[i].difficulty === Difficulty.HARD && playlist[i+1].difficulty === Difficulty.HARD) {
-          validShuffle = false;
-          break;
+    } else if (hard.length > 0 && notHard.length > 0) {
+      const result: Exercise[] = [];
+      let hi = 0;
+      let ni = 0;
+      const startWithHard = hard.length > notHard.length;
+      while (hi < hard.length || ni < notHard.length) {
+        if (startWithHard) {
+          if (hi < hard.length) result.push(hard[hi++]);
+          if (ni < notHard.length) result.push(notHard[ni++]);
+        } else {
+          if (ni < notHard.length) result.push(notHard[ni++]);
+          if (hi < hard.length) result.push(hard[hi++]);
         }
       }
-      attempts++;
+      playlist = result;
+    } else {
+      playlist = shuffle(playlist);
     }
 
     return playlist;

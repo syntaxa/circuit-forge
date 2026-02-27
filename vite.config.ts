@@ -14,4 +14,15 @@ export default defineConfig({
       '@': path.resolve(__dirname, '.'),
     },
   },
+  test: {
+    environment: 'happy-dom',
+    globals: true,
+    pool: 'threads',
+    setupFiles: './tests/setup.ts',
+    include: ['tests/**/*.test.{ts,tsx}'],
+    coverage: {
+      provider: 'v8',
+      include: ['services/**', 'components/**', 'App.tsx'],
+    },
+  },
 });
