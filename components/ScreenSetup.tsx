@@ -92,7 +92,22 @@ export const ScreenSetup: React.FC<ScreenSetupProps> = ({ onStart, onNavigate, o
         </div>
 
         <div className="bg-surface rounded-xl p-3 sm:p-4 border border-slate-700 shadow-xl mb-2 sm:mb-3">
-          <div className="flex flex-wrap items-end gap-x-10 gap-y-1 mb-3">
+          <div className="flex justify-between items-end gap-2 w-4/5 mx-auto mb-3">
+             <div>
+               <p className="text-2xl font-bold text-white">{playlist.length}</p>
+               <p className="text-xs text-slate-400">Упражнений</p>
+             </div>
+             <div>
+                <p className="text-2xl font-bold text-white">{StorageService.getSettings().cycleCount}</p>
+                <p className="text-xs text-slate-400">Круга</p>
+             </div>
+             <div>
+                <p className="text-2xl font-bold text-white">~{Math.ceil((playlist.length * StorageService.getSettings().exerciseDuration * StorageService.getSettings().cycleCount) / 60)}</p>
+                <p className="text-xs text-slate-400">Минут</p>
+             </div>
+          </div>
+
+          <div className="flex flex-wrap items-end gap-x-10 gap-y-1 w-fit mx-auto">
             {fromPreviousGroups.length > 0 && (
               <div className="flex flex-col gap-1 min-w-0">
                 <p className="uppercase tracking-wider text-amber-400/80 text-center" style={{ fontSize: '9px' }}>из последней тренировки</p>
@@ -135,21 +150,6 @@ export const ScreenSetup: React.FC<ScreenSetupProps> = ({ onStart, onNavigate, o
                 </div>
               </div>
             )}
-          </div>
-          
-          <div className="flex justify-between items-end gap-2">
-             <div>
-               <p className="text-2xl font-bold text-white">{playlist.length}</p>
-               <p className="text-xs text-slate-400">Упражнений</p>
-             </div>
-             <div>
-                <p className="text-2xl font-bold text-white">{StorageService.getSettings().cycleCount}</p>
-                <p className="text-xs text-slate-400">Круга</p>
-             </div>
-             <div>
-                <p className="text-2xl font-bold text-white">~{Math.ceil((playlist.length * StorageService.getSettings().exerciseDuration * StorageService.getSettings().cycleCount) / 60)}</p>
-                <p className="text-xs text-slate-400">Минут</p>
-             </div>
           </div>
         </div>
 

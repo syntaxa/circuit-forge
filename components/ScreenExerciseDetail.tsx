@@ -29,10 +29,11 @@ export const ScreenExerciseDetail: React.FC<ScreenExerciseDetailProps> = ({ exer
 
         {/* Placeholder for square illustration (images not ready yet) */}
         <div
-          className="w-full max-w-[280px] mx-auto aspect-square rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center text-slate-500 text-sm mb-6"
+          className="w-full max-w-[280px] mx-auto aspect-square rounded-xl bg-slate-800 border border-slate-700 flex flex-col items-center justify-center text-slate-500 text-sm mb-6 gap-1"
           aria-hidden
         >
-          Иллюстрация
+          <span>Иллюстрация</span>
+          <span>появится позже</span>
         </div>
 
         <div className="space-y-4">
