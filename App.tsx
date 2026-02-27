@@ -6,6 +6,7 @@ import { ScreenWorkout } from './components/ScreenWorkout';
 import { ScreenExerciseDetail } from './components/ScreenExerciseDetail';
 import { ScreenSettings } from './components/ScreenSettings';
 import { ScreenDatabase } from './components/ScreenDatabase';
+import { ScreenAbout } from './components/ScreenAbout';
 
 function App() {
   const [currentScreen, setCurrentScreen] = useState<AppScreen>(AppScreen.SETUP);
@@ -57,6 +58,12 @@ function App() {
       case AppScreen.DATABASE:
         return (
           <ScreenDatabase 
+            onBack={navigateToSetup}
+          />
+        );
+      case AppScreen.ABOUT:
+        return (
+          <ScreenAbout 
             onBack={navigateToSetup}
           />
         );

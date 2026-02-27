@@ -88,7 +88,7 @@ export const ScreenDatabase: React.FC<ScreenDatabaseProps> = ({ onBack }) => {
           <div>
             <label className="text-slate-400 text-sm">Шаги исполнения</label>
             <textarea 
-              className="w-full bg-surface border border-slate-600 rounded-lg p-3 text-white focus:border-primary outline-none h-32 resize-y"
+              className="w-full bg-surface border border-slate-600 rounded-lg p-3 text-white focus:border-primary outline-none h-[300px] resize-y"
               value={currentEx.steps ?? ''}
               onChange={e => setCurrentEx({...currentEx, steps: e.target.value})}
               placeholder="Например: 1. Шаг один. 2. Шаг два. (каждый шаг с новой строки)"
@@ -104,25 +104,27 @@ export const ScreenDatabase: React.FC<ScreenDatabaseProps> = ({ onBack }) => {
             />
             <label htmlFor="biSided" className="text-slate-300 text-sm cursor-pointer">Двухстороннее упражнение</label>
           </div>
-          <div>
-            <label className="text-slate-400 text-sm">Группа мышц</label>
-            <select 
-              className="w-full bg-surface border border-slate-600 rounded-lg p-3 text-white focus:border-primary outline-none"
-              value={currentEx.muscleGroup}
-              onChange={e => setCurrentEx({...currentEx, muscleGroup: e.target.value as MuscleGroup})}
-            >
-              {ALL_MUSCLE_GROUPS.map(g => <option key={g} value={g}>{g}</option>)}
-            </select>
-          </div>
-          <div>
-            <label className="text-slate-400 text-sm">Сложность</label>
-            <select 
-              className="w-full bg-surface border border-slate-600 rounded-lg p-3 text-white focus:border-primary outline-none"
-              value={currentEx.difficulty}
-              onChange={e => setCurrentEx({...currentEx, difficulty: e.target.value as Difficulty})}
-            >
-              {Object.values(Difficulty).map(d => <option key={d} value={d}>{d}</option>)}
-            </select>
+          <div className="flex gap-3">
+            <div className="flex-1">
+              <label className="text-slate-400 text-sm">Группа мышц</label>
+              <select 
+                className="w-full bg-surface border border-slate-600 rounded-lg p-3 text-white focus:border-primary outline-none"
+                value={currentEx.muscleGroup}
+                onChange={e => setCurrentEx({...currentEx, muscleGroup: e.target.value as MuscleGroup})}
+              >
+                {ALL_MUSCLE_GROUPS.map(g => <option key={g} value={g}>{g}</option>)}
+              </select>
+            </div>
+            <div className="flex-1">
+              <label className="text-slate-400 text-sm">Сложность</label>
+              <select 
+                className="w-full bg-surface border border-slate-600 rounded-lg p-3 text-white focus:border-primary outline-none"
+                value={currentEx.difficulty}
+                onChange={e => setCurrentEx({...currentEx, difficulty: e.target.value as Difficulty})}
+              >
+                {Object.values(Difficulty).map(d => <option key={d} value={d}>{d}</option>)}
+              </select>
+            </div>
           </div>
           <div className="flex gap-3 pt-4">
             <Button variant="secondary" fullWidth onClick={() => setIsEditing(false)}>Отмена</Button>

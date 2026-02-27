@@ -65,16 +65,33 @@ export const ScreenSetup: React.FC<ScreenSetupProps> = ({ onStart, onNavigate, o
     <div className="flex flex-col h-screen min-h-0 overflow-hidden p-4 sm:p-6 animate-fade-in max-w-lg mx-auto">
       <div className="flex-1 min-h-0 flex flex-col overflow-hidden">
         <div className="flex justify-between items-center mb-2 sm:mb-3">
-          <h1 className="text-2xl sm:text-3xl font-black italic text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">
-            CIRCUIT FORGE
-          </h1>
+          <div className="flex items-center gap-2">
+            <button
+              type="button"
+              onClick={() => onNavigate(AppScreen.ABOUT)}
+              className="text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded"
+              aria-label="О приложении"
+            >
+              <h1 className="text-2xl sm:text-3xl font-black italic text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">
+                CIRCUIT FORGE
+              </h1>
+            </button>
+            <button
+              type="button"
+              onClick={() => onNavigate(AppScreen.ABOUT)}
+              className="shrink-0 w-[15px] h-[15px] rounded-full flex items-center justify-center text-slate-400 hover:text-white hover:bg-slate-700/50 border border-slate-600 hover:border-slate-500 transition-colors text-xs font-bold"
+              aria-label="О приложении"
+              title="О приложении"
+            >
+              i
+            </button>
+          </div>
           <button onClick={() => onNavigate(AppScreen.SETTINGS)} className="p-1.5 text-slate-400 hover:text-white">
             ⚙️
           </button>
         </div>
 
         <div className="bg-surface rounded-xl p-3 sm:p-4 border border-slate-700 shadow-xl mb-2 sm:mb-3">
-          <h2 className="text-xs uppercase tracking-widest text-slate-400 font-bold mb-2">Цель на сегодня</h2>
           <div className="flex flex-wrap items-end gap-x-10 gap-y-1 mb-3">
             {fromPreviousGroups.length > 0 && (
               <div className="flex flex-col gap-1 min-w-0">

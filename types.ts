@@ -44,5 +44,6 @@ export enum AppScreen {
   SETUP = 'SETUP',
   WORKOUT = 'WORKOUT',
   SETTINGS = 'SETTINGS',
-  DATABASE = 'DATABASE'
+  DATABASE = 'DATABASE',
+  ABOUT = 'ABOUT'
 }
