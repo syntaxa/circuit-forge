@@ -1,10 +1,11 @@
 import { Difficulty, Exercise, MuscleGroup, Settings } from './types';
 
 /** Версия приложения для отображения в UI (экран «О приложении»). */
-export const APP_VERSION = '1.1.0';
+export const APP_VERSION = '1.2.0';
 
 export const DEFAULT_SETTINGS: Settings = {
   exerciseDuration: 30,
+  breakDuration: 4,
   exercisesPerCycle: 10,
   cycleCount: 2,
   ttsVoiceURI: null,

@@ -107,11 +107,19 @@ export const StorageService = {
       localStorage.setItem(KEYS.SETTINGS, JSON.stringify(DEFAULT_SETTINGS));
       return DEFAULT_SETTINGS;
     }
-    return { ...DEFAULT_SETTINGS, ...JSON.parse(data) };
+    const merged = { ...DEFAULT_SETTINGS, ...JSON.parse(data) };
+    return {
+      ...merged,
+      breakDuration: Math.max(3, Number(merged.breakDuration) || 3),
+    };
   },
 
   saveSettings: (settings: Settings) => {
-    localStorage.setItem(KEYS.SETTINGS, JSON.stringify(settings));
+    const normalized: Settings = {
+      ...settings,
+      breakDuration: Math.max(3, Number(settings.breakDuration) || 3),
+    };
+    localStorage.setItem(KEYS.SETTINGS, JSON.stringify(normalized));
   },
 
   getHistory: (): WorkoutLog[] => {

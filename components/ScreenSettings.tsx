@@ -41,7 +41,10 @@ export const ScreenSettings: React.FC<ScreenSettingsProps> = ({ onBack }) => {
   }, []);
 
   const handleSave = () => {
-    StorageService.saveSettings(settings);
+    StorageService.saveSettings({
+      ...settings,
+      breakDuration: Math.max(3, Number(settings.breakDuration) || 3),
+    });
     onBack();
   };
 
@@ -52,47 +55,68 @@ export const ScreenSettings: React.FC<ScreenSettingsProps> = ({ onBack }) => {
 
   return (
     <div className="p-4 max-w-lg mx-auto pb-20 animate-fade-in">
-      <h2 className="text-2xl font-bold mb-6 text-primary">Настройки</h2>
+      <h2 className="text-2xl font-bold mb-4 text-primary">Настройки</h2>
       
-      <div className="space-y-6">
-        <div className="bg-surface p-4 rounded-xl border border-slate-700">
-          <label className="block text-sm font-medium text-slate-400 mb-2">Время упражнения (сек)</label>
-          <input 
-            type="number" 
-            value={settings.exerciseDuration}
-            onChange={(e) => setSettings({...settings, exerciseDuration: Number(e.target.value)})}
-            className="w-full bg-dark text-white p-3 rounded-lg border border-slate-600 focus:border-primary outline-none"
-          />
+      <div className="space-y-4">
+        <div className="bg-surface p-3.5 rounded-xl border border-slate-700">
+          <h3 className="text-sm font-medium text-slate-400 mb-2.5">Параметры тренировки</h3>
+          <div className="grid grid-cols-2 gap-2.5">
+            <label htmlFor="exerciseDuration" className="block">
+              <span className="block text-xs text-slate-400 mb-1.5">Время упражнения, сек</span>
+              <input
+                id="exerciseDuration"
+                type="number"
+                min={1}
+                value={settings.exerciseDuration}
+                onChange={(e) => setSettings({ ...settings, exerciseDuration: Number(e.target.value) })}
+                className="w-full bg-dark text-white text-center py-1.5 px-2 rounded-md border border-slate-600 focus:border-primary outline-none no-number-spinner"
+              />
+            </label>
+
+            <label htmlFor="breakDuration" className="block">
+              <span className="block text-xs text-slate-400 mb-1.5">Перерыв, сек</span>
+              <input
+                id="breakDuration"
+                type="number"
+                min={3}
+                value={settings.breakDuration}
+                onChange={(e) => setSettings({ ...settings, breakDuration: Math.max(3, Number(e.target.value) || 3) })}
+                className="w-full bg-dark text-white text-center py-1.5 px-2 rounded-md border border-slate-600 focus:border-primary outline-none no-number-spinner"
+              />
+            </label>
+
+            <label htmlFor="exercisesPerCycle" className="block">
+              <span className="block text-xs text-slate-400 mb-1.5">Упражнений в круге</span>
+              <input
+                id="exercisesPerCycle"
+                type="number"
+                min={3}
+                value={settings.exercisesPerCycle}
+                onChange={(e) => setSettings({ ...settings, exercisesPerCycle: Number(e.target.value) })}
+                className="w-full bg-dark text-white text-center py-1.5 px-2 rounded-md border border-slate-600 focus:border-primary outline-none no-number-spinner"
+              />
+            </label>
+
+            <label htmlFor="cycleCount" className="block">
+              <span className="block text-xs text-slate-400 mb-1.5">Количество кругов</span>
+              <input
+                id="cycleCount"
+                type="number"
+                min={1}
+                value={settings.cycleCount}
+                onChange={(e) => setSettings({ ...settings, cycleCount: Number(e.target.value) })}
+                className="w-full bg-dark text-white text-center py-1.5 px-2 rounded-md border border-slate-600 focus:border-primary outline-none no-number-spinner"
+              />
+            </label>
+          </div>
         </div>
 
-        <div className="bg-surface p-4 rounded-xl border border-slate-700">
-          <label className="block text-sm font-medium text-slate-400 mb-2">Упражнений в круге</label>
-          <input 
-            type="number" 
-            min={3}
-            value={settings.exercisesPerCycle}
-            onChange={(e) => setSettings({...settings, exercisesPerCycle: Number(e.target.value)})}
-            className="w-full bg-dark text-white p-3 rounded-lg border border-slate-600 focus:border-primary outline-none"
-          />
-        </div>
-
-        <div className="bg-surface p-4 rounded-xl border border-slate-700">
-          <label className="block text-sm font-medium text-slate-400 mb-2">Количество кругов</label>
-          <input 
-            type="number"
-            min={1} 
-            value={settings.cycleCount}
-            onChange={(e) => setSettings({...settings, cycleCount: Number(e.target.value)})}
-            className="w-full bg-dark text-white p-3 rounded-lg border border-slate-600 focus:border-primary outline-none"
-          />
-        </div>
-
-        <div className="bg-surface p-4 rounded-xl border border-slate-700">
+        <div className="bg-surface p-3.5 rounded-xl border border-slate-700">
           <label className="block text-sm font-medium text-slate-400 mb-2">Голос озвучки</label>
           <select 
             value={settings.ttsVoiceURI || ''}
             onChange={(e) => setSettings({...settings, ttsVoiceURI: e.target.value})}
-            className="w-full bg-dark text-white p-3 rounded-lg border border-slate-600 focus:border-primary outline-none"
+            className="w-full bg-dark text-white p-2.5 rounded-lg border border-slate-600 focus:border-primary outline-none"
           >
             <option value="">
               {defaultVoiceName ?? 'По умолчанию (English)'}
@@ -103,12 +127,12 @@ export const ScreenSettings: React.FC<ScreenSettingsProps> = ({ onBack }) => {
           </select>
         </div>
 
-        <div className="bg-surface p-4 rounded-xl border border-slate-700">
+        <div className="bg-surface p-3.5 rounded-xl border border-slate-700">
           <h3 className="text-sm font-medium text-slate-400 mb-2">Сохранённые данные</h3>
           <p className="text-xs text-slate-500 mb-2">Группы мышц в последней полностью завершённой тренировке (используются для подбора следующих упражнений):</p>
           {lastLog ? (
             <>
-              <p className="text-white mb-3">
+              <p className="text-white mb-2.5">
                 {lastLog.muscleGroupsUsed.join(', ')}
               </p>
               <Button variant="secondary" onClick={handleClearLastWorkout} fullWidth>
@@ -120,7 +144,7 @@ export const ScreenSettings: React.FC<ScreenSettingsProps> = ({ onBack }) => {
           )}
         </div>
 
-        <div className="pt-4 flex gap-3">
+        <div className="pt-2 flex gap-3">
           <Button variant="secondary" onClick={onBack} fullWidth>Отмена</Button>
           <Button onClick={handleSave} fullWidth>Сохранить</Button>
         </div>

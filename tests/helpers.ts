@@ -16,6 +16,7 @@ export function createExercise(overrides: Partial<Exercise> = {}): Exercise {
 export function createSettings(overrides: Partial<Settings> = {}): Settings {
   return {
     exerciseDuration: 30,
+    breakDuration: 4,
     exercisesPerCycle: 10,
     cycleCount: 2,
     ttsVoiceURI: null,

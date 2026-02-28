@@ -161,8 +161,9 @@ export const ScreenWorkout: React.FC<ScreenWorkoutProps> = ({ playlist, muscleGr
     // Store the next exercise in ref so it's immediately available for display
     nextExerciseRef.current = nextEx;
     setState(WorkoutState.PREP);
-    setDuration(5); // 5 seconds transition
-    setTimeLeft(5);
+    const breakTime = Math.max(3, Number(settings.current.breakDuration) || 3);
+    setDuration(breakTime);
+    setTimeLeft(breakTime);
     // Speak only the exercise name
     TTSService.speakEnglish(nextEx.name, settings.current.ttsVoiceURI, () => {});
   };

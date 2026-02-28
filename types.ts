@@ -28,6 +28,7 @@ export interface Exercise {
 
 export interface Settings {
   exerciseDuration: number; // seconds
+  breakDuration: number; // seconds between exercises
   exercisesPerCycle: number;
   cycleCount: number;
   ttsVoiceURI: string | null;

@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { ScreenSettings } from '@/components/ScreenSettings';
 import { StorageService } from '@/services/storageService';
@@ -51,6 +51,7 @@ describe('ScreenSettings', () => {
   it('отображает текущие значения настроек из StorageService', () => {
     const settings = createSettings({
       exerciseDuration: 45,
+      breakDuration: 7,
       exercisesPerCycle: 8,
       cycleCount: 3,
     });
@@ -58,24 +59,24 @@ describe('ScreenSettings', () => {
     render(<ScreenSettings onBack={onBack} />);
 
     expect(screen.getByDisplayValue('45')).toBeInTheDocument();
+    expect(screen.getByDisplayValue('7')).toBeInTheDocument();
     expect(screen.getByDisplayValue('8')).toBeInTheDocument();
     expect(screen.getByDisplayValue('3')).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: 'Настройки' })).toBeInTheDocument();
   });
 
-  it('изменение exerciseDuration сохраняет через StorageService.saveSettings', async () => {
+  it('изменение breakDuration сохраняет через StorageService.saveSettings, минимум 3', async () => {
     const user = userEvent.setup();
-    const settings = createSettings({ exerciseDuration: 30 });
+    const settings = createSettings({ breakDuration: 5 });
     vi.mocked(StorageService.getSettings).mockReturnValue(settings);
     render(<ScreenSettings onBack={onBack} />);
 
-    const durationInput = screen.getByDisplayValue('30');
-    await user.clear(durationInput);
-    await user.type(durationInput, '60');
+    const breakInput = screen.getByDisplayValue('5');
+    fireEvent.change(breakInput, { target: { value: '2' } });
     await user.click(screen.getByRole('button', { name: /сохранить/i }));
 
     expect(StorageService.saveSettings).toHaveBeenCalledWith(
-      expect.objectContaining({ exerciseDuration: 60 })
+      expect.objectContaining({ breakDuration: 3 })
     );
     expect(onBack).toHaveBeenCalled();
   });

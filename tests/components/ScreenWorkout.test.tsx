@@ -93,6 +93,27 @@ describe('ScreenWorkout', () => {
     expect(screen.getByText(/Exercise Two/i)).toBeInTheDocument();
   });
 
+  it('перерыв между упражнениями берется из настроек', async () => {
+    vi.mocked(StorageService.getSettings).mockReturnValue(
+      createSettings({ exerciseDuration: 10, breakDuration: 3, cycleCount: 1 })
+    );
+    render(
+      <ScreenWorkout
+        playlist={playlist}
+        muscleGroups={muscleGroups}
+        onFinish={vi.fn()}
+        onCancel={vi.fn()}
+      />
+    );
+
+    await act(() => { vi.advanceTimersByTime(5000); });
+    await act(() => { vi.advanceTimersByTime(10000); });
+    expect(screen.getByText('ГОТОВЬСЯ')).toBeInTheDocument();
+    await act(() => { vi.advanceTimersByTime(3000); });
+    expect(screen.getByText(/Exercise Two/i)).toBeInTheDocument();
+    expect(screen.getByText('10')).toBeInTheDocument();
+  });
+
   it('двустороннее упражнение — показывает L и R, переключается на полпути', async () => {
     const bilateral = [
       createExercise({ name: 'Bilateral', id: '1', biSided: true, muscleGroup: MuscleGroup.ARMS }),

@@ -87,9 +87,18 @@ describe('StorageService', () => {
       const result = StorageService.getSettings();
 
       expect(result.exerciseDuration).toBe(45);
+      expect(result.breakDuration).toBe(DEFAULT_SETTINGS.breakDuration);
       expect(result.exercisesPerCycle).toBe(DEFAULT_SETTINGS.exercisesPerCycle);
       expect(result.cycleCount).toBe(DEFAULT_SETTINGS.cycleCount);
       expect(result.ttsVoiceURI).toBe(DEFAULT_SETTINGS.ttsVoiceURI);
+    });
+
+    it('breakDuration не может быть меньше 3', () => {
+      localStorage.setItem('cf_settings', JSON.stringify({ breakDuration: 1 }));
+
+      const result = StorageService.getSettings();
+
+      expect(result.breakDuration).toBe(3);
     });
   });
 
