@@ -576,7 +576,7 @@ export const SEED_EXERCISES: Exercise[] = [
   { 
     id: '42', 
     name: 'Pause Push-Up', 
-    description: 'Классика с задержкой на 3 секунды в нижней точке.', 
+    description: 'Классические отжимания с задержкой на 3 секунды в нижней точке.', 
     muscleGroup: MuscleGroup.CHEST, 
     difficulty: Difficulty.MEDIUM, 
     biSided: false,
