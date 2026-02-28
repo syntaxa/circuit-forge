@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef, useCallback } from 'react';
 import { Exercise, MuscleGroup, Settings } from '../types';
 import { StorageService } from '../services/storageService';
 import { TTSService } from '../services/ttsService';
-import { disable as disableWakeLock } from '../services/wakeLockService';
+import { disable as disableWakeLock, enable as enableWakeLock } from '../services/wakeLockService';
 import { CircularTimer } from './CircularTimer';
 import { Button } from './Button';
 
@@ -231,8 +231,10 @@ export const ScreenWorkout: React.FC<ScreenWorkoutProps> = ({ playlist, muscleGr
 
   const togglePause = () => {
     if (state === WorkoutState.PAUSED) {
+      enableWakeLock(); // User gesture при «Продолжить» — перезапросить wake lock после возврата из другого приложения
       setState(stateBeforePauseRef.current); // Resume to the same phase we were in (PREP or WORK)
     } else {
+      enableWakeLock(); // Пауза — тоже user gesture, на случай если только что вернулись из другого приложения
       stateBeforePauseRef.current = state; // Remember PREP or WORK
       setState(WorkoutState.PAUSED);
     }
@@ -243,6 +245,7 @@ export const ScreenWorkout: React.FC<ScreenWorkoutProps> = ({ playlist, muscleGr
       onCancel();
       return;
     }
+    enableWakeLock(); // Отмена — user gesture, на случай возврата из другого приложения
     stateBeforeExitDialogRef.current = state;
     setState(WorkoutState.PAUSED);
     setShowExitConfirm(true);
@@ -253,6 +256,7 @@ export const ScreenWorkout: React.FC<ScreenWorkoutProps> = ({ playlist, muscleGr
     if (confirmed) {
       onCancel();
     } else {
+      enableWakeLock(); // «Нет» — user gesture, перезапросить wake lock (могли вернуться из другого приложения)
       setState(stateBeforeExitDialogRef.current);
     }
   };
@@ -319,7 +323,10 @@ export const ScreenWorkout: React.FC<ScreenWorkoutProps> = ({ playlist, muscleGr
         <div className="mt-8 text-center max-w-md">
           <button
             type="button"
-            onClick={() => onOpenExerciseDetail?.(currentExercise)}
+            onClick={() => {
+              enableWakeLock(); // Клик по упражнению — user gesture (могли вернуться из другого приложения)
+              onOpenExerciseDetail?.(currentExercise);
+            }}
             className="inline-flex items-center justify-center gap-1.5 text-center mb-2 hover:opacity-90 transition-opacity focus:outline-none focus:ring-2 focus:ring-primary/50 rounded-lg"
             aria-label={`Подробнее об упражнении ${currentExercise.name}`}
           >

@@ -177,7 +177,10 @@ function App() {
               zIndex: 99999,
             }}
           >
-            <ScreenExerciseDetail exercise={exerciseDetail} onBack={goBack} />
+            <ScreenExerciseDetail
+              exercise={exerciseDetail}
+              onBack={currentScreen === AppScreen.WORKOUT ? () => { enableWakeLock(); goBack(); } : goBack}
+            />
           </div>,
           document.body
         )}
