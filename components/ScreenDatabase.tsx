@@ -9,12 +9,13 @@ type FilterSource = 'all' | 'base' | 'user';
 interface ScreenDatabaseProps {
   onBack: () => void;
   onOpenInfo: () => void;
+  onOpenExerciseDetail?: (exercise: Exercise) => void;
 }
 
 const CLONE_WARNING_MESSAGE =
   'Будет создана копия упражнения в «Моё» и это упражнение в базе будет отключено. Вы сможете править только свою копию.';
 
-export const ScreenDatabase: React.FC<ScreenDatabaseProps> = ({ onBack, onOpenInfo }) => {
+export const ScreenDatabase: React.FC<ScreenDatabaseProps> = ({ onBack, onOpenInfo, onOpenExerciseDetail }) => {
   const [exercises, setExercises] = useState<Exercise[]>(() => StorageService.getExercises());
   const [deactivatedIds, setDeactivatedIds] = useState<string[]>(() =>
     StorageService.getDeactivatedBaseIds()
@@ -382,7 +383,21 @@ export const ScreenDatabase: React.FC<ScreenDatabaseProps> = ({ onBack, onOpenIn
                 key={ex.id}
                 className={`bg-surface p-4 rounded-xl border flex justify-between items-center transition-opacity ${
                   isDeactivated ? 'border-slate-600 opacity-45' : 'border-slate-700'
-                }`}
+                } ${onOpenExerciseDetail ? 'cursor-pointer' : ''}`}
+                role={onOpenExerciseDetail ? 'button' : undefined}
+                onClick={onOpenExerciseDetail ? () => onOpenExerciseDetail(ex) : undefined}
+                onKeyDown={
+                  onOpenExerciseDetail
+                    ? (e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                          e.preventDefault();
+                          onOpenExerciseDetail(ex);
+                        }
+                      }
+                    : undefined
+                }
+                tabIndex={onOpenExerciseDetail ? 0 : undefined}
+                aria-label={onOpenExerciseDetail ? `Открыть описание: ${ex.name}` : undefined}
               >
                 <div className={`min-w-0 ${isDeactivated ? 'text-slate-500' : ''}`}>
                   <div className="flex items-center gap-2 flex-wrap">
@@ -404,7 +419,7 @@ export const ScreenDatabase: React.FC<ScreenDatabaseProps> = ({ onBack, onOpenIn
                     {ex.muscleGroup} • {ex.difficulty}
                   </p>
                 </div>
-                <div className="flex gap-2 shrink-0">
+                <div className="flex gap-2 shrink-0" onClick={e => e.stopPropagation()}>
                   {isBase ? (
                     <>
                       <button

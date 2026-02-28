@@ -61,6 +61,7 @@ function App() {
           <ScreenDatabase 
             onBack={navigateToSetup}
             onOpenInfo={() => setCurrentScreen(AppScreen.DATABASE_ABOUT)}
+            onOpenExerciseDetail={setExerciseDetail}
           />
         );
       case AppScreen.DATABASE_ABOUT:
