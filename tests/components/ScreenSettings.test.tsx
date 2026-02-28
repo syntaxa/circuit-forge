@@ -84,9 +84,10 @@ describe('ScreenSettings', () => {
   it('список голосов показывает только английские голоса', () => {
     render(<ScreenSettings onBack={onBack} />);
 
-    expect(screen.getByRole('option', { name: /US English.*en-US/i })).toBeInTheDocument();
-    expect(screen.getByRole('option', { name: /UK English.*en-GB/i })).toBeInTheDocument();
     const options = screen.getAllByRole('option');
+    const texts = options.map((o) => o.textContent ?? '');
+    expect(texts.some((t) => t === 'US English')).toBe(true);
+    expect(texts.some((t) => t === 'UK English')).toBe(true);
     expect(options.length).toBeGreaterThanOrEqual(2);
   });
 
