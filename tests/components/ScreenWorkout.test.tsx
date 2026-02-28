@@ -176,7 +176,7 @@ describe('ScreenWorkout', () => {
     expect(onFinish).toHaveBeenCalledTimes(1);
   });
 
-  it('отмена: вызывает onCancel', async () => {
+  it('отмена: при нажатии показывается диалог, при «Да, прервать» вызывается onCancel', async () => {
     const onCancel = vi.fn();
     render(
       <ScreenWorkout
@@ -187,7 +187,25 @@ describe('ScreenWorkout', () => {
       />
     );
     fireEvent.click(screen.getByRole('button', { name: /отмена/i }));
+    expect(screen.getByRole('dialog')).toBeInTheDocument();
+    expect(screen.getByText(/Прервать тренировку\?/i)).toBeInTheDocument();
+    fireEvent.click(screen.getByRole('button', { name: /да, прервать/i }));
     expect(onCancel).toHaveBeenCalledTimes(1);
+  });
+
+  it('отмена: при нажатии «Нет» в диалоге onCancel не вызывается', async () => {
+    const onCancel = vi.fn();
+    render(
+      <ScreenWorkout
+        playlist={playlist}
+        muscleGroups={muscleGroups}
+        onFinish={vi.fn()}
+        onCancel={onCancel}
+      />
+    );
+    fireEvent.click(screen.getByRole('button', { name: /отмена/i }));
+    fireEvent.click(screen.getByRole('button', { name: /^нет$/i }));
+    expect(onCancel).not.toHaveBeenCalled();
   });
 
   it('isPausedByOverlay ставит таймер на паузу', async () => {

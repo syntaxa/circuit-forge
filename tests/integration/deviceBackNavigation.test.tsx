@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeEach } from 'vitest';
+import { describe, it, expect, beforeEach, vi, afterEach } from 'vitest';
 import { render, screen, waitFor, act } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import App from '@/App';
@@ -18,6 +18,10 @@ describe('deviceBackNavigation (integration)', () => {
         cycleCount: 1,
       })
     );
+  });
+
+  afterEach(() => {
+    vi.unstubAllGlobals?.();
   });
 
   it('симуляция кнопки «Назад» устройства: с экрана О приложении возврат на экран настройки (SETUP)', async () => {
@@ -92,5 +96,48 @@ describe('deviceBackNavigation (integration)', () => {
       expect(screen.queryByRole('heading', { name: 'Как выполнять' })).not.toBeInTheDocument();
     });
     expect(screen.getByRole('heading', { name: /База упражнений/i })).toBeInTheDocument();
+  });
+
+  it('симуляция кнопки «Назад» во время тренировки: показ подтверждения и возврат при согласии', async () => {
+    const user = userEvent.setup();
+    const confirmFn = vi.fn(() => true);
+    vi.stubGlobal('confirm', confirmFn);
+    render(<App />);
+
+    const startBtn = await screen.findByRole('button', { name: /Начать тренировку/i });
+    await waitFor(() => expect(startBtn).not.toBeDisabled());
+    await user.click(startBtn);
+
+    expect(screen.getByText(/ГОТОВЬСЯ/i)).toBeInTheDocument();
+
+    const state: HistoryState = { screen: AppScreen.SETUP, exerciseDetail: null };
+    await act(() => {
+      window.dispatchEvent(new PopStateEvent('popstate', { state }));
+    });
+
+    expect(confirmFn).toHaveBeenCalledWith('Прервать тренировку?');
+    await waitFor(() => {
+      expect(screen.getByRole('button', { name: /Начать тренировку/i })).toBeInTheDocument();
+    });
+  });
+
+  it('симуляция кнопки «Назад» во время тренировки: при отказе остаёмся на тренировке', async () => {
+    const user = userEvent.setup();
+    vi.stubGlobal('confirm', vi.fn(() => false));
+    render(<App />);
+
+    const startBtn = await screen.findByRole('button', { name: /Начать тренировку/i });
+    await waitFor(() => expect(startBtn).not.toBeDisabled());
+    await user.click(startBtn);
+
+    expect(screen.getByText(/ГОТОВЬСЯ/i)).toBeInTheDocument();
+
+    const state: HistoryState = { screen: AppScreen.SETUP, exerciseDetail: null };
+    await act(() => {
+      window.dispatchEvent(new PopStateEvent('popstate', { state }));
+    });
+
+    expect(screen.getByText(/ГОТОВЬСЯ/i)).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /Отмена/i })).toBeInTheDocument();
   });
 });

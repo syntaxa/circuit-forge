@@ -11,6 +11,7 @@ interface ScreenWorkoutProps {
   onFinish: () => void;
   onCancel: () => void;
   onOpenExerciseDetail?: (exercise: Exercise) => void;
+  onWorkoutActiveChange?: (active: boolean) => void;
   isPausedByOverlay?: boolean;
 }
 
@@ -21,12 +22,13 @@ enum WorkoutState {
   FINISHED = 'FINISHED'
 }
 
-export const ScreenWorkout: React.FC<ScreenWorkoutProps> = ({ playlist, muscleGroups, onFinish, onCancel, onOpenExerciseDetail, isPausedByOverlay = false }) => {
+export const ScreenWorkout: React.FC<ScreenWorkoutProps> = ({ playlist, muscleGroups, onFinish, onCancel, onOpenExerciseDetail, onWorkoutActiveChange, isPausedByOverlay = false }) => {
   const settings = useRef<Settings>(StorageService.getSettings());
   
   const [state, setState] = useState<WorkoutState>(WorkoutState.PREP);
   const [currentCycle, setCurrentCycle] = useState(1);
   const [currentExIndex, setCurrentExIndex] = useState(0);
+  const [showExitConfirm, setShowExitConfirm] = useState(false);
   
   // Timer state - Start with 5s prep to allow for initial announcement
   const [timeLeft, setTimeLeft] = useState(5); 
@@ -40,6 +42,8 @@ export const ScreenWorkout: React.FC<ScreenWorkoutProps> = ({ playlist, muscleGr
   const stateRef = useRef(state);
   const currentExIndexRef = useRef(currentExIndex);
   const currentCycleRef = useRef(currentCycle);
+  /** Состояние до открытия диалога выхода — восстанавливаем при отказе. */
+  const stateBeforeExitDialogRef = useRef<WorkoutState>(WorkoutState.PREP);
   stateRef.current = state;
   currentExIndexRef.current = currentExIndex;
   currentCycleRef.current = currentCycle;
@@ -159,6 +163,12 @@ export const ScreenWorkout: React.FC<ScreenWorkoutProps> = ({ playlist, muscleGr
     TTSService.speakEnglish(nextEx.name, settings.current.ttsVoiceURI, () => {});
   };
 
+  // Notify parent when workout is active (PREP/WORK/PAUSED) vs finished — for back-button and beforeunload protection
+  useEffect(() => {
+    onWorkoutActiveChange?.(state !== WorkoutState.FINISHED);
+    return () => onWorkoutActiveChange?.(false);
+  }, [state, onWorkoutActiveChange]);
+
   const finishWorkout = () => {
     if (intervalRef.current) clearInterval(intervalRef.current);
     setState(WorkoutState.FINISHED);
@@ -221,6 +231,25 @@ export const ScreenWorkout: React.FC<ScreenWorkoutProps> = ({ playlist, muscleGr
     }
   };
 
+  const handleCancelClick = () => {
+    if (state === WorkoutState.FINISHED) {
+      onCancel();
+      return;
+    }
+    stateBeforeExitDialogRef.current = state;
+    setState(WorkoutState.PAUSED);
+    setShowExitConfirm(true);
+  };
+
+  const handleExitConfirm = (confirmed: boolean) => {
+    setShowExitConfirm(false);
+    if (confirmed) {
+      onCancel();
+    } else {
+      setState(stateBeforeExitDialogRef.current);
+    }
+  };
+
   const progressValue = timeLeft / duration;
   const workDuration = settings.current.exerciseDuration;
   const mid = Math.ceil(workDuration / 2);
@@ -230,7 +259,30 @@ export const ScreenWorkout: React.FC<ScreenWorkoutProps> = ({ playlist, muscleGr
 
   return (
     <div className="h-screen flex flex-col items-center justify-between p-6 bg-dark animate-fade-in relative overflow-hidden">
-      
+      {/* Диалог подтверждения выхода — свой UI, чтобы работал в PWA и мобильных браузерах */}
+      {showExitConfirm && (
+        <div
+          className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/70"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="exit-confirm-title"
+        >
+          <div className="bg-surface border border-slate-600 rounded-2xl shadow-xl max-w-sm w-full p-6 text-center">
+            <h2 id="exit-confirm-title" className="text-lg font-bold text-white mb-4">
+              Прервать тренировку?
+            </h2>
+            <div className="flex gap-3">
+              <Button variant="secondary" className="flex-1" onClick={() => handleExitConfirm(false)}>
+                Нет
+              </Button>
+              <Button variant="danger" className="flex-1" onClick={() => handleExitConfirm(true)}>
+                Да, прервать
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Header Info */}
       <div className="w-full text-center z-10">
         <div className="text-slate-400 text-sm font-semibold tracking-wider uppercase mb-1">
@@ -278,10 +330,9 @@ export const ScreenWorkout: React.FC<ScreenWorkoutProps> = ({ playlist, muscleGr
 
       {/* Controls */}
       <div className="w-full max-w-md grid grid-cols-2 gap-4 z-10">
-        <Button variant="secondary" onClick={onCancel}>Отмена</Button>
+        <Button variant="secondary" onClick={handleCancelClick}>Отмена</Button>
         <Button 
-          variant={state === WorkoutState.PAUSED ? 'primary' : 'ghost'} 
-          className={state !== WorkoutState.PAUSED ? 'bg-surface border border-slate-600' : ''}
+          variant={state === WorkoutState.PAUSED ? 'primary' : 'secondary'} 
           onClick={togglePause}
         >
           {state === WorkoutState.PAUSED ? 'Продолжить' : 'Пауза'}

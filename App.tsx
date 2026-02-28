@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { AppScreen, Exercise, MuscleGroup } from './types';
 import { ScreenSetup } from './components/ScreenSetup';
@@ -21,6 +21,15 @@ function App() {
   const [exerciseDetail, setExerciseDetail] = useState<Exercise | null>(null);
   /** Увеличивается при каждом возврате на SETUP, чтобы плейлист пересобирался из актуальной базы (после редактирования в базе). */
   const [setupRefreshKey, setSetupRefreshKey] = useState(0);
+  /** Тренировка в процессе (не завершена) — для подтверждения при выходе (назад / закрытие). */
+  const [workoutInProgress, setWorkoutInProgress] = useState(false);
+
+  const currentScreenRef = useRef(currentScreen);
+  const exerciseDetailRef = useRef(exerciseDetail);
+  const workoutInProgressRef = useRef(workoutInProgress);
+  currentScreenRef.current = currentScreen;
+  exerciseDetailRef.current = exerciseDetail;
+  workoutInProgressRef.current = workoutInProgress;
 
   useEffect(() => {
     const state: HistoryState = { screen: AppScreen.SETUP, exerciseDetail: null };
@@ -28,6 +37,24 @@ function App() {
 
     const onPopState = (e: PopStateEvent) => {
       const state = (e.state as HistoryState | null) ?? { screen: AppScreen.SETUP, exerciseDetail: null };
+      const onWorkout = currentScreenRef.current === AppScreen.WORKOUT;
+      const active = workoutInProgressRef.current;
+      if (onWorkout && active && state.screen !== AppScreen.WORKOUT) {
+        history.pushState(
+          { screen: AppScreen.WORKOUT, exerciseDetail: exerciseDetailRef.current },
+          '',
+          window.location.href
+        );
+        if (window.confirm('Прервать тренировку?')) {
+          setCurrentScreen(state.screen);
+          setExerciseDetail(state.exerciseDetail ?? null);
+          if (state.screen === AppScreen.SETUP) {
+            setSetupRefreshKey((k) => k + 1);
+          }
+          history.replaceState(state, '', window.location.href);
+        }
+        return;
+      }
       setCurrentScreen(state.screen);
       setExerciseDetail(state.exerciseDetail ?? null);
       if (state.screen === AppScreen.SETUP) {
@@ -38,6 +65,16 @@ function App() {
     window.addEventListener('popstate', onPopState);
     return () => window.removeEventListener('popstate', onPopState);
   }, []);
+
+  useEffect(() => {
+    if (currentScreen !== AppScreen.WORKOUT || !workoutInProgress) return;
+    const onBeforeUnload = (e: BeforeUnloadEvent) => {
+      e.preventDefault();
+      e.returnValue = '';
+    };
+    window.addEventListener('beforeunload', onBeforeUnload);
+    return () => window.removeEventListener('beforeunload', onBeforeUnload);
+  }, [currentScreen, workoutInProgress]);
 
   const navigateTo = (screen: AppScreen, detail: Exercise | null = null) => {
     setCurrentScreen(screen);
@@ -62,6 +99,14 @@ function App() {
     navigateTo(AppScreen.WORKOUT);
   };
 
+  /** Выход с экрана тренировки без history.back(), чтобы не вызывать popstate и повторный диалог. */
+  const exitWorkout = () => {
+    setCurrentScreen(AppScreen.SETUP);
+    setExerciseDetail(null);
+    setSetupRefreshKey((k) => k + 1);
+    history.replaceState({ screen: AppScreen.SETUP, exerciseDetail: null }, '', window.location.href);
+  };
+
   const renderScreen = () => {
     switch (currentScreen) {
       case AppScreen.SETUP:
@@ -79,8 +124,9 @@ function App() {
             playlist={activePlaylist}
             muscleGroups={activeMuscles}
             onFinish={goBack}
-            onCancel={goBack}
+            onCancel={exitWorkout}
             onOpenExerciseDetail={openExerciseDetail}
+            onWorkoutActiveChange={setWorkoutInProgress}
             isPausedByOverlay={currentScreen === AppScreen.WORKOUT && exerciseDetail !== null}
           />
         );

@@ -35,7 +35,7 @@ describe('workoutFlow (integration)', () => {
     expect(screen.getByRole('button', { name: /Отмена/i })).toBeInTheDocument();
   });
 
-  it('отмена тренировки: Начать → Отмена → возврат на настройку', async () => {
+  it('отмена тренировки: Начать → Отмена → диалог «Да, прервать» → возврат на настройку', async () => {
     const user = userEvent.setup();
     render(<App />);
 
@@ -47,6 +47,7 @@ describe('workoutFlow (integration)', () => {
     expect(screen.getByText(/ГОТОВЬСЯ/i)).toBeInTheDocument();
 
     await user.click(screen.getByRole('button', { name: /Отмена/i }));
+    await user.click(screen.getByRole('button', { name: /да, прервать/i }));
 
     await waitFor(() => {
       expect(screen.getByRole('button', { name: /Начать тренировку/i })).toBeInTheDocument();
