@@ -9,10 +9,11 @@ describe('ScreenAbout', () => {
   it('рендерит описание приложения', () => {
     render(<ScreenAbout onBack={onBack} />);
 
-    expect(screen.getByText(/Circuit Forge/)).toBeInTheDocument();
+    expect(screen.getAllByText(/Circuit Forge/).length).toBeGreaterThanOrEqual(1);
     expect(screen.getByText(/интервальные тренировки|HIIT/)).toBeInTheDocument();
     expect(screen.getByText(/подбираются 3 группы мышц/)).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: 'О приложении' })).toBeInTheDocument();
+    expect(screen.getByRole('img', { name: 'Иконка приложения Circuit Forge' })).toBeInTheDocument();
   });
 
   it('кнопка «Назад» вызывает onBack', async () => {

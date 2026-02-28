@@ -34,3 +34,16 @@ Object.defineProperty(window, 'speechSynthesis', {
 // Мок Audio
 window.HTMLMediaElement.prototype.play = vi.fn(() => Promise.resolve());
 window.HTMLMediaElement.prototype.pause = vi.fn();
+
+// Мок Service Worker API (для PWA; тесты не загружают полную страницу с registerSW)
+if (typeof navigator !== 'undefined' && !('serviceWorker' in navigator)) {
+  Object.defineProperty(navigator, 'serviceWorker', {
+    value: {
+      register: vi.fn(() => Promise.resolve({ scope: '/', updateViaCache: () => {} })),
+      getRegistration: vi.fn(() => Promise.resolve(null)),
+      getRegistrations: vi.fn(() => Promise.resolve([])),
+    },
+    configurable: true,
+    writable: true,
+  });
+}
