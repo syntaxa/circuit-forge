@@ -5,6 +5,7 @@ import { TTSService } from '../services/ttsService';
 import { disable as disableWakeLock, enable as enableWakeLock } from '../services/wakeLockService';
 import { CircularTimer } from './CircularTimer';
 import { Button } from './Button';
+import { getDifficultyPillStyles } from '../utils/difficultyStyles';
 
 interface ScreenWorkoutProps {
   playlist: Exercise[];
@@ -336,7 +337,7 @@ export const ScreenWorkout: React.FC<ScreenWorkoutProps> = ({ playlist, muscleGr
             <span className="text-slate-400 text-lg font-normal" aria-hidden>ⓘ</span>
           </button>
           <p className="text-slate-400">{currentExercise.description}</p>
-          <div className="mt-4 inline-flex items-center px-3 py-1 rounded-full bg-slate-800 border border-slate-700 text-xs font-bold text-slate-300">
+          <div className={`mt-4 inline-flex items-center px-3 py-1 rounded-full border text-xs font-bold ${getDifficultyPillStyles(currentExercise.difficulty)}`}>
              {currentExercise.muscleGroup} • {currentExercise.difficulty}
           </div>
         </div>

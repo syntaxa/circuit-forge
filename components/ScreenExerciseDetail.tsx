@@ -1,6 +1,7 @@
 import React from 'react';
 import { Exercise } from '../types';
 import { Button } from './Button';
+import { getDifficultyPillStyles } from '../utils/difficultyStyles';
 
 interface ScreenExerciseDetailProps {
   exercise: Exercise;
@@ -22,7 +23,7 @@ export const ScreenExerciseDetail: React.FC<ScreenExerciseDetailProps> = ({ exer
         </h1>
 
         <div className="inline-flex items-center gap-2 mb-6">
-          <span className="px-3 py-1 rounded-full bg-slate-800 border border-slate-700 text-xs font-bold text-slate-300">
+          <span className={`px-3 py-1 rounded-full border text-xs font-bold ${getDifficultyPillStyles(exercise.difficulty)}`}>
             {exercise.muscleGroup} • {exercise.difficulty}
           </span>
         </div>

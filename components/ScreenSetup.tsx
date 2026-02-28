@@ -3,6 +3,7 @@ import { MuscleGroup, Exercise, AppScreen } from '../types';
 import { WorkoutGenerator } from '../services/workoutGenerator';
 import { StorageService } from '../services/storageService';
 import { Button } from './Button';
+import { getDifficultyStyles } from '../utils/difficultyStyles';
 
 interface ScreenSetupProps {
   /** null = нужна генерация. Если передано — используется без пересборки. */
@@ -203,7 +204,7 @@ export const ScreenSetup: React.FC<ScreenSetupProps> = ({
                       aria-label={`Подробнее об упражнении ${ex.name}`}
                     >
                       <span className="font-medium text-slate-200">{idx + 1}. {ex.name} <span className="text-slate-400 text-sm font-normal">ⓘ</span></span>
-                      <span className="text-xs px-2 py-1 rounded bg-slate-800 text-slate-400">{ex.difficulty}</span>
+                      <span className={`text-xs px-2 py-1 rounded ${getDifficultyStyles(ex.difficulty)}`}>{ex.difficulty}</span>
                     </button>
                 ))}
                 </div>

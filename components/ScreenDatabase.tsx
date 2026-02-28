@@ -3,6 +3,7 @@ import { Exercise, MuscleGroup, Difficulty } from '../types';
 import { StorageService } from '../services/storageService';
 import { Button } from './Button';
 import { ALL_MUSCLE_GROUPS } from '../constants';
+import { getDifficultyStyles } from '../utils/difficultyStyles';
 
 type FilterSource = 'all' | 'base' | 'user';
 
@@ -416,7 +417,7 @@ export const ScreenDatabase: React.FC<ScreenDatabaseProps> = ({ onBack, onOpenIn
                     )}
                   </div>
                   <p className={`text-xs mt-0.5 ${isDeactivated ? 'text-slate-500' : 'text-slate-400'}`}>
-                    {ex.muscleGroup} • {ex.difficulty}
+                    {ex.muscleGroup} • <span className={`px-2 py-0.5 rounded ${getDifficultyStyles(ex.difficulty)}`}>{ex.difficulty}</span>
                   </p>
                 </div>
                 <div className="flex gap-2 shrink-0" onClick={e => e.stopPropagation()}>
