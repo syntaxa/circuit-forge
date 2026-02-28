@@ -9,6 +9,7 @@ import { ScreenSettings } from './components/ScreenSettings';
 import { ScreenDatabase } from './components/ScreenDatabase';
 import { ScreenDatabaseAbout } from './components/ScreenDatabaseAbout';
 import { ScreenAbout } from './components/ScreenAbout';
+import { TTSService } from './services/ttsService';
 
 export interface HistoryState {
   screen: AppScreen;
@@ -101,6 +102,7 @@ function App() {
 
   const handleStartWorkout = (playlist: Exercise[], muscles: MuscleGroup[]) => {
     enableWakeLock(); // вызов из user gesture критичен для Wake Lock и video fallback
+    TTSService.unlock(); // разблокировка TTS в PWA/мобильном (iOS/Android требуют жеста)
     setActivePlaylist(playlist);
     setActiveMuscles(muscles);
     navigateTo(AppScreen.WORKOUT);

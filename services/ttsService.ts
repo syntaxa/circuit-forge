@@ -12,6 +12,20 @@ function findDefaultEnglishVoice(voices: SpeechSynthesisVoice[]): SpeechSynthesi
 }
 
 export const TTSService = {
+  /**
+   * Вызвать один раз из обработчика пользовательского жеста (например, при нажатии «Начать тренировку»).
+   * На iOS/Android в PWA speechSynthesis блокируется до первого вызова в контексте жеста;
+   * пустая фраза «разблокирует» последующие вызовы speak() из таймеров/колбеков.
+   */
+  unlock: () => {
+    if (!('speechSynthesis' in window)) return;
+    window.speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(' ');
+    u.volume = 0;
+    window.speechSynthesis.speak(u);
+    window.speechSynthesis.cancel();
+  },
+
   speak: (text: string, voiceURI: string | null, lang: 'ru-RU' | 'en-US' = 'ru-RU', onEnd?: () => void) => {
     if (!('speechSynthesis' in window)) {
       onEnd?.();

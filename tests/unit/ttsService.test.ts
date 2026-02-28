@@ -84,4 +84,14 @@ describe('TTSService', () => {
     expect(voices.map((v) => v.lang)).toContain('en-GB');
     expect(voices.some((v) => v.lang === 'ru-RU')).toBe(false);
   });
+
+  it('unlock — вызывает cancel и speak в контексте жеста (для PWA/мобильного)', () => {
+    const cancelSpy = vi.mocked(window.speechSynthesis.cancel);
+    cancelSpy.mockClear();
+    TTSService.unlock();
+    expect(cancelSpy).toHaveBeenCalled();
+    expect(window.speechSynthesis.speak).toHaveBeenCalled();
+    const [u] = (window.speechSynthesis.speak as ReturnType<typeof vi.fn>).mock.calls[0] as [SpeechSynthesisUtterance];
+    expect(u.volume).toBe(0);
+  });
 });

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button } from './Button';
+import { APP_VERSION } from '../constants';
 
 interface ScreenAboutProps {
   onBack: () => void;
@@ -31,12 +32,15 @@ export const ScreenAbout: React.FC<ScreenAboutProps> = ({ onBack }) => {
       <div className="flex-1 min-h-0 overflow-y-auto pr-2 custom-scrollbar flex flex-col">
         <div className="flex-shrink-0 flex flex-col items-center pt-2 pb-5">
           <img
-            src="/icon-192.png"
+            src={`${import.meta.env.BASE_URL}icon-192.png`}
             alt="Иконка приложения Circuit Forge"
             className="w-16 h-16 rounded-2xl shadow-lg ring-1 ring-slate-600/50"
           />
           <span className="mt-3 text-slate-400 font-semibold text-sm tracking-wide">
             Circuit Forge
+          </span>
+          <span className="mt-1 text-slate-500 text-xs font-normal">
+            v. {APP_VERSION}
           </span>
         </div>
         <div className="bg-surface rounded-xl p-4 sm:p-5 border border-slate-700 shadow-xl">
