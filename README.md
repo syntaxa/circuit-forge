@@ -1,72 +1,81 @@
 # Circuit Forge
 
-A progressive web app (PWA) for high-intensity interval training (HIIT) at home. No equipment required — bodyweight and a chair are enough. Circuit Forge builds personalized circuits, rotates muscle groups across sessions, and works offline.
+Веб-приложение для круговых тренировок высокой интенсивности (HIIT) в домашних условиях. Без инвентаря — достаточно собственного веса и стула/стола. Circuit Forge формирует случаные программы тренировок из базы упражнений, ротирует группы мышц между тренировками. Настройки хранятся локально.
 
-## Features
+## Возможности
 
-- **Smart workout generation** — Picks 3 muscle groups per session (2 from last workout + 1 new) for balanced load and variety
-- **Configurable sessions** — Set exercise duration, exercises per cycle, and number of cycles
-- **Exercise database** — Built-in exercises; add, edit, and remove your own (stored locally)
-- **Voice cues (TTS)** — Countdowns and exercise announcements via browser Web Speech API
-- **PWA** — Install on your device, use offline
-- **Mobile-friendly** — Responsive UI and touch-friendly controls
+- **Умная генерация тренировок** — 3 группы мышц за сессию (2 из прошлой тренировки + 1 новая) для сбалансированной нагрузки и разнообразия
+- **Настраиваемые сессии** — длительность упражнения, число упражнений в круге и число кругов
+- **База упражнений** — встроенные упражнения; добавление, редактирование и удаление своих (данные в localStorage)
+- **Голосовые подсказки (TTS)** — обратный отсчёт и объявление упражнений через Web Speech API
+- **Смена стороны** — визуальная и голосовая индикация для двухсторонних упражнений
+- **Адаптивный интерфейс** — удобно на телефоне и планшете
 
-## Tech stack
+## Стек
 
 - **React 19** + **TypeScript**
 - **Vite**
-- **Tailwind CSS** (via CDN in dev)
-- **localStorage** for settings, profile, workout history, and custom exercises
+- **Tailwind CSS**
+- **localStorage** — настройки, профиль, история тренировок и пользовательские упражнения
 
-## Quick start
+## Запуск
 
 ```bash
-# Clone the repo
+# Клонировать репозиторий
 git clone https://github.com/YOUR_USERNAME/circuit-forge.git
 cd circuit-forge
 
-# Install dependencies
+# Установить зависимости
 npm install
 
-# Run dev server (http://localhost:3000)
+# Запустить dev-сервер (http://localhost:3000)
 npm run dev
 ```
 
-**Build for production:**
+**Сборка для продакшена:**
 
 ```bash
 npm run build
 ```
 
-**Preview production build locally:**
+**Просмотр production-сборки локально:**
 
 ```bash
 npm run preview
 ```
 
-## Deploy (GitHub Pages)
+**Тесты:**
 
-On every push to `main`, the [GitHub Actions workflow](.github/workflows/deploy-pages.yml) builds and deploys to GitHub Pages.
+```bash
+npm test              # один прогон
+npm run test:watch    # в режиме наблюдения
+npm run test:coverage # с отчётом покрытия
+```
 
-1. In the repo: **Settings → Pages**
-2. Under **Build and deployment**, set **Source** to **GitHub Actions**
-3. After the first successful run, the app is available at:
+## Деплой (GitHub Pages)
+
+При каждом пуше в `main` workflow [GitHub Actions](.github/workflows/deploy-pages.yml) собирает проект и публикует на GitHub Pages.
+
+1. В репозитории: **Settings → Pages**
+2. В **Build and deployment** выберите **Source: GitHub Actions**
+3. После первого успешного запуска приложение будет доступно по адресу:  
    `https://<owner>.github.io/<repo-name>/`
 
-## Project structure
+## Структура проекта
 
-| Path | Description |
-|------|-------------|
-| `components/` | UI: setup, workout, settings, exercise database, timer, buttons |
-| `services/` | Data, settings, profile, workout history, TTS, workout generator |
-| `constants.ts` | Exercise seed data, defaults, types |
-| `docs/` | [Architecture](docs/architecture.md), [Tasks](docs/tasks.md) |
+| Путь | Описание |
+|------|----------|
+| `components/` | Экраны и UI: настройка тренировки, тренировка, настройки, база упражнений, таймер, кнопки |
+| `services/` | Данные, настройки, профиль, история, TTS, генератор тренировок |
+| `constants.ts` | Исходные упражнения, дефолты, типы |
+| `tests/` | Unit- и интеграционные тесты (Vitest + Testing Library) |
+| `docs/` | [Архитектура](docs/architecture.md), [Задачи](docs/tasks.md) |
 
-## Documentation
+## Документация
 
-- [Architecture & roadmap](docs/architecture.md) — Design, data model, and future phases (backend, native apps, social features)
-- [Tasks](docs/tasks.md) — Current tasks and known issues
+- [Архитектура и дорожная карта](docs/architecture.md) — дизайн, модель данных, фазы развития
+- [Задачи](docs/tasks.md) — текущие задачи и известные дефекты
 
-## License
+## Лицензия
 
-See [LICENSE](LICENSE) in this repository (if present).
+См. [LICENSE](LICENSE) в репозитории (если есть).
