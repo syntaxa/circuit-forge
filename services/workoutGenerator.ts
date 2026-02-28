@@ -113,31 +113,42 @@ export const WorkoutGenerator = {
   }
 };
 
-/** Swap elements so that no two adjacent exercises have the same id. */
+/**
+ * Rearrange so that no two adjacent exercises share the same id.
+ * Greedy "most-frequent first" approach: always place the exercise
+ * from the largest remaining group whose id differs from the last
+ * placed one. Guarantees zero consecutive duplicates when
+ * max_count(id) <= ceil(n / 2), and minimises them otherwise.
+ */
 function avoidConsecutiveDuplicates(list: Exercise[]): Exercise[] {
-  const arr = [...list];
-  let changed = true;
-  let iterations = 0;
-  const maxIterations = arr.length * arr.length;
-  while (changed && iterations < maxIterations) {
-    changed = false;
-    iterations++;
-    for (let i = 1; i < arr.length; i++) {
-      if (arr[i].id !== arr[i - 1].id) continue;
-      const duplicateId = arr[i].id;
-      let found = false;
-      for (let j = 0; j < arr.length && !found; j++) {
-        if (j === i || j === i - 1) continue;
-        if (arr[j].id === duplicateId) continue;
-        const prevId = j > 0 ? arr[j - 1].id : null;
-        const nextId = j < arr.length - 1 ? arr[j + 1].id : null;
-        if (prevId === duplicateId || nextId === duplicateId) continue;
-        [arr[i], arr[j]] = [arr[j], arr[i]];
-        found = true;
-        changed = true;
+  if (list.length <= 1) return [...list];
+
+  const groups = new Map<string, Exercise[]>();
+  for (const ex of list) {
+    let g = groups.get(ex.id);
+    if (!g) { g = []; groups.set(ex.id, g); }
+    g.push(ex);
+  }
+
+  const buckets = [...groups.values()];
+  const result: Exercise[] = [];
+
+  while (result.length < list.length) {
+    buckets.sort((a, b) => b.length - a.length);
+    const lastId = result.length > 0 ? result[result.length - 1].id : null;
+    let placed = false;
+    for (const bucket of buckets) {
+      if (bucket.length === 0) continue;
+      if (bucket[0].id === lastId) continue;
+      result.push(bucket.pop()!);
+      placed = true;
+      break;
+    }
+    if (!placed) {
+      for (const bucket of buckets) {
+        if (bucket.length > 0) { result.push(bucket.pop()!); break; }
       }
-      if (found) break;
     }
   }
-  return arr;
+  return result;
 }
