@@ -75,7 +75,7 @@ export const ScreenSettings: React.FC<ScreenSettingsProps> = ({ onBack }) => {
             </label>
 
             <div className="block">
-              <span className="block text-xs text-slate-400 mb-1.5">Перерыв между упражнениями, сек</span>
+              <span className="block text-xs text-slate-400 mb-1.5">Между упражнениями, сек</span>
               <div className="flex items-center gap-1">
                 <button
                   type="button"
