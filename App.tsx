@@ -6,6 +6,7 @@ import { ScreenWorkout } from './components/ScreenWorkout';
 import { ScreenExerciseDetail } from './components/ScreenExerciseDetail';
 import { ScreenSettings } from './components/ScreenSettings';
 import { ScreenDatabase } from './components/ScreenDatabase';
+import { ScreenDatabaseAbout } from './components/ScreenDatabaseAbout';
 import { ScreenAbout } from './components/ScreenAbout';
 
 function App() {
@@ -59,6 +60,13 @@ function App() {
         return (
           <ScreenDatabase 
             onBack={navigateToSetup}
+            onOpenInfo={() => setCurrentScreen(AppScreen.DATABASE_ABOUT)}
+          />
+        );
+      case AppScreen.DATABASE_ABOUT:
+        return (
+          <ScreenDatabaseAbout 
+            onBack={() => setCurrentScreen(AppScreen.DATABASE)}
           />
         );
       case AppScreen.ABOUT:

@@ -4,11 +4,11 @@ import userEvent from '@testing-library/user-event';
 import App from '@/App';
 import { StorageService } from '@/services/storageService';
 import { createSettings } from '../helpers';
-import { SEED_EXERCISES } from '@/constants';
 
 describe('workoutFlow (integration)', () => {
   beforeEach(() => {
-    StorageService.saveExercises(SEED_EXERCISES);
+    localStorage.removeItem('cf_exercises');
+    localStorage.setItem('cf_user_exercises', '[]');
     StorageService.saveSettings(
       createSettings({
         exerciseDuration: 30,

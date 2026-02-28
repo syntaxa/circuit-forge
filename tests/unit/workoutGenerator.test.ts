@@ -9,6 +9,7 @@ vi.mock('@/services/storageService', () => ({
   StorageService: {
     getLastLog: vi.fn(),
     getExercises: vi.fn(),
+    getExercisesForWorkout: vi.fn(),
   },
 }));
 
@@ -16,6 +17,7 @@ describe('WorkoutGenerator', () => {
   beforeEach(() => {
     vi.mocked(StorageService.getLastLog).mockReturnValue(null);
     vi.mocked(StorageService.getExercises).mockReturnValue([]);
+    vi.mocked(StorageService.getExercisesForWorkout).mockReturnValue([]);
   });
 
   describe('selectMuscleGroups', () => {
@@ -70,7 +72,7 @@ describe('WorkoutGenerator', () => {
         createExercise({ id: '3', muscleGroup: MuscleGroup.LEGS }),
         createExercise({ id: '4', muscleGroup: MuscleGroup.LEGS }),
       ];
-      vi.mocked(StorageService.getExercises).mockReturnValue(exercises);
+      vi.mocked(StorageService.getExercisesForWorkout).mockReturnValue(exercises);
 
       const result = WorkoutGenerator.generatePlaylist(targetMuscles, 4);
 
@@ -88,7 +90,7 @@ describe('WorkoutGenerator', () => {
         createExercise({ muscleGroup: MuscleGroup.ARMS }),
         createExercise({ muscleGroup: MuscleGroup.ARMS }),
       ];
-      vi.mocked(StorageService.getExercises).mockReturnValue(exercises);
+      vi.mocked(StorageService.getExercisesForWorkout).mockReturnValue(exercises);
 
       const result = WorkoutGenerator.generatePlaylist(targetMuscles, 3);
 
@@ -102,7 +104,7 @@ describe('WorkoutGenerator', () => {
         createExercise({ id: '2', muscleGroup: MuscleGroup.ARMS, difficulty: Difficulty.HARD }),
         createExercise({ id: '3', muscleGroup: MuscleGroup.ARMS, difficulty: Difficulty.MEDIUM }),
       ];
-      vi.mocked(StorageService.getExercises).mockReturnValue(exercises);
+      vi.mocked(StorageService.getExercisesForWorkout).mockReturnValue(exercises);
 
       // Детерминируем выбор: один из каждой группы (индексы 0, 1, 2), чтобы в плейлисте 2 HARD и 1 MEDIUM
       let pickIndex = 0;
@@ -124,7 +126,7 @@ describe('WorkoutGenerator', () => {
     });
 
     it('пустая база — возвращает пустой массив при отсутствии кандидатов', () => {
-      vi.mocked(StorageService.getExercises).mockReturnValue([]);
+      vi.mocked(StorageService.getExercisesForWorkout).mockReturnValue([]);
 
       const result = WorkoutGenerator.generatePlaylist([MuscleGroup.ARMS], 5);
 
@@ -138,7 +140,7 @@ describe('WorkoutGenerator', () => {
         createExercise({ id: '2', muscleGroup: MuscleGroup.ABS }),
         createExercise({ id: '3', muscleGroup: MuscleGroup.ABS }),
       ];
-      vi.mocked(StorageService.getExercises).mockReturnValue(exercises);
+      vi.mocked(StorageService.getExercisesForWorkout).mockReturnValue(exercises);
 
       const result = WorkoutGenerator.generatePlaylist(targetMuscles, 3);
 
@@ -154,7 +156,7 @@ describe('WorkoutGenerator', () => {
         createExercise({ id: '3', muscleGroup: MuscleGroup.LEGS }),
         createExercise({ id: '4', muscleGroup: MuscleGroup.LEGS }),
       ];
-      vi.mocked(StorageService.getExercises).mockReturnValue(exercises);
+      vi.mocked(StorageService.getExercisesForWorkout).mockReturnValue(exercises);
 
       const result = WorkoutGenerator.generatePlaylist(targetMuscles, 4);
 
@@ -170,7 +172,7 @@ describe('WorkoutGenerator', () => {
         createExercise({ id: '2', name: 'B', muscleGroup: MuscleGroup.LEGS }),
         createExercise({ id: '3', name: 'C', muscleGroup: MuscleGroup.ARMS }),
       ];
-      vi.mocked(StorageService.getExercises).mockReturnValue(exercises);
+      vi.mocked(StorageService.getExercisesForWorkout).mockReturnValue(exercises);
 
       const result = WorkoutGenerator.generatePlaylist(targetMuscles, 6);
 

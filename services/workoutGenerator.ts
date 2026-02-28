@@ -37,7 +37,7 @@ export const WorkoutGenerator = {
   },
 
   generatePlaylist: (targetMuscles: MuscleGroup[], count: number): Exercise[] => {
-    const allExercises = StorageService.getExercises();
+    const allExercises = StorageService.getExercisesForWorkout();
     
     // Filter exercises that match target muscles
     const candidates = allExercises.filter(ex => targetMuscles.includes(ex.muscleGroup));

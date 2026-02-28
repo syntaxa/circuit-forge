@@ -10,33 +10,67 @@ describe('StorageService', () => {
   });
 
   describe('getExercises', () => {
-    it('первый запуск — инициализирует localStorage seed-данными и возвращает их', () => {
+    it('первый запуск — возвращает SEED с source: base, не записывает cf_exercises', () => {
       const result = StorageService.getExercises();
 
-      expect(result).toEqual(SEED_EXERCISES);
-      expect(localStorage.getItem('cf_exercises')).toBe(JSON.stringify(SEED_EXERCISES));
+      expect(result.length).toBe(SEED_EXERCISES.length);
+      result.forEach((ex, i) => {
+        expect(ex).toMatchObject({ ...SEED_EXERCISES[i], source: 'base' });
+      });
+      expect(localStorage.getItem('cf_exercises')).toBeNull();
     });
 
-    it('повторный запуск — возвращает ранее сохранённые данные', () => {
-      const custom = [createExercise({ id: 'custom-1', name: 'Custom' })];
-      StorageService.saveExercises(custom);
+    it('повторный запуск — возвращает SEED + пользовательские данные', () => {
+      const custom = [createExercise({ id: 'user_1', name: 'Custom', source: 'user' })];
+      StorageService.saveUserExercises(custom);
 
       const result = StorageService.getExercises();
 
-      expect(result).toEqual(custom);
-      expect(result[0].name).toBe('Custom');
+      const baseCount = result.filter(e => e.source === 'base').length;
+      const userEx = result.find(e => e.source === 'user');
+      expect(baseCount).toBe(SEED_EXERCISES.length);
+      expect(userEx?.name).toBe('Custom');
     });
   });
 
-  describe('saveExercises', () => {
-    it('корректно сериализует и сохраняет массив', () => {
-      const exercises = [createExercise({ id: 'a', name: 'A' })];
+  describe('saveUserExercises / getUserExercises', () => {
+    it('корректно сериализует и сохраняет массив пользовательских упражнений', () => {
+      const exercises = [createExercise({ id: 'user_a', name: 'A' })];
 
-      StorageService.saveExercises(exercises);
+      StorageService.saveUserExercises(exercises);
 
-      const raw = localStorage.getItem('cf_exercises');
+      const raw = localStorage.getItem('cf_user_exercises');
       expect(raw).toBeTruthy();
-      expect(JSON.parse(raw!)).toEqual(exercises);
+      const parsed = JSON.parse(raw!);
+      expect(parsed).toHaveLength(1);
+      expect(parsed[0].name).toBe('A');
+      expect(parsed[0].source).toBe('user');
+    });
+  });
+
+  describe('migration', () => {
+    it('при старом формате (cf_exercises без cf_user_exercises) — очищает старый ключ и создаёт пустой user', () => {
+      const oldData = [createExercise({ id: '1', name: 'Old' })];
+      localStorage.setItem('cf_exercises', JSON.stringify(oldData));
+
+      StorageService.getExercises();
+
+      expect(localStorage.getItem('cf_exercises')).toBeNull();
+      expect(JSON.parse(localStorage.getItem('cf_user_exercises')!)).toEqual([]);
+    });
+  });
+
+  describe('getExercisesForWorkout', () => {
+    it('исключает деактивированные базовые упражнения', () => {
+      StorageService.setDeactivatedBaseIds(['1', '2']);
+
+      const result = StorageService.getExercisesForWorkout();
+
+      const ids = result.map(e => e.id);
+      expect(ids).not.toContain('1');
+      expect(ids).not.toContain('2');
+      const baseFromSeed = result.filter(e => e.source === 'base');
+      expect(baseFromSeed.length).toBe(SEED_EXERCISES.length - 2);
     });
   });
 

@@ -1,25 +1,104 @@
-import { Exercise, Settings, WorkoutLog, UserProfile } from '../types';
+import { Exercise, ExerciseSource, Settings, WorkoutLog, UserProfile } from '../types';
 import { DEFAULT_SETTINGS, SEED_EXERCISES } from '../constants';
 
 const KEYS = {
   EXERCISES: 'cf_exercises',
+  USER_EXERCISES: 'cf_user_exercises',
+  DEACTIVATED_BASE_IDS: 'cf_deactivated_base_ids',
+  HIDE_CLONE_WARNING: 'cf_hide_clone_warning',
   SETTINGS: 'cf_settings',
   PROFILE: 'cf_profile',
   HISTORY: 'cf_history',
 };
 
+function runMigration(): void {
+  const hasOld = localStorage.getItem(KEYS.EXERCISES);
+  const hasNew = localStorage.getItem(KEYS.USER_EXERCISES);
+  if (hasOld && !hasNew) {
+    localStorage.removeItem(KEYS.EXERCISES);
+    localStorage.setItem(KEYS.USER_EXERCISES, '[]');
+  }
+}
+
 export const StorageService = {
-  getExercises: (): Exercise[] => {
-    const data = localStorage.getItem(KEYS.EXERCISES);
-    if (!data) {
-      localStorage.setItem(KEYS.EXERCISES, JSON.stringify(SEED_EXERCISES));
-      return SEED_EXERCISES;
-    }
-    return JSON.parse(data);
+  runMigration,
+
+  getExercises: (forWorkout?: boolean): Exercise[] => {
+    runMigration();
+    const deactivated = StorageService.getDeactivatedBaseIds();
+    const userExercises = StorageService.getUserExercises();
+
+    const baseExercises: Exercise[] = SEED_EXERCISES.map(e => ({
+      ...e,
+      source: 'base' as ExerciseSource,
+    }));
+
+    const activeBase = forWorkout
+      ? baseExercises.filter(e => !deactivated.includes(e.id))
+      : baseExercises;
+
+    const userWithSource: Exercise[] = userExercises.map(e => ({
+      ...e,
+      source: 'user' as ExerciseSource,
+    }));
+
+    return [...activeBase, ...userWithSource];
   },
 
-  saveExercises: (exercises: Exercise[]) => {
-    localStorage.setItem(KEYS.EXERCISES, JSON.stringify(exercises));
+  getExercisesForWorkout: (): Exercise[] => StorageService.getExercises(true),
+
+  getUserExercises: (): Exercise[] => {
+    runMigration();
+    const data = localStorage.getItem(KEYS.USER_EXERCISES);
+    if (!data) return [];
+    try {
+      const parsed = JSON.parse(data) as Exercise[];
+      return Array.isArray(parsed) ? parsed : [];
+    } catch {
+      return [];
+    }
+  },
+
+  saveUserExercises: (exercises: Exercise[]) => {
+    const withSource = exercises.map(e => ({ ...e, source: 'user' as ExerciseSource }));
+    localStorage.setItem(KEYS.USER_EXERCISES, JSON.stringify(withSource));
+  },
+
+  getDeactivatedBaseIds: (): string[] => {
+    const data = localStorage.getItem(KEYS.DEACTIVATED_BASE_IDS);
+    if (!data) return [];
+    try {
+      const parsed = JSON.parse(data) as string[];
+      return Array.isArray(parsed) ? parsed : [];
+    } catch {
+      return [];
+    }
+  },
+
+  setDeactivatedBaseIds: (ids: string[]) => {
+    localStorage.setItem(KEYS.DEACTIVATED_BASE_IDS, JSON.stringify(ids));
+  },
+
+  toggleBaseActive: (id: string) => {
+    const ids = StorageService.getDeactivatedBaseIds();
+    const idx = ids.indexOf(id);
+    if (idx >= 0) {
+      StorageService.setDeactivatedBaseIds(ids.filter((_, i) => i !== idx));
+    } else {
+      StorageService.setDeactivatedBaseIds([...ids, id]);
+    }
+  },
+
+  isBaseDeactivated: (id: string): boolean =>
+    StorageService.getDeactivatedBaseIds().includes(id),
+
+  getHideCloneWarning: (): boolean => {
+    const data = localStorage.getItem(KEYS.HIDE_CLONE_WARNING);
+    return data === 'true';
+  },
+
+  setHideCloneWarning: (value: boolean) => {
+    localStorage.setItem(KEYS.HIDE_CLONE_WARNING, value ? 'true' : 'false');
   },
 
   getSettings: (): Settings => {
@@ -42,7 +121,7 @@ export const StorageService = {
 
   addLog: (log: WorkoutLog) => {
     const history = StorageService.getHistory();
-    history.unshift(log); // Add to beginning
+    history.unshift(log);
     localStorage.setItem(KEYS.HISTORY, JSON.stringify(history));
   },
 

@@ -5,7 +5,6 @@ import App from '@/App';
 import { StorageService } from '@/services/storageService';
 import { MuscleGroup } from '@/types';
 import { createExercise } from '../helpers';
-import { SEED_EXERCISES } from '@/constants';
 
 vi.mock('@/services/workoutGenerator', async (importOriginal) => {
   const actual = await importOriginal<typeof import('@/services/workoutGenerator')>();
@@ -17,7 +16,7 @@ vi.mock('@/services/workoutGenerator', async (importOriginal) => {
       selectMuscleGroups: vi.fn(() => [MuscleGroup.LEGS, MuscleGroup.ARMS, MuscleGroup.ABS]),
       // Детерминированный плейлист: первые count упражнений из LEGS, чтобы Jump Squat (id 1) всегда входил
       generatePlaylist: vi.fn((_groups: MuscleGroup[], count: number) => {
-        const exercises = StorageService.getExercises();
+        const exercises = StorageService.getExercisesForWorkout?.() ?? StorageService.getExercises();
         const legs = exercises.filter((e) => e.muscleGroup === MuscleGroup.LEGS);
         return legs.slice(0, Math.max(count, legs.length));
       }),
@@ -47,7 +46,8 @@ function getDeleteButtonForExercise(exerciseName: string): HTMLElement {
 
 describe('databaseSync (integration)', () => {
   beforeEach(() => {
-    StorageService.saveExercises(SEED_EXERCISES);
+    localStorage.removeItem('cf_exercises');
+    localStorage.setItem('cf_user_exercises', '[]');
   });
 
   it('редактирование упражнения в базе → возврат на экран настройки → плейлист содержит обновлённые данные', async () => {
@@ -63,7 +63,14 @@ describe('databaseSync (integration)', () => {
 
     await user.click(getEditButtonForExercise('Jump Squat'));
 
-    expect(screen.getByRole('heading', { name: /Редактировать/i })).toBeInTheDocument();
+    const cloneConfirmBtn = screen.queryByRole('button', { name: /Создать копию и редактировать/i });
+    if (cloneConfirmBtn) {
+      await user.click(cloneConfirmBtn);
+    }
+
+    await waitFor(() => {
+      expect(screen.getByRole('heading', { name: /Редактировать/i })).toBeInTheDocument();
+    });
 
     const nameInput = screen.getByDisplayValue('Jump Squat');
     await user.clear(nameInput);
@@ -84,16 +91,16 @@ describe('databaseSync (integration)', () => {
 
   it('удаление упражнения из базы → плейлист не содержит удалённого упражнения', async () => {
     const toDelete = createExercise({
-      id: 'to-delete',
+      id: 'user_to-delete',
       name: 'Unique To Delete',
       muscleGroup: MuscleGroup.LEGS,
     });
     const toKeep = createExercise({
-      id: 'to-keep',
+      id: 'user_to-keep',
       name: 'Unique To Keep',
       muscleGroup: MuscleGroup.LEGS,
     });
-    StorageService.saveExercises([toDelete, toKeep]);
+    StorageService.saveUserExercises([toDelete, toKeep]);
 
     const confirmFn = vi.fn(() => true);
     vi.stubGlobal('confirm', confirmFn);

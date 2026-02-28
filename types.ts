@@ -13,6 +13,8 @@ export enum Difficulty {
   HARD = 'высокий'
 }
 
+export type ExerciseSource = 'base' | 'user';
+
 export interface Exercise {
   id: string;
   name: string;
@@ -21,6 +23,7 @@ export interface Exercise {
   difficulty: Difficulty;
   biSided?: boolean;
   steps: string;
+  source?: ExerciseSource;
 }
 
 export interface Settings {
@@ -45,5 +48,6 @@ export enum AppScreen {
   WORKOUT = 'WORKOUT',
   SETTINGS = 'SETTINGS',
   DATABASE = 'DATABASE',
+  DATABASE_ABOUT = 'DATABASE_ABOUT',
   ABOUT = 'ABOUT'
 }
