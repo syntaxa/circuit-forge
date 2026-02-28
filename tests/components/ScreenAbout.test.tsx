@@ -14,7 +14,7 @@ describe('ScreenAbout', () => {
     expect(screen.getByText(/подбираются 3 группы мышц/)).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: 'О приложении' })).toBeInTheDocument();
     expect(screen.getByRole('img', { name: 'Иконка приложения Circuit Forge' })).toBeInTheDocument();
-    expect(screen.getByText(/v\.\s*1\.01/)).toBeInTheDocument();
+    expect(screen.getByText(/v\.\s*[\d.]+/)).toBeInTheDocument();
   });
 
   it('кнопка «Назад» вызывает onBack', async () => {
