@@ -19,8 +19,9 @@ function App() {
   const [activePlaylist, setActivePlaylist] = useState<Exercise[]>([]);
   const [activeMuscles, setActiveMuscles] = useState<MuscleGroup[]>([]);
   const [exerciseDetail, setExerciseDetail] = useState<Exercise | null>(null);
-  /** Увеличивается при каждом возврате на SETUP, чтобы плейлист пересобирался из актуальной базы (после редактирования в базе). */
-  const [setupRefreshKey, setSetupRefreshKey] = useState(0);
+  /** Плейлист экрана настройки. null = нужна генерация. Сохраняется при переходах Settings/About/Database. */
+  const [setupPlaylist, setSetupPlaylist] = useState<Exercise[] | null>(null);
+  const [setupMuscles, setSetupMuscles] = useState<MuscleGroup[] | null>(null);
   /** Тренировка в процессе (не завершена) — для подтверждения при выходе (назад / закрытие). */
   const [workoutInProgress, setWorkoutInProgress] = useState(false);
 
@@ -49,7 +50,8 @@ function App() {
           setCurrentScreen(state.screen);
           setExerciseDetail(state.exerciseDetail ?? null);
           if (state.screen === AppScreen.SETUP) {
-            setSetupRefreshKey((k) => k + 1);
+            setSetupPlaylist(null);
+            setSetupMuscles(null);
           }
           history.replaceState(state, '', window.location.href);
         }
@@ -57,8 +59,11 @@ function App() {
       }
       setCurrentScreen(state.screen);
       setExerciseDetail(state.exerciseDetail ?? null);
-      if (state.screen === AppScreen.SETUP) {
-        setSetupRefreshKey((k) => k + 1);
+      // Перегенерировать плейлист только при возврате с экрана тренировки (окончание или выход).
+      // Навигация Настройки/База/О программе → SETUP и закрытие оверлея описания сохраняют плейлист.
+      if (state.screen === AppScreen.SETUP && currentScreenRef.current === AppScreen.WORKOUT) {
+        setSetupPlaylist(null);
+        setSetupMuscles(null);
       }
     };
 
@@ -103,7 +108,8 @@ function App() {
   const exitWorkout = () => {
     setCurrentScreen(AppScreen.SETUP);
     setExerciseDetail(null);
-    setSetupRefreshKey((k) => k + 1);
+    setSetupPlaylist(null);
+    setSetupMuscles(null);
     history.replaceState({ screen: AppScreen.SETUP, exerciseDetail: null }, '', window.location.href);
   };
 
@@ -112,7 +118,12 @@ function App() {
       case AppScreen.SETUP:
         return (
           <ScreenSetup
-            key={setupRefreshKey}
+            playlist={setupPlaylist}
+            muscles={setupMuscles}
+            onPlaylistReady={(pl, m) => {
+              setSetupPlaylist(pl);
+              setSetupMuscles(m);
+            }}
             onStart={handleStartWorkout}
             onNavigate={navigateTo}
             onOpenExerciseDetail={openExerciseDetail}

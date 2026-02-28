@@ -50,7 +50,7 @@ describe('databaseSync (integration)', () => {
     localStorage.setItem('cf_user_exercises', '[]');
   });
 
-  it('редактирование упражнения в базе → возврат на экран настройки → плейлист содержит обновлённые данные', async () => {
+  it('редактирование упражнения в базе → возврат → Обновить план → плейлист содержит обновлённые данные', async () => {
     const user = userEvent.setup();
     render(<App />);
 
@@ -83,6 +83,8 @@ describe('databaseSync (integration)', () => {
     await waitFor(() => {
       expect(screen.getByRole('button', { name: /Начать тренировку/i })).toBeInTheDocument();
     });
+    // Плейлист сохраняется при возврате из базы. Обновить план пересобирает из актуальной базы.
+    await user.click(screen.getByRole('button', { name: /обновить план/i }));
 
     await waitFor(() => {
       expect(screen.getByText(/Jump Squat Edited/i)).toBeInTheDocument();
@@ -130,8 +132,12 @@ describe('databaseSync (integration)', () => {
     await waitFor(() => {
       expect(screen.getByRole('button', { name: /Начать тренировку/i })).toBeInTheDocument();
     });
+    // Плейлист сохраняется при возврате из базы. Обновить план пересобирает без удалённого.
+    await user.click(screen.getByRole('button', { name: /обновить план/i }));
 
-    expect(screen.queryByText('Unique To Delete')).not.toBeInTheDocument();
+    await waitFor(() => {
+      expect(screen.queryByText('Unique To Delete')).not.toBeInTheDocument();
+    });
 
     vi.unstubAllGlobals();
   });

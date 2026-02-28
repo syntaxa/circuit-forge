@@ -5,6 +5,11 @@ import { StorageService } from '../services/storageService';
 import { Button } from './Button';
 
 interface ScreenSetupProps {
+  /** null = нужна генерация. Если передано — используется без пересборки. */
+  playlist?: Exercise[] | null;
+  muscles?: MuscleGroup[] | null;
+  /** Вызывается после генерации плейлиста (для сохранения в родителе при переходах между экранами). */
+  onPlaylistReady?: (playlist: Exercise[], muscles: MuscleGroup[]) => void;
   onStart: (playlist: Exercise[], muscles: MuscleGroup[]) => void;
   onNavigate: (screen: AppScreen) => void;
   onOpenExerciseDetail: (exercise: Exercise) => void;
@@ -23,21 +28,36 @@ function getDisplayMuscles(muscles: MuscleGroup[]): { group: MuscleGroup; fromPr
   return displayOrder.map(m => ({ group: m, fromPrevious: previousGroups.includes(m) }));
 }
 
-export const ScreenSetup: React.FC<ScreenSetupProps> = ({ onStart, onNavigate, onOpenExerciseDetail }) => {
-  const [muscles, setMuscles] = useState<MuscleGroup[]>([]);
-  const [playlist, setPlaylist] = useState<Exercise[]>([]);
-  const [loading, setLoading] = useState(true);
+export const ScreenSetup: React.FC<ScreenSetupProps> = ({
+  playlist: propPlaylist,
+  muscles: propMuscles,
+  onPlaylistReady,
+  onStart,
+  onNavigate,
+  onOpenExerciseDetail,
+}) => {
+  const [localMuscles, setLocalMuscles] = useState<MuscleGroup[]>(propMuscles ?? []);
+  const [localPlaylist, setLocalPlaylist] = useState<Exercise[]>(propPlaylist ?? []);
+  const [loading, setLoading] = useState(propPlaylist == null && propMuscles == null);
+
+  const needToGenerate = propPlaylist == null || propMuscles == null;
+  const muscles = propMuscles ?? localMuscles;
+  const playlist = propPlaylist ?? localPlaylist;
 
   useEffect(() => {
-    // Generate new workout logic
+    if (!needToGenerate) {
+      setLoading(false);
+      return;
+    }
     const selectedMuscles = WorkoutGenerator.selectMuscleGroups();
-    setMuscles(selectedMuscles);
-    
     const settings = StorageService.getSettings();
     const generatedPlaylist = WorkoutGenerator.generatePlaylist(selectedMuscles, settings.exercisesPerCycle);
-    setPlaylist(generatedPlaylist);
+    setLocalMuscles(selectedMuscles);
+    setLocalPlaylist(generatedPlaylist);
     setLoading(false);
-  }, []);
+    onPlaylistReady?.(generatedPlaylist, selectedMuscles);
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- onPlaylistReady: нужен только при смене needToGenerate
+  }, [needToGenerate]);
 
   const displayMuscles = getDisplayMuscles(muscles);
   const fromPreviousGroups = displayMuscles.filter(m => m.fromPrevious);
@@ -46,13 +66,13 @@ export const ScreenSetup: React.FC<ScreenSetupProps> = ({ onStart, onNavigate, o
   const handleRefresh = () => {
     setLoading(true);
     setTimeout(() => {
-      // Новый выбор групп мышц с учётом последней тренировки (2 из прошлых + 1 новая)
       const selectedMuscles = WorkoutGenerator.selectMuscleGroups();
-      setMuscles(selectedMuscles);
       const settings = StorageService.getSettings();
       const newPlaylist = WorkoutGenerator.generatePlaylist(selectedMuscles, settings.exercisesPerCycle);
-      setPlaylist(newPlaylist);
+      setLocalMuscles(selectedMuscles);
+      setLocalPlaylist(newPlaylist);
       setLoading(false);
+      onPlaylistReady?.(newPlaylist, selectedMuscles);
     }, 300);
   };
 
