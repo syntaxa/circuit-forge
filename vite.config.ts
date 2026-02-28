@@ -3,8 +3,10 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { VitePWA } from 'vite-plugin-pwa';
 
+const base = process.env.VITE_BASE_PATH || '/';
+
 export default defineConfig({
-  base: process.env.VITE_BASE_PATH || '/',
+  base,
   server: {
     port: 3000,
     host: '0.0.0.0',
@@ -18,19 +20,20 @@ export default defineConfig({
         name: 'Circuit Forge',
         short_name: 'Circuit Forge',
         description: 'Workout and circuit training app',
-        start_url: '/',
+        // Для GitHub Pages: start_url должен быть /circuit-forge/, иначе PWA открывает корень домена
+        start_url: base,
         display: 'standalone',
         background_color: '#0f172a',
         theme_color: '#0f172a',
         icons: [
           {
-            src: '/icon-192.png',
+            src: (base === '/' ? '' : base.replace(/\/$/, '')) + '/icon-192.png',
             sizes: '192x192',
             type: 'image/png',
             purpose: 'any',
           },
           {
-            src: '/icon-512.png',
+            src: (base === '/' ? '' : base.replace(/\/$/, '')) + '/icon-512.png',
             sizes: '512x512',
             type: 'image/png',
             purpose: 'any',
