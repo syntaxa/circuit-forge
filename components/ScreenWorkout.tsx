@@ -53,6 +53,8 @@ export const ScreenWorkout: React.FC<ScreenWorkoutProps> = ({ playlist, muscleGr
   const completeAudioRef = useRef<HTMLAudioElement | null>(null);
   // One "Switch side" announcement per bilateral exercise, at midpoint
   const sideSwitchAnnouncedRef = useRef(false);
+  /** Screen Wake Lock — предотвращает блокировку экрана на смартфоне во время тренировки */
+  const wakeLockRef = useRef<WakeLockSentinel | null>(null);
 
   // During PREP, show the next exercise if available, otherwise show current
   const currentExercise = (state === WorkoutState.PREP && nextExerciseRef.current) 
@@ -168,6 +170,43 @@ export const ScreenWorkout: React.FC<ScreenWorkoutProps> = ({ playlist, muscleGr
     onWorkoutActiveChange?.(state !== WorkoutState.FINISHED);
     return () => onWorkoutActiveChange?.(false);
   }, [state, onWorkoutActiveChange]);
+
+  // Screen Wake Lock — не даёт экрану засыпать во время тренировки на мобильном
+  const requestWakeLock = useCallback(async () => {
+    if (!('wakeLock' in navigator)) return;
+    try {
+      wakeLockRef.current = await navigator.wakeLock.request('screen');
+    } catch {
+      // Игнорируем: API недоступен или отклонён (низкий заряд, настройки и т.п.)
+    }
+  }, []);
+  const releaseWakeLock = useCallback(async () => {
+    if (wakeLockRef.current) {
+      try {
+        await wakeLockRef.current.release();
+      } catch {
+        // уже освобождено системой
+      }
+      wakeLockRef.current = null;
+    }
+  }, []);
+  useEffect(() => {
+    if (state === WorkoutState.FINISHED) {
+      releaseWakeLock();
+      return;
+    }
+    requestWakeLock();
+    const onVisibilityChange = () => {
+      if (document.visibilityState === 'visible' && stateRef.current !== WorkoutState.FINISHED) {
+        requestWakeLock();
+      }
+    };
+    document.addEventListener('visibilitychange', onVisibilityChange);
+    return () => {
+      document.removeEventListener('visibilitychange', onVisibilityChange);
+      releaseWakeLock();
+    };
+  }, [state, requestWakeLock, releaseWakeLock]);
 
   const finishWorkout = () => {
     if (intervalRef.current) clearInterval(intervalRef.current);
