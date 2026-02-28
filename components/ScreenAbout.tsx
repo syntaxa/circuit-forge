@@ -47,6 +47,9 @@ export const ScreenAbout: React.FC<ScreenAboutProps> = ({ onBack }) => {
           <p className="text-slate-200 whitespace-pre-line leading-relaxed text-sm sm:text-base">
             {ABOUT_TEXT}
           </p>
+          <p className="mt-4 pt-4 border-t border-slate-700 text-slate-500 text-xs leading-relaxed">
+            Чтобы установить приложение на главный экран: в Chrome откройте меню (⋮) → «Установить приложение» или «Добавить на главный экран».
+          </p>
         </div>
       </div>
 
