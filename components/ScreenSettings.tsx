@@ -69,21 +69,41 @@ export const ScreenSettings: React.FC<ScreenSettingsProps> = ({ onBack }) => {
                 min={1}
                 value={settings.exerciseDuration}
                 onChange={(e) => setSettings({ ...settings, exerciseDuration: Number(e.target.value) })}
+                onFocus={(e) => e.target.select()}
                 className="w-full bg-dark text-white text-center py-1.5 px-2 rounded-md border border-slate-600 focus:border-primary outline-none no-number-spinner"
               />
             </label>
 
-            <label htmlFor="breakDuration" className="block">
-              <span className="block text-xs text-slate-400 mb-1.5">Перерыв, сек</span>
-              <input
-                id="breakDuration"
-                type="number"
-                min={3}
-                value={settings.breakDuration}
-                onChange={(e) => setSettings({ ...settings, breakDuration: Math.max(3, Number(e.target.value) || 3) })}
-                className="w-full bg-dark text-white text-center py-1.5 px-2 rounded-md border border-slate-600 focus:border-primary outline-none no-number-spinner"
-              />
-            </label>
+            <div className="block">
+              <span className="block text-xs text-slate-400 mb-1.5">Перерыв между упражнениями, сек</span>
+              <div className="flex items-center gap-1">
+                <button
+                  type="button"
+                  onClick={() => setSettings({ ...settings, breakDuration: Math.max(3, (settings.breakDuration ?? 4) - 1) })}
+                  className="shrink-0 w-8 h-8 rounded-md bg-dark border border-slate-600 text-slate-300 hover:text-white hover:border-slate-500 flex items-center justify-center font-bold text-lg leading-none"
+                  aria-label="Уменьшить перерыв"
+                >
+                  −
+                </button>
+                <input
+                  id="breakDuration"
+                  type="number"
+                  min={3}
+                  value={settings.breakDuration}
+                  onChange={(e) => setSettings({ ...settings, breakDuration: Math.max(3, Number(e.target.value) || 3) })}
+                  onFocus={(e) => e.target.select()}
+                  className="flex-1 min-w-0 bg-dark text-white text-center py-1.5 px-2 rounded-md border border-slate-600 focus:border-primary outline-none no-number-spinner"
+                />
+                <button
+                  type="button"
+                  onClick={() => setSettings({ ...settings, breakDuration: (settings.breakDuration ?? 4) + 1 })}
+                  className="shrink-0 w-8 h-8 rounded-md bg-dark border border-slate-600 text-slate-300 hover:text-white hover:border-slate-500 flex items-center justify-center font-bold text-lg leading-none"
+                  aria-label="Увеличить перерыв"
+                >
+                  +
+                </button>
+              </div>
+            </div>
 
             <label htmlFor="exercisesPerCycle" className="block">
               <span className="block text-xs text-slate-400 mb-1.5">Упражнений в круге</span>
@@ -93,21 +113,41 @@ export const ScreenSettings: React.FC<ScreenSettingsProps> = ({ onBack }) => {
                 min={3}
                 value={settings.exercisesPerCycle}
                 onChange={(e) => setSettings({ ...settings, exercisesPerCycle: Number(e.target.value) })}
+                onFocus={(e) => e.target.select()}
                 className="w-full bg-dark text-white text-center py-1.5 px-2 rounded-md border border-slate-600 focus:border-primary outline-none no-number-spinner"
               />
             </label>
 
-            <label htmlFor="cycleCount" className="block">
+            <div className="block">
               <span className="block text-xs text-slate-400 mb-1.5">Количество кругов</span>
-              <input
-                id="cycleCount"
-                type="number"
-                min={1}
-                value={settings.cycleCount}
-                onChange={(e) => setSettings({ ...settings, cycleCount: Number(e.target.value) })}
-                className="w-full bg-dark text-white text-center py-1.5 px-2 rounded-md border border-slate-600 focus:border-primary outline-none no-number-spinner"
-              />
-            </label>
+              <div className="flex items-center gap-1">
+                <button
+                  type="button"
+                  onClick={() => setSettings({ ...settings, cycleCount: Math.max(1, (settings.cycleCount ?? 2) - 1) })}
+                  className="shrink-0 w-8 h-8 rounded-md bg-dark border border-slate-600 text-slate-300 hover:text-white hover:border-slate-500 flex items-center justify-center font-bold text-lg leading-none"
+                  aria-label="Уменьшить количество кругов"
+                >
+                  −
+                </button>
+                <input
+                  id="cycleCount"
+                  type="number"
+                  min={1}
+                  value={settings.cycleCount}
+                  onChange={(e) => setSettings({ ...settings, cycleCount: Number(e.target.value) })}
+                  onFocus={(e) => e.target.select()}
+                  className="flex-1 min-w-0 bg-dark text-white text-center py-1.5 px-2 rounded-md border border-slate-600 focus:border-primary outline-none no-number-spinner"
+                />
+                <button
+                  type="button"
+                  onClick={() => setSettings({ ...settings, cycleCount: (settings.cycleCount ?? 2) + 1 })}
+                  className="shrink-0 w-8 h-8 rounded-md bg-dark border border-slate-600 text-slate-300 hover:text-white hover:border-slate-500 flex items-center justify-center font-bold text-lg leading-none"
+                  aria-label="Увеличить количество кругов"
+                >
+                  +
+                </button>
+              </div>
+            </div>
           </div>
         </div>
 
