@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { AppScreen, Exercise, MuscleGroup } from './types';
+import { enable as enableWakeLock } from './services/wakeLockService';
 import { ScreenSetup } from './components/ScreenSetup';
 import { ScreenWorkout } from './components/ScreenWorkout';
 import { ScreenExerciseDetail } from './components/ScreenExerciseDetail';
@@ -99,6 +100,7 @@ function App() {
   };
 
   const handleStartWorkout = (playlist: Exercise[], muscles: MuscleGroup[]) => {
+    enableWakeLock(); // вызов из user gesture критичен для Wake Lock и video fallback
     setActivePlaylist(playlist);
     setActiveMuscles(muscles);
     navigateTo(AppScreen.WORKOUT);

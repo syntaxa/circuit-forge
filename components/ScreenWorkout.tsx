@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef, useCallback } from 'react';
 import { Exercise, MuscleGroup, Settings } from '../types';
 import { StorageService } from '../services/storageService';
 import { TTSService } from '../services/ttsService';
+import { disable as disableWakeLock } from '../services/wakeLockService';
 import { CircularTimer } from './CircularTimer';
 import { Button } from './Button';
 
@@ -44,6 +45,8 @@ export const ScreenWorkout: React.FC<ScreenWorkoutProps> = ({ playlist, muscleGr
   const currentCycleRef = useRef(currentCycle);
   /** Состояние до открытия диалога выхода — восстанавливаем при отказе. */
   const stateBeforeExitDialogRef = useRef<WorkoutState>(WorkoutState.PREP);
+  /** Состояние до паузы — восстанавливаем при снятии паузы (PREP или WORK). */
+  const stateBeforePauseRef = useRef<WorkoutState>(WorkoutState.PREP);
   stateRef.current = state;
   currentExIndexRef.current = currentExIndex;
   currentCycleRef.current = currentCycle;
@@ -53,8 +56,6 @@ export const ScreenWorkout: React.FC<ScreenWorkoutProps> = ({ playlist, muscleGr
   const completeAudioRef = useRef<HTMLAudioElement | null>(null);
   // One "Switch side" announcement per bilateral exercise, at midpoint
   const sideSwitchAnnouncedRef = useRef(false);
-  /** Screen Wake Lock — предотвращает блокировку экрана на смартфоне во время тренировки */
-  const wakeLockRef = useRef<WakeLockSentinel | null>(null);
 
   // During PREP, show the next exercise if available, otherwise show current
   const currentExercise = (state === WorkoutState.PREP && nextExerciseRef.current) 
@@ -171,42 +172,8 @@ export const ScreenWorkout: React.FC<ScreenWorkoutProps> = ({ playlist, muscleGr
     return () => onWorkoutActiveChange?.(false);
   }, [state, onWorkoutActiveChange]);
 
-  // Screen Wake Lock — не даёт экрану засыпать во время тренировки на мобильном
-  const requestWakeLock = useCallback(async () => {
-    if (!('wakeLock' in navigator)) return;
-    try {
-      wakeLockRef.current = await navigator.wakeLock.request('screen');
-    } catch {
-      // Игнорируем: API недоступен или отклонён (низкий заряд, настройки и т.п.)
-    }
-  }, []);
-  const releaseWakeLock = useCallback(async () => {
-    if (wakeLockRef.current) {
-      try {
-        await wakeLockRef.current.release();
-      } catch {
-        // уже освобождено системой
-      }
-      wakeLockRef.current = null;
-    }
-  }, []);
-  useEffect(() => {
-    if (state === WorkoutState.FINISHED) {
-      releaseWakeLock();
-      return;
-    }
-    requestWakeLock();
-    const onVisibilityChange = () => {
-      if (document.visibilityState === 'visible' && stateRef.current !== WorkoutState.FINISHED) {
-        requestWakeLock();
-      }
-    };
-    document.addEventListener('visibilitychange', onVisibilityChange);
-    return () => {
-      document.removeEventListener('visibilitychange', onVisibilityChange);
-      releaseWakeLock();
-    };
-  }, [state, requestWakeLock, releaseWakeLock]);
+  // Снимаем wake lock при размонтировании (выход/завершение тренировки)
+  useEffect(() => () => disableWakeLock(), []);
 
   const finishWorkout = () => {
     if (intervalRef.current) clearInterval(intervalRef.current);
@@ -264,8 +231,9 @@ export const ScreenWorkout: React.FC<ScreenWorkoutProps> = ({ playlist, muscleGr
 
   const togglePause = () => {
     if (state === WorkoutState.PAUSED) {
-      setState(WorkoutState.WORK); // Resume (simplified, returns to WORK even if was PREP to avoid complexity)
+      setState(stateBeforePauseRef.current); // Resume to the same phase we were in (PREP or WORK)
     } else {
+      stateBeforePauseRef.current = state; // Remember PREP or WORK
       setState(WorkoutState.PAUSED);
     }
   };
