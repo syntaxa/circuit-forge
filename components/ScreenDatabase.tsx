@@ -322,7 +322,7 @@ export const ScreenDatabase: React.FC<ScreenDatabaseProps> = ({ onBack, onOpenIn
         {ALL_MUSCLE_GROUPS.map(g => `${g}: ${statsByGroup[g] ?? 0}`).join(' · ')}
       </p>
 
-      <div className="flex flex-col sm:flex-row gap-2 mb-4 flex-wrap w-full">
+      <div className="flex flex-col sm:flex-row gap-2 mb-4 flex-wrap wide:flex-nowrap w-full">
         <input
           type="search"
           placeholder="Поиск по названию..."
@@ -344,13 +344,13 @@ export const ScreenDatabase: React.FC<ScreenDatabaseProps> = ({ onBack, onOpenIn
             </option>
           ))}
         </select>
-        <div className="flex rounded-lg overflow-hidden border border-slate-600 shrink-0" role="group" aria-label="Фильтр по источнику упражнений">
+        <div className="flex flex-1 min-w-full sm:min-w-0 rounded-lg overflow-hidden border border-slate-600" role="group" aria-label="Фильтр по источнику упражнений">
           {(['all', 'base', 'user'] as const).map(key => (
             <button
               key={key}
               type="button"
               onClick={() => setFilterSource(key)}
-              className={`px-3 py-2 text-sm transition-colors ${
+              className={`flex-1 min-w-0 px-3 py-2 text-sm transition-colors ${
                 filterSource === key
                   ? 'bg-primary text-white'
                   : 'bg-surface text-slate-400 hover:text-white'

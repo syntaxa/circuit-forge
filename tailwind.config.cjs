@@ -7,6 +7,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      screens: {
+        wide: '1080px', // фильтры в одну строку
+      },
       colors: {
         primary: "#10b981", // Emerald 500
         secondary: "#f97316", // Orange 500
