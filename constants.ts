@@ -548,12 +548,12 @@ export const SEED_EXERCISES: Exercise[] = [
     muscleGroup: MuscleGroup.CHEST, 
     difficulty: Difficulty.HARD, 
     biSided: false,
-    steps: '1. Широкая постановка рук.\n2. При спуске сгибайте только одну руку, вторая остается прямой.\n3. Перенесите весь вес на согнутую руку.\n4. Вернитесь в центр и смените сторону.'
+    steps: '1. Широкая постановка рук. Руки прямые. Пальцы направлены в стороны.\n2. При спуске сгибайте только одну руку, вторая остается прямой.\n3. Перенесите весь вес на согнутую руку.\n4. Вернитесь в центр и смените сторону.'
   },
   { 
     id: '38', 
     name: 'Chair Decline Push-Up', 
-    description: 'Акцент на верхнюю часть грудных мышц.', 
+    description: 'Отжимания с ногами на стуле.', 
     muscleGroup: MuscleGroup.CHEST, 
     difficulty: Difficulty.HARD, 
     biSided: false,
@@ -602,7 +602,7 @@ export const SEED_EXERCISES: Exercise[] = [
     muscleGroup: MuscleGroup.CHEST, 
     difficulty: Difficulty.HARD, 
     biSided: false,
-    steps: '1. Поза "собака мордой вниз".\n2. Нырните грудью к полу.\n3. Вынырните в "собаку мордой вверх".\n4. Верните таз назад.'
+    steps: '1. Поза "собака мордой вниз".\n2. Нырните грудью к полу.\n3. Вынырните в "собаку мордой вверх".\n4. Вернитесь в исходное положение.'
   },
   { 
     id: '46', 
@@ -643,11 +643,11 @@ export const SEED_EXERCISES: Exercise[] = [
   { 
     id: '75', 
     name: 'Chair Pike Push-Up', 
-    description: 'Отжимание в положении «пике» с ногами на стуле, акцент на плечи.', 
+    description: 'Отжимание в положении «пик» с ногами на стуле, акцент на плечи.', 
     muscleGroup: MuscleGroup.CHEST, 
     difficulty: Difficulty.HARD, 
     biSided: false,
-    steps: '1. Ноги на стул, таз максимально вверх.\n2. Тело — буква L.\n3. Опускайте макушку к полу.\n4. Выжмите себя вверх.'
+    steps: '1. Ноги на стул, таз максимально вверх.\n2. Тело — буква L.\n3. Опускайте макушку к полу.\n4. Выжмите себя вверх, с основной нагрузкой на плечи.'
   },
   { 
     id: '76', 
@@ -665,7 +665,7 @@ export const SEED_EXERCISES: Exercise[] = [
     muscleGroup: MuscleGroup.CHEST, 
     difficulty: Difficulty.HARD, 
     biSided: true,
-    steps: '1. Поднимите одну ногу.\n2. Выполняйте отжимания, не опуская ногу.\n3. Держите таз ровно.\n4. После сета смените ногу.'
+    steps: '1. Поднимите одну ногу.\n2. Выполняйте отжимания, не опуская ногу.\n3. Держите таз ровно.\n4. После ряда повторений смените ногу.'
   },
   { 
     id: '78', 
@@ -685,7 +685,7 @@ export const SEED_EXERCISES: Exercise[] = [
     muscleGroup: MuscleGroup.BACK, 
     difficulty: Difficulty.MEDIUM, 
     biSided: false,
-    steps: '1. Лягте на живот.\n2. Поднимите прямые руки и ноги вверх.\n3. Задержитесь на 2 секунды.\n4. Опуститесь.'
+    steps: '1. Лягте на живот. Руки вытянуты перед собой.\n2. Поднимите прямые руки и ноги вверх.\n3. Задержитесь.\n4. Опуститесь.'
   },
   { 
     id: '50', 
@@ -704,15 +704,6 @@ export const SEED_EXERCISES: Exercise[] = [
     difficulty: Difficulty.MEDIUM, 
     biSided: false,
     steps: '1. Лягте на живот, ноги прижаты к полу.\n2. Поднимите грудь максимально высоко.\n3. Плавно опуститесь.\n4. Руки за головой или у груди.'
-  },
-  { 
-    id: '52', 
-    name: 'Swimmer', 
-    description: 'Поочередные махи разноименными руками и ногами лежа.', 
-    muscleGroup: MuscleGroup.BACK, 
-    difficulty: Difficulty.MEDIUM, 
-    biSided: false,
-    steps: '1. Лягте на живот.\n2. Поочередно поднимайте правую руку/левую ногу и наоборот.\n3. Двигайтесь быстро.\n4. Взгляд в пол.'
   },
   { 
     id: '53', 
@@ -739,7 +730,7 @@ export const SEED_EXERCISES: Exercise[] = [
     muscleGroup: MuscleGroup.BACK, 
     difficulty: Difficulty.HARD, 
     biSided: false,
-    steps: '1. Лягте под стол.\n2. Хватитесь за край.\n3. Подтяните грудь к столешнице.\n4. Медленно опуститесь.'
+    steps: '1. Лягте под стол.\n2. Схватитесь за край.\n3. Подтяните грудь к столешнице.\n4. Медленно опуститесь.'
   },
   { 
     id: '56', 
@@ -767,15 +758,6 @@ export const SEED_EXERCISES: Exercise[] = [
     difficulty: Difficulty.HARD, 
     biSided: false,
     steps: '1. Поза стола или планка.\n2. Поднимите правую руку и левую ногу.\n3. Держите баланс и ровную спину.\n4. Поменяйте стороны.'
-  },
-  { 
-    id: '59', 
-    name: 'Bent Over Fly', 
-    description: 'Максимальное сжатие лопаток в наклоне корпуса.', 
-    muscleGroup: MuscleGroup.BACK, 
-    difficulty: Difficulty.MEDIUM, 
-    biSided: false,
-    steps: '1. Наклон 45 градусов, спина прямая.\n2. Разведите руки в стороны через лопатки.\n3. Зажмите лопатки на секунду.\n4. Опустите руки.'
   },
   { 
     id: '60', 
