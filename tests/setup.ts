@@ -25,7 +25,9 @@ class MockSpeechSynthesisUtterance {
 Object.defineProperty(window, 'speechSynthesis', {
   configurable: true,
   value: {
-    speak: vi.fn(),
+    speak: vi.fn((u: SpeechSynthesisUtterance) => {
+      if (u.onend) (u.onend as () => void)();
+    }),
     cancel: vi.fn(),
     getVoices: vi.fn(() => []),
   },

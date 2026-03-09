@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
-import { render, screen, act, waitFor, fireEvent } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import App from '@/App';
 import { StorageService } from '@/services/storageService';
@@ -31,8 +31,13 @@ describe('workoutFlow (integration)', () => {
 
     await user.click(startBtn);
 
-    expect(screen.getByText(/ГОТОВЬСЯ/i)).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: /Отмена/i })).toBeInTheDocument();
+    await waitFor(
+      () => {
+        expect(screen.getByText(/ГОТОВЬСЯ/i)).toBeInTheDocument();
+        expect(screen.getByRole('button', { name: /Отмена/i })).toBeInTheDocument();
+      },
+      { timeout: 5000 }
+    );
   });
 
   it('отмена тренировки: Начать → Отмена → диалог «Да, прервать» → возврат на настройку', async () => {
@@ -44,7 +49,7 @@ describe('workoutFlow (integration)', () => {
 
     await user.click(startBtn);
 
-    expect(screen.getByText(/ГОТОВЬСЯ/i)).toBeInTheDocument();
+    await waitFor(() => expect(screen.getByText(/ГОТОВЬСЯ/i)).toBeInTheDocument(), { timeout: 5000 });
 
     await user.click(screen.getByRole('button', { name: /Отмена/i }));
     await user.click(screen.getByRole('button', { name: /да, прервать/i }));
@@ -68,14 +73,11 @@ describe('workoutFlow (integration)', () => {
     const startBtn = await screen.findByRole('button', { name: /Начать тренировку/i });
     await waitFor(() => expect(startBtn).not.toBeDisabled());
 
-    vi.useFakeTimers();
-    fireEvent.click(startBtn);
+    await user.click(startBtn);
+    await waitFor(() => expect(screen.getByText(/ГОТОВЬСЯ/i)).toBeInTheDocument());
 
-    expect(screen.getByText(/ГОТОВЬСЯ/i)).toBeInTheDocument();
+    await waitFor(() => expect(screen.getByText('15')).toBeInTheDocument(), { timeout: 8000 });
 
-    for (let i = 0; i < 5; i++) await act(() => vi.advanceTimersByTime(1000)); // конец PREP
-
-    expect(screen.getByText('15')).toBeInTheDocument();
     expect(screen.getByText(/ОСТАЛОСЬ/i)).toBeInTheDocument();
-  });
+  }, 10000);
 });

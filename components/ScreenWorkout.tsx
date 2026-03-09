@@ -225,9 +225,14 @@ export const ScreenWorkout: React.FC<ScreenWorkoutProps> = ({ playlist, muscleGr
     completeAudioRef.current.load();
   }, []);
 
-  // Initial announcement - speak only the exercise name
+  // Initial announcement — с задержкой, чтобы после прогрева движок успел принять первую фразу (на Android иначе обрезает начало)
   useEffect(() => {
-    TTSService.speakEnglish(currentExercise.name, settings.current.ttsVoiceURI, () => {});
+    const name = currentExercise.name;
+    const voiceURI = settings.current.ttsVoiceURI;
+    const t = window.setTimeout(() => {
+      TTSService.speakEnglish(name, voiceURI, () => {});
+    }, 350);
+    return () => clearTimeout(t);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

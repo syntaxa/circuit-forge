@@ -5,21 +5,7 @@ import { ScreenWorkout } from '@/components/ScreenWorkout';
 import { createExercise } from '../helpers';
 import { MuscleGroup, Difficulty } from '@/types';
 import { StorageService } from '@/services/storageService';
-import { TTSService } from '@/services/ttsService';
 import { createSettings } from '../helpers';
-
-vi.mock('@/services/storageService', () => ({
-  StorageService: {
-    getSettings: vi.fn(),
-    addLog: vi.fn(),
-  },
-}));
-
-vi.mock('@/services/ttsService', () => ({
-  TTSService: {
-    speakEnglish: vi.fn(),
-  },
-}));
 
 const defaultSettings = createSettings({
   exerciseDuration: 10,
@@ -36,8 +22,8 @@ describe('ScreenWorkout', () => {
 
   beforeEach(() => {
     vi.useFakeTimers();
-    vi.mocked(StorageService.getSettings).mockReturnValue(defaultSettings);
-    vi.mocked(TTSService.speakEnglish).mockClear();
+    localStorage.clear();
+    StorageService.saveSettings(defaultSettings);
   });
 
   afterEach(() => {
@@ -94,7 +80,7 @@ describe('ScreenWorkout', () => {
   });
 
   it('перерыв между упражнениями берется из настроек', async () => {
-    vi.mocked(StorageService.getSettings).mockReturnValue(
+    StorageService.saveSettings(
       createSettings({ exerciseDuration: 10, breakDuration: 3, cycleCount: 1 })
     );
     render(
@@ -120,6 +106,8 @@ describe('ScreenWorkout', () => {
     ];
     const onFinish = vi.fn();
     const onCancel = vi.fn();
+    const speakSpy = window.speechSynthesis.speak as ReturnType<typeof vi.fn>;
+    speakSpy.mockClear();
     render(
       <ScreenWorkout
         playlist={bilateral}
@@ -131,9 +119,8 @@ describe('ScreenWorkout', () => {
     await act(() => { vi.advanceTimersByTime(5000); });
     expect(screen.getByText(/Bilateral/i)).toBeInTheDocument();
     await act(() => { vi.advanceTimersByTime(10000); });
-    const calls = vi.mocked(TTSService.speakEnglish).mock.calls;
-    const switchSideCall = calls.find((c) => c[0] === 'Switch side');
-    expect(switchSideCall).toBeDefined();
+    const spokenTexts = speakSpy.mock.calls.map((c) => (c[0] as SpeechSynthesisUtterance).text);
+    expect(spokenTexts).toContain('Switch side');
   });
 
   it('пауза: таймер останавливается, кнопка меняет текст', async () => {
@@ -246,7 +233,9 @@ describe('ScreenWorkout', () => {
     expect(screen.getByText('ГОТОВЬСЯ')).toBeInTheDocument();
   });
 
-  it('TTS: вызывает speakEnglish с названием упражнения', () => {
+  it('TTS: озвучивает название упражнения через Speech Synthesis API', async () => {
+    const speakSpy = window.speechSynthesis.speak as ReturnType<typeof vi.fn>;
+    speakSpy.mockClear();
     render(
       <ScreenWorkout
         playlist={playlist}
@@ -255,6 +244,9 @@ describe('ScreenWorkout', () => {
         onCancel={vi.fn()}
       />
     );
-    expect(TTSService.speakEnglish).toHaveBeenCalledWith('Exercise One', null, expect.any(Function));
+    await act(() => { vi.advanceTimersByTime(400); });
+    expect(speakSpy).toHaveBeenCalled();
+    const utterance = speakSpy.mock.calls[0][0] as SpeechSynthesisUtterance;
+    expect(utterance.text).toBe('Exercise One');
   });
 });

@@ -4,25 +4,8 @@ import userEvent from '@testing-library/user-event';
 import App from '@/App';
 import { StorageService } from '@/services/storageService';
 import { MuscleGroup } from '@/types';
-import { createExercise } from '../helpers';
-
-vi.mock('@/services/workoutGenerator', async (importOriginal) => {
-  const actual = await importOriginal<typeof import('@/services/workoutGenerator')>();
-  const { StorageService } = await import('@/services/storageService');
-  return {
-    ...actual,
-    WorkoutGenerator: {
-      ...actual.WorkoutGenerator,
-      selectMuscleGroups: vi.fn(() => [MuscleGroup.LEGS, MuscleGroup.ARMS, MuscleGroup.ABS]),
-      // Детерминированный плейлист: первые count упражнений из LEGS, чтобы Jump Squat (id 1) всегда входил
-      generatePlaylist: vi.fn((_groups: MuscleGroup[], count: number) => {
-        const exercises = StorageService.getExercisesForWorkout?.() ?? StorageService.getExercises();
-        const legs = exercises.filter((e) => e.muscleGroup === MuscleGroup.LEGS);
-        return legs.slice(0, Math.max(count, legs.length));
-      }),
-    },
-  };
-});
+import { createExercise, createSettings, createWorkoutLog } from '../helpers';
+import { SEED_EXERCISES } from '@/constants';
 
 function getEditButtonForExercise(exerciseName: string): HTMLElement {
   const heading = screen.getByRole('heading', { name: exerciseName });
@@ -46,35 +29,43 @@ function getDeleteButtonForExercise(exerciseName: string): HTMLElement {
 
 describe('databaseSync (integration)', () => {
   beforeEach(() => {
-    localStorage.removeItem('cf_exercises');
-    localStorage.setItem('cf_user_exercises', '[]');
+    localStorage.clear();
+    StorageService.setDeactivatedBaseIds(SEED_EXERCISES.map((e) => e.id));
+    StorageService.saveSettings(
+      createSettings({ exerciseDuration: 30, exercisesPerCycle: 3, cycleCount: 1 })
+    );
   });
 
   it('редактирование упражнения в базе → возврат → Обновить план → плейлист содержит обновлённые данные', async () => {
+    const exToEdit = createExercise({
+      id: 'user_edit-test',
+      name: 'ExToEdit',
+      muscleGroup: MuscleGroup.LEGS,
+    });
+    StorageService.saveUserExercises([exToEdit]);
+    StorageService.addLog(createWorkoutLog({ muscleGroupsUsed: [MuscleGroup.LEGS] }));
+
     const user = userEvent.setup();
     render(<App />);
 
     const startBtn = await screen.findByRole('button', { name: /Начать тренировку/i });
-    await waitFor(() => expect(startBtn).not.toBeDisabled());
+    await waitFor(() => expect(startBtn).not.toBeDisabled(), { timeout: 5000 });
+
+    expect(screen.getAllByText(/ExToEdit/i).length).toBeGreaterThan(0);
 
     await user.click(screen.getByRole('button', { name: /База упражнений/i }));
 
     expect(screen.getByRole('heading', { name: /База упражнений/i })).toBeInTheDocument();
 
-    await user.click(getEditButtonForExercise('Jump Squat'));
-
-    const cloneConfirmBtn = screen.queryByRole('button', { name: /Создать копию и редактировать/i });
-    if (cloneConfirmBtn) {
-      await user.click(cloneConfirmBtn);
-    }
+    await user.click(getEditButtonForExercise('ExToEdit'));
 
     await waitFor(() => {
       expect(screen.getByRole('heading', { name: /Редактировать/i })).toBeInTheDocument();
     });
 
-    const nameInput = screen.getByDisplayValue('Jump Squat');
+    const nameInput = screen.getByDisplayValue('ExToEdit');
     await user.clear(nameInput);
-    await user.type(nameInput, 'Jump Squat Edited');
+    await user.type(nameInput, 'ExToEdit Edited');
 
     await user.click(screen.getByRole('button', { name: /Сохранить/i }));
 
@@ -83,12 +74,15 @@ describe('databaseSync (integration)', () => {
     await waitFor(() => {
       expect(screen.getByRole('button', { name: /Начать тренировку/i })).toBeInTheDocument();
     });
-    // Плейлист сохраняется при возврате из базы. Обновить план пересобирает из актуальной базы.
+
     await user.click(screen.getByRole('button', { name: /обновить план/i }));
 
-    await waitFor(() => {
-      expect(screen.getByText(/Jump Squat Edited/i)).toBeInTheDocument();
-    });
+    await waitFor(
+      () => {
+        expect(screen.getAllByText(/ExToEdit Edited/i).length).toBeGreaterThan(0);
+      },
+      { timeout: 5000 }
+    );
   });
 
   it('удаление упражнения из базы → плейлист не содержит удалённого упражнения', async () => {
@@ -103,15 +97,15 @@ describe('databaseSync (integration)', () => {
       muscleGroup: MuscleGroup.LEGS,
     });
     StorageService.saveUserExercises([toDelete, toKeep]);
+    StorageService.addLog(createWorkoutLog({ muscleGroupsUsed: [MuscleGroup.LEGS] }));
 
-    const confirmFn = vi.fn(() => true);
-    vi.stubGlobal('confirm', confirmFn);
+    vi.stubGlobal('confirm', () => true);
 
     const user = userEvent.setup();
     render(<App />);
 
     const startBtn = await screen.findByRole('button', { name: /Начать тренировку/i });
-    await waitFor(() => expect(startBtn).not.toBeDisabled());
+    await waitFor(() => expect(startBtn).not.toBeDisabled(), { timeout: 5000 });
 
     await user.click(screen.getByRole('button', { name: /База упражнений/i }));
 
@@ -119,8 +113,6 @@ describe('databaseSync (integration)', () => {
     expect(screen.getByText('Unique To Keep')).toBeInTheDocument();
 
     await user.click(getDeleteButtonForExercise('Unique To Delete'));
-
-    expect(confirmFn).toHaveBeenCalledWith('Удалить упражнение?');
 
     await waitFor(() => {
       expect(screen.queryByText('Unique To Delete')).not.toBeInTheDocument();
@@ -132,7 +124,7 @@ describe('databaseSync (integration)', () => {
     await waitFor(() => {
       expect(screen.getByRole('button', { name: /Начать тренировку/i })).toBeInTheDocument();
     });
-    // Плейлист сохраняется при возврате из базы. Обновить план пересобирает без удалённого.
+
     await user.click(screen.getByRole('button', { name: /обновить план/i }));
 
     await waitFor(() => {

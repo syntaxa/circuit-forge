@@ -1,0 +1,2118 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Review exercise illustrations</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { font-family: system-ui, sans-serif; padding: 1rem; background: #0f172a; color: #e2e8f0; }
+    h1 { margin-top: 0; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; }
+    .card { background: #1e293b; border-radius: 8px; padding: 1rem; }
+    .card-header { display: flex; gap: 0.75rem; align-items: flex-start; }
+    .thumb { width: 80px; height: 80px; object-fit: cover; border-radius: 4px; flex-shrink: 0; }
+    .meta { flex: 1; }
+    .id { color: #94a3b8; font-size: 0.9em; }
+    .muscle { color: #64748b; font-size: 0.85em; }
+    .description { font-size: 0.9em; color: #cbd5e1; margin: 0.5rem 0; }
+    .steps { margin: 0.5rem 0; }
+    .steps pre { white-space: pre-wrap; font-size: 0.8em; color: #94a3b8; margin: 0.25rem 0; }
+    .actions { margin-top: 0.75rem; display: flex; flex-direction: column; gap: 0.5rem; }
+    .actions input[type="text"] { width: 100%; padding: 0.35rem; background: #334155; border: 1px solid #475569; color: #e2e8f0; border-radius: 4px; }
+    .toolbar { margin-bottom: 1rem; display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; }
+    .toolbar button { padding: 0.5rem 1rem; background: #3b82f6; color: white; border: none; border-radius: 6px; cursor: pointer; }
+    .toolbar button:hover { background: #2563eb; }
+    .toolbar button.primary { background: #059669; }
+    .toolbar button.primary:hover { background: #047857; }
+    .toolbar .out { font-size: 0.9em; color: #94a3b8; max-width: 40em; }
+  </style>
+</head>
+<body>
+  <h1>Review exercise illustrations</h1>
+  <div class="toolbar">
+    <button type="button" id="export-ids">Экспорт ID для --regen</button>
+    <button type="button" id="download-instructions">Скачать instructions.json</button>
+    <button type="button" id="regen-command" class="primary">Команда перегенерации</button>
+    <span class="out" id="out"></span>
+  </div>
+  <div class="grid" id="cards">
+    <div class="card" data-id="1">
+      <div class="card-header">
+        <img src="./1.png" alt="Jump Squat" class="thumb" loading="lazy" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect fill=%22%23eee%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2250%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23999%22 font-size=%2212%22>No image</text></svg>'">
+        <div class="meta">
+          <strong>Jump Squat</strong> <span class="id">#1</span><br>
+          <span class="muscle">ноги</span>
+        </div>
+      </div>
+      <p class="description">Взрывное приседание с максимальным прыжком вверх.</p>
+      <details class="steps">
+        <summary>Шаги</summary>
+        <pre>1. Поставьте ноги на ширине плеч.
+2. Опуститесь в классический присед, отводя таз назад.
+3. Из нижней точки мощно выпрыгните вверх, полностью выпрямляя тело.
+4. Мягко приземлитесь на согнутые колени и сразу переходите к следующему повторению.</pre>
+      </details>
+      <div class="actions">
+        <label><input type="checkbox" class="regen-check" data-id="1"> Нужна перегенерация</label>
+        <input type="text" class="regen-instruction" data-id="1" placeholder="Доп. инструкции для перегенерации">
+      </div>
+    </div>
+    <div class="card" data-id="2">
+      <div class="card-header">
+        <img src="./2.png" alt="Bulgarian Split Squat" class="thumb" loading="lazy" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect fill=%22%23eee%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2250%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23999%22 font-size=%2212%22>No image</text></svg>'">
+        <div class="meta">
+          <strong>Bulgarian Split Squat</strong> <span class="id">#2</span><br>
+          <span class="muscle">ноги</span>
+        </div>
+      </div>
+      <p class="description">Выпады с одной ногой на стуле.</p>
+      <details class="steps">
+        <summary>Шаги</summary>
+        <pre>1. Встаньте спиной к стулу или скамье.
+2. Положите одну ногу на сиденье (носком или подъемом стопы).
+3. Сделайте шаг вперед опорной ногой.
+4. Приседайте, пока бедро передней ноги не станет параллельно полу.
+5. Вернитесь в исходное положение, сохраняя спину прямой.</pre>
+      </details>
+      <div class="actions">
+        <label><input type="checkbox" class="regen-check" data-id="2"> Нужна перегенерация</label>
+        <input type="text" class="regen-instruction" data-id="2" placeholder="Доп. инструкции для перегенерации">
+      </div>
+    </div>
+    <div class="card" data-id="3">
+      <div class="card-header">
+        <img src="./3.png" alt="Pistol Squat" class="thumb" loading="lazy" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect fill=%22%23eee%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2250%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23999%22 font-size=%2212%22>No image</text></svg>'">
+        <div class="meta">
+          <strong>Pistol Squat</strong> <span class="id">#3</span><br>
+          <span class="muscle">ноги</span>
+        </div>
+      </div>
+      <p class="description">Приседание на одной ноге, вторая вытянута вперед.</p>
+      <details class="steps">
+        <summary>Шаги</summary>
+        <pre>1. Встаньте на одну ногу, вторую вытяните перед собой.
+2. Для баланса вытяните руки вперед.
+3. Медленно опускайтесь в глубокий присед на опорной ноге.
+4. Держите поднятую ногу прямой и не касайтесь ею пола.
+5. Мощным движением поднимитесь вверх.</pre>
+      </details>
+      <div class="actions">
+        <label><input type="checkbox" class="regen-check" data-id="3"> Нужна перегенерация</label>
+        <input type="text" class="regen-instruction" data-id="3" placeholder="Доп. инструкции для перегенерации">
+      </div>
+    </div>
+    <div class="card" data-id="4">
+      <div class="card-header">
+        <img src="./4.png" alt="Lateral Lunge" class="thumb" loading="lazy" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect fill=%22%23eee%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2250%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23999%22 font-size=%2212%22>No image</text></svg>'">
+        <div class="meta">
+          <strong>Lateral Lunge</strong> <span class="id">#4</span><br>
+          <span class="muscle">ноги</span>
+        </div>
+      </div>
+      <p class="description">Широкий шаг в сторону с глубоким приседом на одну ногу.</p>
+      <details class="steps">
+        <summary>Шаги</summary>
+        <pre>1. Встаньте прямо, ноги вместе.
+2. Сделайте широкий шаг в сторону.
+3. Перенесите вес на отставленную ногу и присядьте на ней, держа вторую ногу прямой.
+4. Оттолкнитесь пяткой и вернитесь в исходное положение.</pre>
+      </details>
+      <div class="actions">
+        <label><input type="checkbox" class="regen-check" data-id="4"> Нужна перегенерация</label>
+        <input type="text" class="regen-instruction" data-id="4" placeholder="Доп. инструкции для перегенерации">
+      </div>
+    </div>
+    <div class="card" data-id="5">
+      <div class="card-header">
+        <img src="./5.png" alt="Step Up" class="thumb" loading="lazy" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect fill=%22%23eee%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2250%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23999%22 font-size=%2212%22>No image</text></svg>'">
+        <div class="meta">
+          <strong>Step Up</strong> <span class="id">#5</span><br>
+          <span class="muscle">ноги</span>
+        </div>
+      </div>
+      <p class="description">Поочередный подъем на стул с акцентом на пятку.</p>
+      <details class="steps">
+        <summary>Шаги</summary>
+        <pre>1. Поставьте одну стопу полностью на устойчивый стул или возвышенность.
+2. Надавите пяткой на стул и поднимите тело вверх.
+3. Приставьте вторую ногу к первой на стуле.
+4. Медленно спуститесь вниз, начиная с ноги, которую подняли последней.</pre>
+      </details>
+      <div class="actions">
+        <label><input type="checkbox" class="regen-check" data-id="5"> Нужна перегенерация</label>
+        <input type="text" class="regen-instruction" data-id="5" placeholder="Доп. инструкции для перегенерации">
+      </div>
+    </div>
+    <div class="card" data-id="6">
+      <div class="card-header">
+        <img src="./6.png" alt="Single Leg Glute Bridge" class="thumb" loading="lazy" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect fill=%22%23eee%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2250%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23999%22 font-size=%2212%22>No image</text></svg>'">
+        <div class="meta">
+          <strong>Single Leg Glute Bridge</strong> <span class="id">#6</span><br>
+          <span class="muscle">ноги</span>
+        </div>
+      </div>
+      <p class="description">Подъем таза лежа, одна нога поднята вертикально.</p>
+      <details class="steps">
+        <summary>Шаги</summary>
+        <pre>1. Лягте на спину, согните одну ногу в колене, стопа на полу.
+2. Вторую ногу вытяните вертикально вверх.
+3. Напрягите ягодицы и вытолкните таз максимально высоко.
+4. Сделайте паузу вверху и плавно опуститесь, не касаясь тазом пола.</pre>
+      </details>
+      <div class="actions">
+        <label><input type="checkbox" class="regen-check" data-id="6"> Нужна перегенерация</label>
+        <input type="text" class="regen-instruction" data-id="6" placeholder="Доп. инструкции для перегенерации">
+      </div>
+    </div>
+    <div class="card" data-id="7">
+      <div class="card-header">
+        <img src="./7.png" alt="High Knees" class="thumb" loading="lazy" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect fill=%22%23eee%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2250%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23999%22 font-size=%2212%22>No image</text></svg>'">
+        <div class="meta">
+          <strong>High Knees</strong> <span class="id">#7</span><br>
+          <span class="muscle">ноги</span>
+        </div>
+      </div>
+      <p class="description">Бег на месте с максимальным подниманием колен к груди в быстром темпе.</p>
+      <details class="steps">
+        <summary>Шаги</summary>
+        <pre>1. Встаньте прямо, руки согнуты в локтях.
+2. Начните бег на месте, поднимая колени до уровня таза или выше.
+3. Активно работайте руками синхронно с ногами.
+4. Поддерживайте максимально возможный темп.</pre>
+      </details>
+      <div class="actions">
+        <label><input type="checkbox" class="regen-check" data-id="7"> Нужна перегенерация</label>
+        <input type="text" class="regen-instruction" data-id="7" placeholder="Доп. инструкции для перегенерации">
+      </div>
+    </div>
+    <div class="card" data-id="8">
+      <div class="card-header">
+        <img src="./8.png" alt="Jumping Plie Squat" class="thumb" loading="lazy" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect fill=%22%23eee%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2250%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23999%22 font-size=%2212%22>No image</text></svg>'">
+        <div class="meta">
+          <strong>Jumping Plie Squat</strong> <span class="id">#8</span><br>
+          <span class="muscle">ноги</span>
+        </div>
+      </div>
+      <p class="description">Приседания с широкой постановкой стоп и прыжком.</p>
+      <details class="steps">
+        <summary>Шаги</summary>
+        <pre>1. Расставьте ноги широко, разверните носки в стороны (позиция плие).
+2. Присядьте, пока бедра не станут параллельны полу.
+3. Выпрыгните вверх, выпрямляя ноги.
+4. Мягко приземлитесь обратно в широкую стойку и сразу присядьте.</pre>
+      </details>
+      <div class="actions">
+        <label><input type="checkbox" class="regen-check" data-id="8"> Нужна перегенерация</label>
+        <input type="text" class="regen-instruction" data-id="8" placeholder="Доп. инструкции для перегенерации">
+      </div>
+    </div>
+    <div class="card" data-id="10">
+      <div class="card-header">
+        <img src="./10.png" alt="Single Leg Calf Raise" class="thumb" loading="lazy" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect fill=%22%23eee%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2250%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23999%22 font-size=%2212%22>No image</text></svg>'">
+        <div class="meta">
+          <strong>Single Leg Calf Raise</strong> <span class="id">#10</span><br>
+          <span class="muscle">ноги</span>
+        </div>
+      </div>
+      <p class="description">Проработка икроножных мышц стоя на одной ноге.</p>
+      <details class="steps">
+        <summary>Шаги</summary>
+        <pre>1. Встаньте на одну ногу (можно придерживаться за стену для баланса).
+2. Вторую ногу согните в колене или заведите за опорную.
+3. Медленно поднимитесь на носок опорной ноги максимально высоко.
+4. Задержитесь на секунду и плавно опустите пятку на пол.</pre>
+      </details>
+      <div class="actions">
+        <label><input type="checkbox" class="regen-check" data-id="10"> Нужна перегенерация</label>
+        <input type="text" class="regen-instruction" data-id="10" placeholder="Доп. инструкции для перегенерации">
+      </div>
+    </div>
+    <div class="card" data-id="11">
+      <div class="card-header">
+        <img src="./11.png" alt="Wall Sit" class="thumb" loading="lazy" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect fill=%22%23eee%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2250%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23999%22 font-size=%2212%22>No image</text></svg>'">
+        <div class="meta">
+          <strong>Wall Sit</strong> <span class="id">#11</span><br>
+          <span class="muscle">ноги</span>
+        </div>
+      </div>
+      <p class="description">Статическое удержание полуприседа прижавшись к стене.</p>
+      <details class="steps">
+        <summary>Шаги</summary>
+        <pre>1. Прижмитесь спиной к стене.
+2. Сделайте шаг вперед и опуститесь вниз по стене, пока бедра не станут параллельны полу.
+3. Угол в коленях должен составлять 90 градусов.
+4. Удерживайте это положение, плотно прижимая поясницу к стене.</pre>
+      </details>
+      <div class="actions">
+        <label><input type="checkbox" class="regen-check" data-id="11"> Нужна перегенерация</label>
+        <input type="text" class="regen-instruction" data-id="11" placeholder="Доп. инструкции для перегенерации">
+      </div>
+    </div>
+    <div class="card" data-id="12">
+      <div class="card-header">
+        <img src="./12.png" alt="Diagonal Lunge" class="thumb" loading="lazy" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect fill=%22%23eee%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2250%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23999%22 font-size=%2212%22>No image</text></svg>'">
+        <div class="meta">
+          <strong>Diagonal Lunge</strong> <span class="id">#12</span><br>
+          <span class="muscle">ноги</span>
+        </div>
+      </div>
+      <p class="description">Выпад назад по диагонали (реверанс).</p>
+      <details class="steps">
+        <summary>Шаги</summary>
+        <pre>1. Встаньте прямо, руки на поясе.
+2. Сделайте шаг назад и в сторону, заводя одну ногу за другую по диагонали.
+3. Опустите колено задней ноги почти до пола.
+4. Вернитесь в исходное положение за счет усилий передней ноги.</pre>
+      </details>
+      <div class="actions">
+        <label><input type="checkbox" class="regen-check" data-id="12"> Нужна перегенерация</label>
+        <input type="text" class="regen-instruction" data-id="12" placeholder="Доп. инструкции для перегенерации">
+      </div>
+    </div>
+    <div class="card" data-id="61">
+      <div class="card-header">
+        <img src="./61.png" alt="Jumping Jack" class="thumb" loading="lazy" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect fill=%22%23eee%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2250%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23999%22 font-size=%2212%22>No image</text></svg>'">
+        <div class="meta">
+          <strong>Jumping Jack</strong> <span class="id">#61</span><br>
+          <span class="muscle">ноги</span>
+        </div>
+      </div>
+      <p class="description">Кардио-упражнение: прыжки с одновременным разведением рук и ног в стороны.</p>
+      <details class="steps">
+        <summary>Шаги</summary>
+        <pre>1. Встаньте прямо, ноги вместе, руки вдоль туловища.
+2. В прыжке разведите ноги шире плеч и хлопните ладонями над головой.
+3. Следующим прыжком вернитесь в исходную позицию.
+4. Двигайтесь ритмично и без пауз.</pre>
+      </details>
+      <div class="actions">
+        <label><input type="checkbox" class="regen-check" data-id="61"> Нужна перегенерация</label>
+        <input type="text" class="regen-instruction" data-id="61" placeholder="Доп. инструкции для перегенерации">
+      </div>
+    </div>
+    <div class="card" data-id="62">
+      <div class="card-header">
+        <img src="./62.png" alt="Lateral Drop And Touch" class="thumb" loading="lazy" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect fill=%22%23eee%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2250%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23999%22 font-size=%2212%22>No image</text></svg>'">
+        <div class="meta">
+          <strong>Lateral Drop And Touch</strong> <span class="id">#62</span><br>
+          <span class="muscle">ноги</span>
+        </div>
+      </div>
+      <p class="description">Прыжок в сторону с последующим приседанием и касанием пола противоположной рукой.</p>
+      <details class="steps">
+        <summary>Шаги</summary>
+        <pre>1. Сделайте широкий прыжок в правую сторону.
+2. Приземлитесь на правую ногу в полуприсед.
+3. Коснитесь пола левой рукой перед собой.
+4. Сразу же сделайте прыжок влево и коснитесь пола правой рукой. 
+5. Старайтесь чтобы не было паузы в позиции &quot;ноги вместе&quot;. 
+6. В момент прыжка делайте максимальное усилие согнутой ногой.</pre>
+      </details>
+      <div class="actions">
+        <label><input type="checkbox" class="regen-check" data-id="62"> Нужна перегенерация</label>
+        <input type="text" class="regen-instruction" data-id="62" placeholder="Доп. инструкции для перегенерации">
+      </div>
+    </div>
+    <div class="card" data-id="63">
+      <div class="card-header">
+        <img src="./63.png" alt="Drop And Touch" class="thumb" loading="lazy" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect fill=%22%23eee%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2250%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23999%22 font-size=%2212%22>No image</text></svg>'">
+        <div class="meta">
+          <strong>Drop And Touch</strong> <span class="id">#63</span><br>
+          <span class="muscle">ноги</span>
+        </div>
+      </div>
+      <p class="description">Прыжки ноги врозь — присед и касание пола поочерёдно каждой рукой.</p>
+      <details class="steps">
+        <summary>Шаги</summary>
+        <pre>1. Ноги вместе.
+2. Прыжком расставить ноги шире плеч.
+3. Присесть и коснуться пола одной рукой.
+4. Прыжок — ноги вместе.
+5. Повтор другой рукой.
+ Старайтесь чтобы не было паузы в позиции &quot;ноги вместе&quot;</pre>
+      </details>
+      <div class="actions">
+        <label><input type="checkbox" class="regen-check" data-id="63"> Нужна перегенерация</label>
+        <input type="text" class="regen-instruction" data-id="63" placeholder="Доп. инструкции для перегенерации">
+      </div>
+    </div>
+    <div class="card" data-id="64">
+      <div class="card-header">
+        <img src="./64.png" alt="Skater" class="thumb" loading="lazy" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect fill=%22%23eee%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2250%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23999%22 font-size=%2212%22>No image</text></svg>'">
+        <div class="meta">
+          <strong>Skater</strong> <span class="id">#64</span><br>
+          <span class="muscle">ноги</span>
+        </div>
+      </div>
+      <p class="description">Прыжки из стороны в сторону, имитирующие движения конькобежца.</p>
+      <details class="steps">
+        <summary>Шаги</summary>
+        <pre>1. Сделайте прыжок в сторону на правую ногу.
+2. Левую ногу заведите назад за правую по диагонали, не касаясь ею пола.
+3. Слегка наклоните корпус вперед для баланса.
+4. Повторите прыжок в левую сторону, меняя опорную ногу. 
+5. Концентрируйтесь не на высоте пррыжка, а на горизонтальной скорости</pre>
+      </details>
+      <div class="actions">
+        <label><input type="checkbox" class="regen-check" data-id="64"> Нужна перегенерация</label>
+        <input type="text" class="regen-instruction" data-id="64" placeholder="Доп. инструкции для перегенерации">
+      </div>
+    </div>
+    <div class="card" data-id="65">
+      <div class="card-header">
+        <img src="./65.png" alt="Lunge Touch And Kick" class="thumb" loading="lazy" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect fill=%22%23eee%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2250%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23999%22 font-size=%2212%22>No image</text></svg>'">
+        <div class="meta">
+          <strong>Lunge Touch And Kick</strong> <span class="id">#65</span><br>
+          <span class="muscle">ноги</span>
+        </div>
+      </div>
+      <p class="description">Выпад назад с касанием пола рукой, затем подъем и удар ногой вперед.</p>
+      <details class="steps">
+        <summary>Шаги</summary>
+        <pre>1. Сделайте глубокий выпад назад и коснитесь коленом пола.
+2. Коснитесь пола рукой со стороны передней ноги.
+3. Встаньте и нанесите резкий удар (кик) вперед ногой, которая стояла на месте.
+4. Снова вернитесь в выпад назад.</pre>
+      </details>
+      <div class="actions">
+        <label><input type="checkbox" class="regen-check" data-id="65"> Нужна перегенерация</label>
+        <input type="text" class="regen-instruction" data-id="65" placeholder="Доп. инструкции для перегенерации">
+      </div>
+    </div>
+    <div class="card" data-id="66">
+      <div class="card-header">
+        <img src="./66.png" alt="Plyo Split Squat" class="thumb" loading="lazy" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect fill=%22%23eee%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2250%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23999%22 font-size=%2212%22>No image</text></svg>'">
+        <div class="meta">
+          <strong>Plyo Split Squat</strong> <span class="id">#66</span><br>
+          <span class="muscle">ноги</span>
+        </div>
+      </div>
+      <p class="description">Взрывной сплит-присед с прыжком и сменой ног в воздухе.</p>
+      <details class="steps">
+        <summary>Шаги</summary>
+        <pre>1. Встаньте в положение выпада.
+2. Максимально сильно оттолкнитесь обеими ногами вверх.
+3. В верхней точке прыжка поменяйте ноги местами.
+4. Приземлитесь мягко в выпад и сразу продолжайте.</pre>
+      </details>
+      <div class="actions">
+        <label><input type="checkbox" class="regen-check" data-id="66"> Нужна перегенерация</label>
+        <input type="text" class="regen-instruction" data-id="66" placeholder="Доп. инструкции для перегенерации">
+      </div>
+    </div>
+    <div class="card" data-id="67">
+      <div class="card-header">
+        <img src="./67.png" alt="Side To Side Hops" class="thumb" loading="lazy" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect fill=%22%23eee%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2250%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23999%22 font-size=%2212%22>No image</text></svg>'">
+        <div class="meta">
+          <strong>Side To Side Hops</strong> <span class="id">#67</span><br>
+          <span class="muscle">ноги</span>
+        </div>
+      </div>
+      <p class="description">Быстрые прыжки из стороны в сторону</p>
+      <details class="steps">
+        <summary>Шаги</summary>
+        <pre>1. Поставьте стопы вместе. 
+2. Согните одну ногу в колене и сделайте прыжок в сторону. 
+3. Сделайте прыжок в другую сторону и поменяйте ноги местами. 
+4. Повторите, сосредоточившись на горизонтальной скорости, а не на высоте прыжка.</pre>
+      </details>
+      <div class="actions">
+        <label><input type="checkbox" class="regen-check" data-id="67"> Нужна перегенерация</label>
+        <input type="text" class="regen-instruction" data-id="67" placeholder="Доп. инструкции для перегенерации">
+      </div>
+    </div>
+    <div class="card" data-id="68">
+      <div class="card-header">
+        <img src="./68.png" alt="Lunge And Rotation" class="thumb" loading="lazy" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect fill=%22%23eee%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2250%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23999%22 font-size=%2212%22>No image</text></svg>'">
+        <div class="meta">
+          <strong>Lunge And Rotation</strong> <span class="id">#68</span><br>
+          <span class="muscle">ноги</span>
+        </div>
+      </div>
+      <p class="description">Выпад вперед с одновременным поворотом корпуса в сторону передней ноги.</p>
+      <details class="steps">
+        <summary>Шаги</summary>
+        <pre>1. Сделайте шаг вперед и опуститесь в выпад.
+2. Вытяните руки перед собой или держите их у груди.
+3. Плавно поверните корпус в сторону ноги, стоящей впереди.
+4. Верните корпус в центр и поднимитесь из выпада.</pre>
+      </details>
+      <div class="actions">
+        <label><input type="checkbox" class="regen-check" data-id="68"> Нужна перегенерация</label>
+        <input type="text" class="regen-instruction" data-id="68" placeholder="Доп. инструкции для перегенерации">
+      </div>
+    </div>
+    <div class="card" data-id="69">
+      <div class="card-header">
+        <img src="./69.png" alt="Power Lunge Jump" class="thumb" loading="lazy" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect fill=%22%23eee%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2250%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23999%22 font-size=%2212%22>No image</text></svg>'">
+        <div class="meta">
+          <strong>Power Lunge Jump</strong> <span class="id">#69</span><br>
+          <span class="muscle">ноги</span>
+        </div>
+      </div>
+      <p class="description">Из выпада назад — взрывной прыжок вверх с подъёмом колена задней ноги к груди. Задняя нога может слегка опираться.</p>
+      <details class="steps">
+        <summary>Шаги</summary>
+        <pre>1. Примите положение выпада: одна нога впереди, другая сзади (можно слегка опираться на носок).
+2. Опуститесь в присед, сохраняя выпад.
+3. Взрывным движением выпрыгните вверх.
+4. В полёте подтяните колено задней ноги к груди.
+5. Мягко приземлитесь и повторите.</pre>
+      </details>
+      <div class="actions">
+        <label><input type="checkbox" class="regen-check" data-id="69"> Нужна перегенерация</label>
+        <input type="text" class="regen-instruction" data-id="69" placeholder="Доп. инструкции для перегенерации">
+      </div>
+    </div>
+    <div class="card" data-id="70">
+      <div class="card-header">
+        <img src="./70.png" alt="One Leg Squat Hops" class="thumb" loading="lazy" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect fill=%22%23eee%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2250%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23999%22 font-size=%2212%22>No image</text></svg>'">
+        <div class="meta">
+          <strong>One Leg Squat Hops</strong> <span class="id">#70</span><br>
+          <span class="muscle">ноги</span>
+        </div>
+      </div>
+      <p class="description">Приседание на одной ноге с последующими небольшими прыжками вверх.</p>
+      <details class="steps">
+        <summary>Шаги</summary>
+        <pre>1. Примите положение полуприседа на одной ноге.
+2. Выполняйте серию небольших, частых прыжков на опорной ноге.
+3. Старайтесь не выпрямлять ногу полностью.
+4. Вторую ногу держите навесу.</pre>
+      </details>
+      <div class="actions">
+        <label><input type="checkbox" class="regen-check" data-id="70"> Нужна перегенерация</label>
+        <input type="text" class="regen-instruction" data-id="70" placeholder="Доп. инструкции для перегенерации">
+      </div>
+    </div>
+    <div class="card" data-id="71">
+      <div class="card-header">
+        <img src="./71.png" alt="One Leg Squat Touch" class="thumb" loading="lazy" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect fill=%22%23eee%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2250%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23999%22 font-size=%2212%22>No image</text></svg>'">
+        <div class="meta">
+          <strong>One Leg Squat Touch</strong> <span class="id">#71</span><br>
+          <span class="muscle">ноги</span>
+        </div>
+      </div>
+      <p class="description">Приседание на одной ноге с касанием пола противоположной рукой.</p>
+      <details class="steps">
+        <summary>Шаги</summary>
+        <pre>1. Встаньте на правую ногу.
+2. Приседая на ней, наклонитесь вперед и коснитесь пола левой рукой.
+3. Держите спину ровной, а левую ногу вытянутой назад для баланса.
+4. Вернитесь в вертикальное положение.</pre>
+      </details>
+      <div class="actions">
+        <label><input type="checkbox" class="regen-check" data-id="71"> Нужна перегенерация</label>
+        <input type="text" class="regen-instruction" data-id="71" placeholder="Доп. инструкции для перегенерации">
+      </div>
+    </div>
+    <div class="card" data-id="72">
+      <div class="card-header">
+        <img src="./72.png" alt="One Leg Wall Sit" class="thumb" loading="lazy" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect fill=%22%23eee%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2250%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23999%22 font-size=%2212%22>No image</text></svg>'">
+        <div class="meta">
+          <strong>One Leg Wall Sit</strong> <span class="id">#72</span><br>
+          <span class="muscle">ноги</span>
+        </div>
+      </div>
+      <p class="description">Статическое удержание полуприседа у стены на одной ноге.</p>
+      <details class="steps">
+        <summary>Шаги</summary>
+        <pre>1. Примите классическое положение Wall Sit (спина у стены, бедра параллельны полу).
+2. Оторвите одну ногу от пола и вытяните ее вперед.
+3. Удерживайте баланс и вес тела только на одной опорной ноге.
+4. Следите, чтобы таз не перекашивался.</pre>
+      </details>
+      <div class="actions">
+        <label><input type="checkbox" class="regen-check" data-id="72"> Нужна перегенерация</label>
+        <input type="text" class="regen-instruction" data-id="72" placeholder="Доп. инструкции для перегенерации">
+      </div>
+    </div>
+    <div class="card" data-id="73">
+      <div class="card-header">
+        <img src="./73.png" alt="Power Squat" class="thumb" loading="lazy" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect fill=%22%23eee%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2250%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23999%22 font-size=%2212%22>No image</text></svg>'">
+        <div class="meta">
+          <strong>Power Squat</strong> <span class="id">#73</span><br>
+          <span class="muscle">ноги</span>
+        </div>
+      </div>
+      <p class="description">Глубокий присед с акцентом на взрывной подъем вверх.</p>
+      <details class="steps">
+        <summary>Шаги</summary>
+        <pre>1. Ноги чуть шире плеч.
+2. Медленно опуститесь в глубокий присед.
+3. Из нижней точки максимально быстро и мощно вытолкните тело вверх.
+4. В верхней точке напрягите ягодицы.</pre>
+      </details>
+      <div class="actions">
+        <label><input type="checkbox" class="regen-check" data-id="73"> Нужна перегенерация</label>
+        <input type="text" class="regen-instruction" data-id="73" placeholder="Доп. инструкции для перегенерации">
+      </div>
+    </div>
+    <div class="card" data-id="13">
+      <div class="card-header">
+        <img src="./13.png" alt="Chair Dip" class="thumb" loading="lazy" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect fill=%22%23eee%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2250%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23999%22 font-size=%2212%22>No image</text></svg>'">
+        <div class="meta">
+          <strong>Chair Dip</strong> <span class="id">#13</span><br>
+          <span class="muscle">руки</span>
+        </div>
+      </div>
+      <p class="description">Классическое упражнение на трицепс с опорой сзади.</p>
+      <details class="steps">
+        <summary>Шаги</summary>
+        <pre>1. Сядьте на край стула, упритесь ладонями в сиденье рядом с бедрами.
+2. Вынесите ноги вперед и снимите таз со стула.
+3. Медленно согните локти до угла 90 градусов.
+4. Мощно выпрямите руки, поднимая себя обратно.</pre>
+      </details>
+      <div class="actions">
+        <label><input type="checkbox" class="regen-check" data-id="13"> Нужна перегенерация</label>
+        <input type="text" class="regen-instruction" data-id="13" placeholder="Доп. инструкции для перегенерации">
+      </div>
+    </div>
+    <div class="card" data-id="14">
+      <div class="card-header">
+        <img src="./14.png" alt="Diamond Push-Up" class="thumb" loading="lazy" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect fill=%22%23eee%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2250%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23999%22 font-size=%2212%22>No image</text></svg>'">
+        <div class="meta">
+          <strong>Diamond Push-Up</strong> <span class="id">#14</span><br>
+          <span class="muscle">руки</span>
+        </div>
+      </div>
+      <p class="description">Отжимания с узкой постановкой рук (пальцы образуют ромб).</p>
+      <details class="steps">
+        <summary>Шаги</summary>
+        <pre>1. Примите упор лежа.
+2. Соедините указательные и большие пальцы под грудью в форме ромба.
+3. Опускайте грудь к рукам, локти вдоль корпуса.
+4. Выжмите себя вверх, напрягая трицепсы.</pre>
+      </details>
+      <div class="actions">
+        <label><input type="checkbox" class="regen-check" data-id="14"> Нужна перегенерация</label>
+        <input type="text" class="regen-instruction" data-id="14" placeholder="Доп. инструкции для перегенерации">
+      </div>
+    </div>
+    <div class="card" data-id="15">
+      <div class="card-header">
+        <img src="./15.png" alt="Plank To Elbow" class="thumb" loading="lazy" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect fill=%22%23eee%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2250%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23999%22 font-size=%2212%22>No image</text></svg>'">
+        <div class="meta">
+          <strong>Plank To Elbow</strong> <span class="id">#15</span><br>
+          <span class="muscle">руки</span>
+        </div>
+      </div>
+      <p class="description">Смена положения из планки на прямых руках в планку на локтях.</p>
+      <details class="steps">
+        <summary>Шаги</summary>
+        <pre>1. Встаньте в планку на прямых руках.
+2. Опустите правую руку на локоть, затем левую.
+3. Верните правую руку на ладонь, затем левую.
+4. Держите корпус ровно.</pre>
+      </details>
+      <div class="actions">
+        <label><input type="checkbox" class="regen-check" data-id="15"> Нужна перегенерация</label>
+        <input type="text" class="regen-instruction" data-id="15" placeholder="Доп. инструкции для перегенерации">
+      </div>
+    </div>
+    <div class="card" data-id="16">
+      <div class="card-header">
+        <img src="./16.png" alt="Shadow Boxing" class="thumb" loading="lazy" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect fill=%22%23eee%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2250%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23999%22 font-size=%2212%22>No image</text></svg>'">
+        <div class="meta">
+          <strong>Shadow Boxing</strong> <span class="id">#16</span><br>
+          <span class="muscle">руки</span>
+        </div>
+      </div>
+      <p class="description">Интенсивные удары перед собой в высоком темпе.</p>
+      <details class="steps">
+        <summary>Шаги</summary>
+        <pre>1. Встаньте в боксерскую стойку.
+2. Наносите удары вперед по воображаемой цели поочерёдно каждой рукой.
+3. Полностью выпрямляйте руку и быстро возвращайте к лицу.
+4. Удары должны быть короткими и быстрыми.</pre>
+      </details>
+      <div class="actions">
+        <label><input type="checkbox" class="regen-check" data-id="16"> Нужна перегенерация</label>
+        <input type="text" class="regen-instruction" data-id="16" placeholder="Доп. инструкции для перегенерации">
+      </div>
+    </div>
+    <div class="card" data-id="17">
+      <div class="card-header">
+        <img src="./17.png" alt="Triceps Push-Up" class="thumb" loading="lazy" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect fill=%22%23eee%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2250%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23999%22 font-size=%2212%22>No image</text></svg>'">
+        <div class="meta">
+          <strong>Triceps Push-Up</strong> <span class="id">#17</span><br>
+          <span class="muscle">руки</span>
+        </div>
+      </div>
+      <p class="description">Локти прижаты к корпусу и смотрят строго назад.</p>
+      <details class="steps">
+        <summary>Шаги</summary>
+        <pre>1. Примите упор лежа, руки на ширине плеч.
+2. При спуске направляйте локти строго назад, вдоль корпуса.
+3. Коснитесь грудью пола.
+4. Вернитесь вверх.</pre>
+      </details>
+      <div class="actions">
+        <label><input type="checkbox" class="regen-check" data-id="17"> Нужна перегенерация</label>
+        <input type="text" class="regen-instruction" data-id="17" placeholder="Доп. инструкции для перегенерации">
+      </div>
+    </div>
+    <div class="card" data-id="18">
+      <div class="card-header">
+        <img src="./18.png" alt="Plank Walk" class="thumb" loading="lazy" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect fill=%22%23eee%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2250%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23999%22 font-size=%2212%22>No image</text></svg>'">
+        <div class="meta">
+          <strong>Plank Walk</strong> <span class="id">#18</span><br>
+          <span class="muscle">руки</span>
+        </div>
+      </div>
+      <p class="description">Перемещение в сторону в положении упор лежа.</p>
+      <details class="steps">
+        <summary>Шаги</summary>
+        <pre>1. Встаньте в планку на прямых руках.
+2. Одновременно переставьте правую руку и правую ногу в сторону.
+3. Приставьте левую сторону.
+4. Теперь перемещайтесь в другую сторону, повторяя движение.</pre>
+      </details>
+      <div class="actions">
+        <label><input type="checkbox" class="regen-check" data-id="18"> Нужна перегенерация</label>
+        <input type="text" class="regen-instruction" data-id="18" placeholder="Доп. инструкции для перегенерации">
+      </div>
+    </div>
+    <div class="card" data-id="19">
+      <div class="card-header">
+        <img src="./19.png" alt="Wall Curl" class="thumb" loading="lazy" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect fill=%22%23eee%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2250%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23999%22 font-size=%2212%22>No image</text></svg>'">
+        <div class="meta">
+          <strong>Wall Curl</strong> <span class="id">#19</span><br>
+          <span class="muscle">руки</span>
+        </div>
+      </div>
+      <p class="description">Имитация подъема штанги за счет давления рук на стену.</p>
+      <details class="steps">
+        <summary>Шаги</summary>
+        <pre>1. Встаньте лицом к стене, прижмите к ней ладони пальцами вниз.
+2. Давите на стену, пытаясь &quot;поднять&quot; ее, напрягая бицепсы.
+3. Удерживайте напряжение 10 секунд.
+4. Расслабьтесь и повторите.</pre>
+      </details>
+      <div class="actions">
+        <label><input type="checkbox" class="regen-check" data-id="19"> Нужна перегенерация</label>
+        <input type="text" class="regen-instruction" data-id="19" placeholder="Доп. инструкции для перегенерации">
+      </div>
+    </div>
+    <div class="card" data-id="20">
+      <div class="card-header">
+        <img src="./20.png" alt="Plank Up" class="thumb" loading="lazy" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect fill=%22%23eee%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2250%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23999%22 font-size=%2212%22>No image</text></svg>'">
+        <div class="meta">
+          <strong>Plank Up</strong> <span class="id">#20</span><br>
+          <span class="muscle">руки</span>
+        </div>
+      </div>
+      <p class="description">Из положения стоя наклон и «шаги» руками до упора лежа.</p>
+      <details class="steps">
+        <summary>Шаги</summary>
+        <pre>1. Встаньте прямо.
+2. Наклонитесь и поставьте ладони на пол.
+3. Переставляйте руки вперед до положения планки на вытянутых руках.
+4. &quot;Шагайте&quot; руками обратно к ногам и выпрямитесь.</pre>
+      </details>
+      <div class="actions">
+        <label><input type="checkbox" class="regen-check" data-id="20"> Нужна перегенерация</label>
+        <input type="text" class="regen-instruction" data-id="20" placeholder="Доп. инструкции для перегенерации">
+      </div>
+    </div>
+    <div class="card" data-id="21">
+      <div class="card-header">
+        <img src="./21.png" alt="One Arm Push-Up" class="thumb" loading="lazy" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect fill=%22%23eee%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2250%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23999%22 font-size=%2212%22>No image</text></svg>'">
+        <div class="meta">
+          <strong>One Arm Push-Up</strong> <span class="id">#21</span><br>
+          <span class="muscle">руки</span>
+        </div>
+      </div>
+      <p class="description">Экстремальная нагрузка на трицепс и плечевой пояс.</p>
+      <details class="steps">
+        <summary>Шаги</summary>
+        <pre>1. Примите упор лежа, ноги расставьте широко.
+2. Одну руку уберите за спину.
+3. Медленно опуститесь вниз.
+4. Мощно выжмите себя вверх одной рукой.</pre>
+      </details>
+      <div class="actions">
+        <label><input type="checkbox" class="regen-check" data-id="21"> Нужна перегенерация</label>
+        <input type="text" class="regen-instruction" data-id="21" placeholder="Доп. инструкции для перегенерации">
+      </div>
+    </div>
+    <div class="card" data-id="22">
+      <div class="card-header">
+        <img src="./22.png" alt="Push-Up Hold" class="thumb" loading="lazy" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect fill=%22%23eee%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2250%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23999%22 font-size=%2212%22>No image</text></svg>'">
+        <div class="meta">
+          <strong>Push-Up Hold</strong> <span class="id">#22</span><br>
+          <span class="muscle">руки</span>
+        </div>
+      </div>
+      <p class="description">Зависание в нижней точке отжиманий на время.</p>
+      <details class="steps">
+        <summary>Шаги</summary>
+        <pre>1. Примите упор лежа.
+2. Опуститесь в нижнюю точку (грудь в паре сантиметров от пола).
+3. Зафиксируйте положение на максимально долгое время.
+4. Держите спину прямой.
+5. выпрямляйте руки вверх. Повторите.</pre>
+      </details>
+      <div class="actions">
+        <label><input type="checkbox" class="regen-check" data-id="22"> Нужна перегенерация</label>
+        <input type="text" class="regen-instruction" data-id="22" placeholder="Доп. инструкции для перегенерации">
+      </div>
+    </div>
+    <div class="card" data-id="24">
+      <div class="card-header">
+        <img src="./24.png" alt="Plank Fist Raise" class="thumb" loading="lazy" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect fill=%22%23eee%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2250%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23999%22 font-size=%2212%22>No image</text></svg>'">
+        <div class="meta">
+          <strong>Plank Fist Raise</strong> <span class="id">#24</span><br>
+          <span class="muscle">руки</span>
+        </div>
+      </div>
+      <p class="description">Переход с ладоней на кулаки для укрепления кистей и рук.</p>
+      <details class="steps">
+        <summary>Шаги</summary>
+        <pre>1. Встаньте в планку на ладонях.
+2. Перенесите вес на одну руку, вторую сожмите в кулак и поставьте.
+3. Повторите со второй рукой.
+4. Так же по очереди вернитесь на ладони.</pre>
+      </details>
+      <div class="actions">
+        <label><input type="checkbox" class="regen-check" data-id="24"> Нужна перегенерация</label>
+        <input type="text" class="regen-instruction" data-id="24" placeholder="Доп. инструкции для перегенерации">
+      </div>
+    </div>
+    <div class="card" data-id="25">
+      <div class="card-header">
+        <img src="./25.png" alt="Bicycle Crunch" class="thumb" loading="lazy" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect fill=%22%23eee%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2250%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23999%22 font-size=%2212%22>No image</text></svg>'">
+        <div class="meta">
+          <strong>Bicycle Crunch</strong> <span class="id">#25</span><br>
+          <span class="muscle">пресс</span>
+        </div>
+      </div>
+      <p class="description">Поочередное касание локтем противоположного колена лежа.</p>
+      <details class="steps">
+        <summary>Шаги</summary>
+        <pre>1. Лягте на спину, руки за головой.
+2. Подтяните правое колено к левому локтю, выпрямляя левую ногу, не касаясь ей пола.
+3. Смените сторону: левое колено к правому локтю.
+4. Двигайтесь ритмично.</pre>
+      </details>
+      <div class="actions">
+        <label><input type="checkbox" class="regen-check" data-id="25"> Нужна перегенерация</label>
+        <input type="text" class="regen-instruction" data-id="25" placeholder="Доп. инструкции для перегенерации">
+      </div>
+    </div>
+    <div class="card" data-id="26">
+      <div class="card-header">
+        <img src="./26.png" alt="V-Up" class="thumb" loading="lazy" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect fill=%22%23eee%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2250%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23999%22 font-size=%2212%22>No image</text></svg>'">
+        <div class="meta">
+          <strong>V-Up</strong> <span class="id">#26</span><br>
+          <span class="muscle">пресс</span>
+        </div>
+      </div>
+      <p class="description">Одновременный подъем корпуса и прямых ног.</p>
+      <details class="steps">
+        <summary>Шаги</summary>
+        <pre>1. Лягте на спину, руки за головой.
+2. На выдохе одновременно поднимите прямые ноги и корпус.
+3. Постарайтесь коснуться руками стоп.
+4. Плавно опуститесь назад.</pre>
+      </details>
+      <div class="actions">
+        <label><input type="checkbox" class="regen-check" data-id="26"> Нужна перегенерация</label>
+        <input type="text" class="regen-instruction" data-id="26" placeholder="Доп. инструкции для перегенерации">
+      </div>
+    </div>
+    <div class="card" data-id="27">
+      <div class="card-header">
+        <img src="./27.png" alt="Mountain Climber" class="thumb" loading="lazy" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect fill=%22%23eee%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2250%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23999%22 font-size=%2212%22>No image</text></svg>'">
+        <div class="meta">
+          <strong>Mountain Climber</strong> <span class="id">#27</span><br>
+          <span class="muscle">пресс</span>
+        </div>
+      </div>
+      <p class="description">Подтягивание колен к груди в упоре лежа в быстром темпе.</p>
+      <details class="steps">
+        <summary>Шаги</summary>
+        <pre>1. Примите упор лежа.
+2. Быстро подтяните одно колено к груди.
+3. Верните ногу назад и сразу подтяните другую.
+4. Держите темп, не поднимая таз.</pre>
+      </details>
+      <div class="actions">
+        <label><input type="checkbox" class="regen-check" data-id="27"> Нужна перегенерация</label>
+        <input type="text" class="regen-instruction" data-id="27" placeholder="Доп. инструкции для перегенерации">
+      </div>
+    </div>
+    <div class="card" data-id="28">
+      <div class="card-header">
+        <img src="./28.png" alt="V-Sit Twist" class="thumb" loading="lazy" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect fill=%22%23eee%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2250%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23999%22 font-size=%2212%22>No image</text></svg>'">
+        <div class="meta">
+          <strong>V-Sit Twist</strong> <span class="id">#28</span><br>
+          <span class="muscle">пресс</span>
+        </div>
+      </div>
+      <p class="description">Повороты корпуса сидя с оторванными от пола ногами.</p>
+      <details class="steps">
+        <summary>Шаги</summary>
+        <pre>1. Сядьте на пол, ноги согнуты в коленях, отклонитесь назад, ноги оторвите от пола.
+2. Поворачивайте корпус вправо и влево.
+3. Руки в замке вытянуты перед собой и следуют за корпусом.
+4. Ноги должны оставаться неподвижными.</pre>
+      </details>
+      <div class="actions">
+        <label><input type="checkbox" class="regen-check" data-id="28"> Нужна перегенерация</label>
+        <input type="text" class="regen-instruction" data-id="28" placeholder="Доп. инструкции для перегенерации">
+      </div>
+    </div>
+    <div class="card" data-id="29">
+      <div class="card-header">
+        <img src="./29.png" alt="Reverse Crunch" class="thumb" loading="lazy" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect fill=%22%23eee%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2250%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23999%22 font-size=%2212%22>No image</text></svg>'">
+        <div class="meta">
+          <strong>Reverse Crunch</strong> <span class="id">#29</span><br>
+          <span class="muscle">пресс</span>
+        </div>
+      </div>
+      <p class="description">Подъем таза вверх за счет мышц пресса лежа на спине.</p>
+      <details class="steps">
+        <summary>Шаги</summary>
+        <pre>1. Лягте на спину, ноги согнуты.
+2. Напрягая пресс, поднимите таз и подтяните колени к лицу.
+3. Оторвите поясницу от пола.
+4. Медленно опустите таз обратно.</pre>
+      </details>
+      <div class="actions">
+        <label><input type="checkbox" class="regen-check" data-id="29"> Нужна перегенерация</label>
+        <input type="text" class="regen-instruction" data-id="29" placeholder="Доп. инструкции для перегенерации">
+      </div>
+    </div>
+    <div class="card" data-id="30">
+      <div class="card-header">
+        <img src="./30.png" alt="Star Plank" class="thumb" loading="lazy" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect fill=%22%23eee%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2250%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23999%22 font-size=%2212%22>No image</text></svg>'">
+        <div class="meta">
+          <strong>Star Plank</strong> <span class="id">#30</span><br>
+          <span class="muscle">пресс</span>
+        </div>
+      </div>
+      <p class="description">Планка с максимально широкой постановкой рук и ног.</p>
+      <details class="steps">
+        <summary>Шаги</summary>
+        <pre>1. Встаньте в планку на прямых руках.
+2. Раздвиньте руки и ноги максимально широко (в форме звезды).
+3. Удерживайте положение с ровной спиной.
+4. Напрягайте кор.</pre>
+      </details>
+      <div class="actions">
+        <label><input type="checkbox" class="regen-check" data-id="30"> Нужна перегенерация</label>
+        <input type="text" class="regen-instruction" data-id="30" placeholder="Доп. инструкции для перегенерации">
+      </div>
+    </div>
+    <div class="card" data-id="31">
+      <div class="card-header">
+        <img src="./31.png" alt="Leg Raise" class="thumb" loading="lazy" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect fill=%22%23eee%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2250%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23999%22 font-size=%2212%22>No image</text></svg>'">
+        <div class="meta">
+          <strong>Leg Raise</strong> <span class="id">#31</span><br>
+          <span class="muscle">пресс</span>
+        </div>
+      </div>
+      <p class="description">Медленное опускание ног без касания пола.</p>
+      <details class="steps">
+        <summary>Шаги</summary>
+        <pre>1. Лягте на спину, руки под ягодицами.
+2. Поднимите прямые ноги вверх на 90 градусов.
+3. Медленно опускайте их, не касаясь пола.
+4. Поднимите обратно.</pre>
+      </details>
+      <div class="actions">
+        <label><input type="checkbox" class="regen-check" data-id="31"> Нужна перегенерация</label>
+        <input type="text" class="regen-instruction" data-id="31" placeholder="Доп. инструкции для перегенерации">
+      </div>
+    </div>
+    <div class="card" data-id="32">
+      <div class="card-header">
+        <img src="./32.png" alt="Side Plank Hip Lift" class="thumb" loading="lazy" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect fill=%22%23eee%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2250%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23999%22 font-size=%2212%22>No image</text></svg>'">
+        <div class="meta">
+          <strong>Side Plank Hip Lift</strong> <span class="id">#32</span><br>
+          <span class="muscle">пресс</span>
+        </div>
+      </div>
+      <p class="description">Динамическая боковая планка для косых мышц.</p>
+      <details class="steps">
+        <summary>Шаги</summary>
+        <pre>1. Встаньте в боковую планку на локте.
+2. Опустите таз вниз до легкого касания пола.
+3. Мощно вытолкните таз вверх.
+4. Держите тело в одной линии.</pre>
+      </details>
+      <div class="actions">
+        <label><input type="checkbox" class="regen-check" data-id="32"> Нужна перегенерация</label>
+        <input type="text" class="regen-instruction" data-id="32" placeholder="Доп. инструкции для перегенерации">
+      </div>
+    </div>
+    <div class="card" data-id="33">
+      <div class="card-header">
+        <img src="./33.png" alt="Dead Bug" class="thumb" loading="lazy" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect fill=%22%23eee%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2250%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23999%22 font-size=%2212%22>No image</text></svg>'">
+        <div class="meta">
+          <strong>Dead Bug</strong> <span class="id">#33</span><br>
+          <span class="muscle">пресс</span>
+        </div>
+      </div>
+      <p class="description">Контролируемое опускание разноименных руки и ноги.</p>
+      <details class="steps">
+        <summary>Шаги</summary>
+        <pre>1. Лягте на спину, руки и ноги подняты вверх (колени согнуты).
+2. Медленно опустите правую руку назад и левую ногу вперед.
+3. Верните в центр.
+4. Повторите для другой стороны.</pre>
+      </details>
+      <div class="actions">
+        <label><input type="checkbox" class="regen-check" data-id="33"> Нужна перегенерация</label>
+        <input type="text" class="regen-instruction" data-id="33" placeholder="Доп. инструкции для перегенерации">
+      </div>
+    </div>
+    <div class="card" data-id="34">
+      <div class="card-header">
+        <img src="./34.png" alt="L-Sit" class="thumb" loading="lazy" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect fill=%22%23eee%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2250%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23999%22 font-size=%2212%22>No image</text></svg>'">
+        <div class="meta">
+          <strong>L-Sit</strong> <span class="id">#34</span><br>
+          <span class="muscle">пресс</span>
+        </div>
+      </div>
+      <p class="description">Удержание прямых ног на весу, опираясь руками на стул.</p>
+      <details class="steps">
+        <summary>Шаги</summary>
+        <pre>1. Упритесь ладонями в сиденье стула.
+2. Поднимите таз и выпрямите ноги перед собой параллельно полу.
+3. Удерживайте уголок максимально долго.
+4. Не сгибайте колени.</pre>
+      </details>
+      <div class="actions">
+        <label><input type="checkbox" class="regen-check" data-id="34"> Нужна перегенерация</label>
+        <input type="text" class="regen-instruction" data-id="34" placeholder="Доп. инструкции для перегенерации">
+      </div>
+    </div>
+    <div class="card" data-id="35">
+      <div class="card-header">
+        <img src="./35.png" alt="Toe Touch Crunch" class="thumb" loading="lazy" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect fill=%22%23eee%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2250%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23999%22 font-size=%2212%22>No image</text></svg>'">
+        <div class="meta">
+          <strong>Toe Touch Crunch</strong> <span class="id">#35</span><br>
+          <span class="muscle">пресс</span>
+        </div>
+      </div>
+      <p class="description">Подъем лопаток к поднятым вертикально ногам.</p>
+      <details class="steps">
+        <summary>Шаги</summary>
+        <pre>1. Лягте на спину, ноги подняты вертикально.
+2. Тянитесь руками к носкам, отрывая лопатки.
+3. Сделайте короткое скручивание вверху.
+4. Опуститесь.</pre>
+      </details>
+      <div class="actions">
+        <label><input type="checkbox" class="regen-check" data-id="35"> Нужна перегенерация</label>
+        <input type="text" class="regen-instruction" data-id="35" placeholder="Доп. инструкции для перегенерации">
+      </div>
+    </div>
+    <div class="card" data-id="36">
+      <div class="card-header">
+        <img src="./36.png" alt="Burpee" class="thumb" loading="lazy" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect fill=%22%23eee%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2250%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23999%22 font-size=%2212%22>No image</text></svg>'">
+        <div class="meta">
+          <strong>Burpee</strong> <span class="id">#36</span><br>
+          <span class="muscle">пресс</span>
+        </div>
+      </div>
+      <p class="description">Комплексное упражнение с прыжком и упором лежа.</p>
+      <details class="steps">
+        <summary>Шаги</summary>
+        <pre>1. Из положения стоя присядьте, руки на пол.
+2. Прыжком перейдите в упор лежа.
+3. Прыжком вернитесь в присед.
+4. Выпрыгните вверх.</pre>
+      </details>
+      <div class="actions">
+        <label><input type="checkbox" class="regen-check" data-id="36"> Нужна перегенерация</label>
+        <input type="text" class="regen-instruction" data-id="36" placeholder="Доп. инструкции для перегенерации">
+      </div>
+    </div>
+    <div class="card" data-id="79">
+      <div class="card-header">
+        <img src="./79.png" alt="Abdominal Crunch" class="thumb" loading="lazy" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect fill=%22%23eee%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2250%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23999%22 font-size=%2212%22>No image</text></svg>'">
+        <div class="meta">
+          <strong>Abdominal Crunch</strong> <span class="id">#79</span><br>
+          <span class="muscle">пресс</span>
+        </div>
+      </div>
+      <p class="description">Классическое упражнение для пресса: подъем верхней части тела из положения лежа.</p>
+      <details class="steps">
+        <summary>Шаги</summary>
+        <pre>1. Лягте на спину, ноги согнуты.
+2. Руки за головой (не тяните шею!).
+3. На выдохе оторвите лопатки от пола.
+4. На вдохе медленно опуститесь.</pre>
+      </details>
+      <div class="actions">
+        <label><input type="checkbox" class="regen-check" data-id="79"> Нужна перегенерация</label>
+        <input type="text" class="regen-instruction" data-id="79" placeholder="Доп. инструкции для перегенерации">
+      </div>
+    </div>
+    <div class="card" data-id="80">
+      <div class="card-header">
+        <img src="./80.png" alt="Full Side Plank" class="thumb" loading="lazy" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect fill=%22%23eee%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2250%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23999%22 font-size=%2212%22>No image</text></svg>'">
+        <div class="meta">
+          <strong>Full Side Plank</strong> <span class="id">#80</span><br>
+          <span class="muscle">пресс</span>
+        </div>
+      </div>
+      <p class="description">Удержание тела в боковой планке на одной руке и ноге.</p>
+      <details class="steps">
+        <summary>Шаги</summary>
+        <pre>1. Встаньте в боковую планку на прямой руке.
+2. Вторая рука направлена вверх.
+3. Тело — ровная линия.
+4. Поднимите ногу, находящуюся сверху, максимально высоко.  
+5. Удерживайте статику. 
+6. Поменяйте руку и ногу.</pre>
+      </details>
+      <div class="actions">
+        <label><input type="checkbox" class="regen-check" data-id="80"> Нужна перегенерация</label>
+        <input type="text" class="regen-instruction" data-id="80" placeholder="Доп. инструкции для перегенерации">
+      </div>
+    </div>
+    <div class="card" data-id="81">
+      <div class="card-header">
+        <img src="./81.png" alt="Plank" class="thumb" loading="lazy" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect fill=%22%23eee%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2250%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23999%22 font-size=%2212%22>No image</text></svg>'">
+        <div class="meta">
+          <strong>Plank</strong> <span class="id">#81</span><br>
+          <span class="muscle">пресс</span>
+        </div>
+      </div>
+      <p class="description">Статическое упражнение: удержание тела в прямой линии на предплечьях и носках.</p>
+      <details class="steps">
+        <summary>Шаги</summary>
+        <pre>1. Упор на предплечья, локти под плечами.
+2. Ноги прямые, таз не поднят и не провален.
+3. Напрягите пресс и ягодицы.
+4. Смотрите в пол.</pre>
+      </details>
+      <div class="actions">
+        <label><input type="checkbox" class="regen-check" data-id="81"> Нужна перегенерация</label>
+        <input type="text" class="regen-instruction" data-id="81" placeholder="Доп. инструкции для перегенерации">
+      </div>
+    </div>
+    <div class="card" data-id="82">
+      <div class="card-header">
+        <img src="./82.png" alt="Crunch And Hug" class="thumb" loading="lazy" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect fill=%22%23eee%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2250%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23999%22 font-size=%2212%22>No image</text></svg>'">
+        <div class="meta">
+          <strong>Crunch And Hug</strong> <span class="id">#82</span><br>
+          <span class="muscle">пресс</span>
+        </div>
+      </div>
+      <p class="description">Скручивание с подтягиванием коленей и обниманием их руками.</p>
+      <details class="steps">
+        <summary>Шаги</summary>
+        <pre>1. Лягте на спину на пол, ноги прямые, руки вытянуты за головой.
+2. Скручивание: подтяните колени к груди.
+3. Руки обнимают колени.
+4. Плавно вернитесь в исходное положение.</pre>
+      </details>
+      <div class="actions">
+        <label><input type="checkbox" class="regen-check" data-id="82"> Нужна перегенерация</label>
+        <input type="text" class="regen-instruction" data-id="82" placeholder="Доп. инструкции для перегенерации">
+      </div>
+    </div>
+    <div class="card" data-id="83">
+      <div class="card-header">
+        <img src="./83.png" alt="Reverse Plank" class="thumb" loading="lazy" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect fill=%22%23eee%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2250%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23999%22 font-size=%2212%22>No image</text></svg>'">
+        <div class="meta">
+          <strong>Reverse Plank</strong> <span class="id">#83</span><br>
+          <span class="muscle">пресс</span>
+        </div>
+      </div>
+      <p class="description">Удержание тела в прямой линии лицом вверх, опираясь на руки и пятки.</p>
+      <details class="steps">
+        <summary>Шаги</summary>
+        <pre>1. Сядьте, руки сзади.
+2. Опираясь на пятки, поднимите таз до прямой линии тела.
+3. Смотрите вверх.
+4. Удерживайте статику.</pre>
+      </details>
+      <div class="actions">
+        <label><input type="checkbox" class="regen-check" data-id="83"> Нужна перегенерация</label>
+        <input type="text" class="regen-instruction" data-id="83" placeholder="Доп. инструкции для перегенерации">
+      </div>
+    </div>
+    <div class="card" data-id="84">
+      <div class="card-header">
+        <img src="./84.png" alt="Scissor Kicks" class="thumb" loading="lazy" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect fill=%22%23eee%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2250%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23999%22 font-size=%2212%22>No image</text></svg>'">
+        <div class="meta">
+          <strong>Scissor Kicks</strong> <span class="id">#84</span><br>
+          <span class="muscle">пресс</span>
+        </div>
+      </div>
+      <p class="description">Горизонтальные скрещивания прямых ног лежа на спине.</p>
+      <details class="steps">
+        <summary>Шаги</summary>
+        <pre>1. Лягте на спину, руки вдоль корпуса или под таз для поддержки.
+2. Поднимите прямые ноги на 10–20 см от пола, слегка напрягите пресс.
+3. Разведите ноги в стороны, затем скрестите их горизонтально: одна нога сверху, другая снизу.
+4. Повторяйте: чередуйте, чтобы левая и правая ноги оказывались сверху.
+5. На протяжении всего упражнения ноги и поясница не должны касаться пола. Пресс напряжён.</pre>
+      </details>
+      <div class="actions">
+        <label><input type="checkbox" class="regen-check" data-id="84"> Нужна перегенерация</label>
+        <input type="text" class="regen-instruction" data-id="84" placeholder="Доп. инструкции для перегенерации">
+      </div>
+    </div>
+    <div class="card" data-id="85">
+      <div class="card-header">
+        <img src="./85.png" alt="Side Plank" class="thumb" loading="lazy" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect fill=%22%23eee%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2250%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23999%22 font-size=%2212%22>No image</text></svg>'">
+        <div class="meta">
+          <strong>Side Plank</strong> <span class="id">#85</span><br>
+          <span class="muscle">пресс</span>
+        </div>
+      </div>
+      <p class="description">Удержание тела в боковой планке на предплечье и боковой части стопы.</p>
+      <details class="steps">
+        <summary>Шаги</summary>
+        <pre>1. Боковая планка на предплечье.
+2. Таз поднят.
+3. Держите равновесие.
+4. Свободная рука на бедре или вверху.</pre>
+      </details>
+      <div class="actions">
+        <label><input type="checkbox" class="regen-check" data-id="85"> Нужна перегенерация</label>
+        <input type="text" class="regen-instruction" data-id="85" placeholder="Доп. инструкции для перегенерации">
+      </div>
+    </div>
+    <div class="card" data-id="86">
+      <div class="card-header">
+        <img src="./86.png" alt="Side Plank Crunch" class="thumb" loading="lazy" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect fill=%22%23eee%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2250%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23999%22 font-size=%2212%22>No image</text></svg>'">
+        <div class="meta">
+          <strong>Side Plank Crunch</strong> <span class="id">#86</span><br>
+          <span class="muscle">пресс</span>
+        </div>
+      </div>
+      <p class="description">Боковая планка с подтягиванием верхнего колена к локтю.</p>
+      <details class="steps">
+        <summary>Шаги</summary>
+        <pre>1. Из боковой планки подтяните верхнее колено к локтю.
+2. Коснитесь и вернитесь в планку.
+3. Держите таз высоко.
+4. Повторите.</pre>
+      </details>
+      <div class="actions">
+        <label><input type="checkbox" class="regen-check" data-id="86"> Нужна перегенерация</label>
+        <input type="text" class="regen-instruction" data-id="86" placeholder="Доп. инструкции для перегенерации">
+      </div>
+    </div>
+    <div class="card" data-id="88">
+      <div class="card-header">
+        <img src="./88.png" alt="Windscreen Wipers" class="thumb" loading="lazy" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect fill=%22%23eee%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2250%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23999%22 font-size=%2212%22>No image</text></svg>'">
+        <div class="meta">
+          <strong>Windscreen Wipers</strong> <span class="id">#88</span><br>
+          <span class="muscle">пресс</span>
+        </div>
+      </div>
+      <p class="description">Лежа на спине, подъем ног и их движение из стороны в сторону, имитируя работу дворников.</p>
+      <details class="steps">
+        <summary>Шаги</summary>
+        <pre>1. Лягте на спину, руки в стороны, ноги вертикально.
+2. Опускайте ноги вправо, затем влево.
+3. Лопатки прижаты к полу.
+4. Используйте силу косых мышц. 
+5. Вдох делается при опускании ног в сторону, а выдох — при возврате в центральное положение.</pre>
+      </details>
+      <div class="actions">
+        <label><input type="checkbox" class="regen-check" data-id="88"> Нужна перегенерация</label>
+        <input type="text" class="regen-instruction" data-id="88" placeholder="Доп. инструкции для перегенерации">
+      </div>
+    </div>
+    <div class="card" data-id="37">
+      <div class="card-header">
+        <img src="./37.png" alt="Wide Push-Up" class="thumb" loading="lazy" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect fill=%22%23eee%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2250%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23999%22 font-size=%2212%22>No image</text></svg>'">
+        <div class="meta">
+          <strong>Wide Push-Up</strong> <span class="id">#37</span><br>
+          <span class="muscle">грудь</span>
+        </div>
+      </div>
+      <p class="description">Отжимания с постановкой рук значительно шире плеч.</p>
+      <details class="steps">
+        <summary>Шаги</summary>
+        <pre>1. Поставьте руки в два раза шире плеч.
+2. Опускайтесь до касания грудью пола.
+3. Выжмите себя вверх.
+4. Локти направлены в стороны.</pre>
+      </details>
+      <div class="actions">
+        <label><input type="checkbox" class="regen-check" data-id="37"> Нужна перегенерация</label>
+        <input type="text" class="regen-instruction" data-id="37" placeholder="Доп. инструкции для перегенерации">
+      </div>
+    </div>
+    <div class="card" data-id="40">
+      <div class="card-header">
+        <img src="./40.png" alt="Archer Push-Up" class="thumb" loading="lazy" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect fill=%22%23eee%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2250%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23999%22 font-size=%2212%22>No image</text></svg>'">
+        <div class="meta">
+          <strong>Archer Push-Up</strong> <span class="id">#40</span><br>
+          <span class="muscle">грудь</span>
+        </div>
+      </div>
+      <p class="description">Перенос веса на одну руку во время спуска.</p>
+      <details class="steps">
+        <summary>Шаги</summary>
+        <pre>1. Широкая постановка рук. Руки прямые. Пальцы направлены в стороны.
+2. При спуске сгибайте только одну руку, вторая остается прямой.
+3. Перенесите весь вес на согнутую руку.
+4. Вернитесь в центр и смените сторону.</pre>
+      </details>
+      <div class="actions">
+        <label><input type="checkbox" class="regen-check" data-id="40"> Нужна перегенерация</label>
+        <input type="text" class="regen-instruction" data-id="40" placeholder="Доп. инструкции для перегенерации">
+      </div>
+    </div>
+    <div class="card" data-id="38">
+      <div class="card-header">
+        <img src="./38.png" alt="Chair Decline Push-Up" class="thumb" loading="lazy" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect fill=%22%23eee%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2250%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23999%22 font-size=%2212%22>No image</text></svg>'">
+        <div class="meta">
+          <strong>Chair Decline Push-Up</strong> <span class="id">#38</span><br>
+          <span class="muscle">грудь</span>
+        </div>
+      </div>
+      <p class="description">Отжимания с ногами на стуле.</p>
+      <details class="steps">
+        <summary>Шаги</summary>
+        <pre>1. Ноги на стуле, руки на полу.
+2. Тело — прямая линия.
+3. Опускайте грудь к полу.
+4. Выжмите себя вверх.</pre>
+      </details>
+      <div class="actions">
+        <label><input type="checkbox" class="regen-check" data-id="38"> Нужна перегенерация</label>
+        <input type="text" class="regen-instruction" data-id="38" placeholder="Доп. инструкции для перегенерации">
+      </div>
+    </div>
+    <div class="card" data-id="39">
+      <div class="card-header">
+        <img src="./39.png" alt="Power Push-Up" class="thumb" loading="lazy" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect fill=%22%23eee%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2250%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23999%22 font-size=%2212%22>No image</text></svg>'">
+        <div class="meta">
+          <strong>Power Push-Up</strong> <span class="id">#39</span><br>
+          <span class="muscle">грудь</span>
+        </div>
+      </div>
+      <p class="description">Отжимания с хлопком или отрывом ладоней от пола.</p>
+      <details class="steps">
+        <summary>Шаги</summary>
+        <pre>1. Опуститесь в отжимание.
+2. Резко толкнитесь вверх, чтобы ладони оторвались от пола.
+3. Сделайте хлопок (опционально).
+4. Мягко приземлитесь и повторите.</pre>
+      </details>
+      <div class="actions">
+        <label><input type="checkbox" class="regen-check" data-id="39"> Нужна перегенерация</label>
+        <input type="text" class="regen-instruction" data-id="39" placeholder="Доп. инструкции для перегенерации">
+      </div>
+    </div>
+    <div class="card" data-id="42">
+      <div class="card-header">
+        <img src="./42.png" alt="Pause Push-Up" class="thumb" loading="lazy" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect fill=%22%23eee%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2250%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23999%22 font-size=%2212%22>No image</text></svg>'">
+        <div class="meta">
+          <strong>Pause Push-Up</strong> <span class="id">#42</span><br>
+          <span class="muscle">грудь</span>
+        </div>
+      </div>
+      <p class="description">Классические отжимания с задержкой на 3 секунды в нижней точке.</p>
+      <details class="steps">
+        <summary>Шаги</summary>
+        <pre>1. Опуститесь в нижнюю точку отжимания.
+2. Задержитесь на 3 секунды.
+3. Мощно вытолкните тело вверх.
+4. Повторите.</pre>
+      </details>
+      <div class="actions">
+        <label><input type="checkbox" class="regen-check" data-id="42"> Нужна перегенерация</label>
+        <input type="text" class="regen-instruction" data-id="42" placeholder="Доп. инструкции для перегенерации">
+      </div>
+    </div>
+    <div class="card" data-id="44">
+      <div class="card-header">
+        <img src="./44.png" alt="Slow Negative Push-Up" class="thumb" loading="lazy" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect fill=%22%23eee%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2250%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23999%22 font-size=%2212%22>No image</text></svg>'">
+        <div class="meta">
+          <strong>Slow Negative Push-Up</strong> <span class="id">#44</span><br>
+          <span class="muscle">грудь</span>
+        </div>
+      </div>
+      <p class="description">Максимальное время под нагрузкой в негативной фазе.</p>
+      <details class="steps">
+        <summary>Шаги</summary>
+        <pre>1. Опускайтесь из верхней точки максимально медленно (4-5 сек).
+2. Достигнув низа, быстро выжмите себя вверх.
+3. Держите кор напряженным.</pre>
+      </details>
+      <div class="actions">
+        <label><input type="checkbox" class="regen-check" data-id="44"> Нужна перегенерация</label>
+        <input type="text" class="regen-instruction" data-id="44" placeholder="Доп. инструкции для перегенерации">
+      </div>
+    </div>
+    <div class="card" data-id="45">
+      <div class="card-header">
+        <img src="./45.png" alt="Plyo Push-Up" class="thumb" loading="lazy" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect fill=%22%23eee%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2250%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23999%22 font-size=%2212%22>No image</text></svg>'">
+        <div class="meta">
+          <strong>Plyo Push-Up</strong> <span class="id">#45</span><br>
+          <span class="muscle">грудь</span>
+        </div>
+      </div>
+      <p class="description">Одна рука впереди, другая сзади, смена через прыжок.</p>
+      <details class="steps">
+        <summary>Шаги</summary>
+        <pre>1. Одна рука выше уровня плеча, другая ниже.
+2. Отжимание.
+3. Прыжком на руках смените положение рук.
+4. Снова отжимание.</pre>
+      </details>
+      <div class="actions">
+        <label><input type="checkbox" class="regen-check" data-id="45"> Нужна перегенерация</label>
+        <input type="text" class="regen-instruction" data-id="45" placeholder="Доп. инструкции для перегенерации">
+      </div>
+    </div>
+    <div class="card" data-id="41">
+      <div class="card-header">
+        <img src="./41.png" alt="Hindu Push-Up" class="thumb" loading="lazy" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect fill=%22%23eee%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2250%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23999%22 font-size=%2212%22>No image</text></svg>'">
+        <div class="meta">
+          <strong>Hindu Push-Up</strong> <span class="id">#41</span><br>
+          <span class="muscle">грудь</span>
+        </div>
+      </div>
+      <p class="description">Волнообразное движение корпусом из «собаки мордой вниз».</p>
+      <details class="steps">
+        <summary>Шаги</summary>
+        <pre>1. Поза &quot;собака мордой вниз&quot;.
+2. Нырните грудью к полу.
+3. Вынырните в &quot;собаку мордой вверх&quot;.
+4. Вернитесь в исходное положение.</pre>
+      </details>
+      <div class="actions">
+        <label><input type="checkbox" class="regen-check" data-id="41"> Нужна перегенерация</label>
+        <input type="text" class="regen-instruction" data-id="41" placeholder="Доп. инструкции для перегенерации">
+      </div>
+    </div>
+    <div class="card" data-id="46">
+      <div class="card-header">
+        <img src="./46.png" alt="Push-Up And Rotation" class="thumb" loading="lazy" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect fill=%22%23eee%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2250%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23999%22 font-size=%2212%22>No image</text></svg>'">
+        <div class="meta">
+          <strong>Push-Up And Rotation</strong> <span class="id">#46</span><br>
+          <span class="muscle">грудь</span>
+        </div>
+      </div>
+      <p class="description">Поворот корпуса в боковую планку после каждого отжимания.</p>
+      <details class="steps">
+        <summary>Шаги</summary>
+        <pre>1. Сделайте отжимание.
+2. Вверху разверните корпус, поднимая одну руку в потолок.
+3. Вернитесь в упор лежа.
+4. Повторите в другую сторону.</pre>
+      </details>
+      <div class="actions">
+        <label><input type="checkbox" class="regen-check" data-id="46"> Нужна перегенерация</label>
+        <input type="text" class="regen-instruction" data-id="46" placeholder="Доп. инструкции для перегенерации">
+      </div>
+    </div>
+    <div class="card" data-id="47">
+      <div class="card-header">
+        <img src="./47.png" alt="Chest Press" class="thumb" loading="lazy" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect fill=%22%23eee%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2250%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23999%22 font-size=%2212%22>No image</text></svg>'">
+        <div class="meta">
+          <strong>Chest Press</strong> <span class="id">#47</span><br>
+          <span class="muscle">грудь</span>
+        </div>
+      </div>
+      <p class="description">Изометрическое сжатие ладоней перед грудью стоя.</p>
+      <details class="steps">
+        <summary>Шаги</summary>
+        <pre>1. Соедините ладони перед собой.
+2. Давите ими друг на друга максимально сильно.
+3. Удерживайте давление ~15 секунд.
+4. Расслабьтесь.</pre>
+      </details>
+      <div class="actions">
+        <label><input type="checkbox" class="regen-check" data-id="47"> Нужна перегенерация</label>
+        <input type="text" class="regen-instruction" data-id="47" placeholder="Доп. инструкции для перегенерации">
+      </div>
+    </div>
+    <div class="card" data-id="48">
+      <div class="card-header">
+        <img src="./48.png" alt="Spiderman Push-Up" class="thumb" loading="lazy" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect fill=%22%23eee%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2250%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23999%22 font-size=%2212%22>No image</text></svg>'">
+        <div class="meta">
+          <strong>Spiderman Push-Up</strong> <span class="id">#48</span><br>
+          <span class="muscle">грудь</span>
+        </div>
+      </div>
+      <p class="description">Подтягивание колена к локтю во время отжимания.</p>
+      <details class="steps">
+        <summary>Шаги</summary>
+        <pre>1. Опускайтесь вниз.
+2. Одновременно ведите колено к локтю с той же стороны.
+3. Верните ногу назад при подъеме.
+4. Повторите для другой стороны.</pre>
+      </details>
+      <div class="actions">
+        <label><input type="checkbox" class="regen-check" data-id="48"> Нужна перегенерация</label>
+        <input type="text" class="regen-instruction" data-id="48" placeholder="Доп. инструкции для перегенерации">
+      </div>
+    </div>
+    <div class="card" data-id="74">
+      <div class="card-header">
+        <img src="./74.png" alt="Bird Dog Push-Up" class="thumb" loading="lazy" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect fill=%22%23eee%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2250%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23999%22 font-size=%2212%22>No image</text></svg>'">
+        <div class="meta">
+          <strong>Bird Dog Push-Up</strong> <span class="id">#74</span><br>
+          <span class="muscle">грудь</span>
+        </div>
+      </div>
+      <p class="description">Отжимание и одновременный подъем противоположной руки и ноги в верхней точке.</p>
+      <details class="steps">
+        <summary>Шаги</summary>
+        <pre>1. Сделайте отжимание.
+2. Вверху поднимите правую руку и левую ногу.
+3. Удержите баланс.
+4. Верните руку и ногу в исходное положение. 
+5. Снова отжимание и смена сторон.</pre>
+      </details>
+      <div class="actions">
+        <label><input type="checkbox" class="regen-check" data-id="74"> Нужна перегенерация</label>
+        <input type="text" class="regen-instruction" data-id="74" placeholder="Доп. инструкции для перегенерации">
+      </div>
+    </div>
+    <div class="card" data-id="75">
+      <div class="card-header">
+        <img src="./75.png" alt="Chair Pike Push-Up" class="thumb" loading="lazy" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect fill=%22%23eee%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2250%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23999%22 font-size=%2212%22>No image</text></svg>'">
+        <div class="meta">
+          <strong>Chair Pike Push-Up</strong> <span class="id">#75</span><br>
+          <span class="muscle">грудь</span>
+        </div>
+      </div>
+      <p class="description">Отжимание в положении «пик» с ногами на стуле, акцент на плечи.</p>
+      <details class="steps">
+        <summary>Шаги</summary>
+        <pre>1. Ноги на стул, таз максимально вверх.
+2. Тело — буква L.
+3. Опускайте макушку к полу.
+4. Выжмите себя вверх, с основной нагрузкой на плечи.</pre>
+      </details>
+      <div class="actions">
+        <label><input type="checkbox" class="regen-check" data-id="75"> Нужна перегенерация</label>
+        <input type="text" class="regen-instruction" data-id="75" placeholder="Доп. инструкции для перегенерации">
+      </div>
+    </div>
+    <div class="card" data-id="76">
+      <div class="card-header">
+        <img src="./76.png" alt="Grasshopper Push-Up" class="thumb" loading="lazy" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect fill=%22%23eee%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2250%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23999%22 font-size=%2212%22>No image</text></svg>'">
+        <div class="meta">
+          <strong>Grasshopper Push-Up</strong> <span class="id">#76</span><br>
+          <span class="muscle">грудь</span>
+        </div>
+      </div>
+      <p class="description">Отжимание с приведением колена к противоположному локтю в нижней точке.</p>
+      <details class="steps">
+        <summary>Шаги</summary>
+        <pre>1. В нижней точке отжимания пронесите колено под собой к другому локтю.
+2. Верните ногу.
+3. Поднимитесь.
+4. Повторите для другой ноги.</pre>
+      </details>
+      <div class="actions">
+        <label><input type="checkbox" class="regen-check" data-id="76"> Нужна перегенерация</label>
+        <input type="text" class="regen-instruction" data-id="76" placeholder="Доп. инструкции для перегенерации">
+      </div>
+    </div>
+    <div class="card" data-id="77">
+      <div class="card-header">
+        <img src="./77.png" alt="One Leg Push-Up" class="thumb" loading="lazy" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect fill=%22%23eee%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2250%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23999%22 font-size=%2212%22>No image</text></svg>'">
+        <div class="meta">
+          <strong>One Leg Push-Up</strong> <span class="id">#77</span><br>
+          <span class="muscle">грудь</span>
+        </div>
+      </div>
+      <p class="description">Отжимание с поднятой одной ногой для увеличения сложности.</p>
+      <details class="steps">
+        <summary>Шаги</summary>
+        <pre>1. Поднимите одну ногу.
+2. Выполняйте отжимания, не опуская ногу.
+3. Держите таз ровно.
+4. После ряда повторений смените ногу.</pre>
+      </details>
+      <div class="actions">
+        <label><input type="checkbox" class="regen-check" data-id="77"> Нужна перегенерация</label>
+        <input type="text" class="regen-instruction" data-id="77" placeholder="Доп. инструкции для перегенерации">
+      </div>
+    </div>
+    <div class="card" data-id="78">
+      <div class="card-header">
+        <img src="./78.png" alt="Staggered Push-Up" class="thumb" loading="lazy" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect fill=%22%23eee%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2250%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23999%22 font-size=%2212%22>No image</text></svg>'">
+        <div class="meta">
+          <strong>Staggered Push-Up</strong> <span class="id">#78</span><br>
+          <span class="muscle">грудь</span>
+        </div>
+      </div>
+      <p class="description">Отжимание с одной рукой впереди другой для смещения нагрузки.</p>
+      <details class="steps">
+        <summary>Шаги</summary>
+        <pre>1. Руки на разном уровне (одна выше, другая ниже).
+2. Выполните серию отжиманий.
+3. Поменяйте положение рук.
+4. Повторите серию.</pre>
+      </details>
+      <div class="actions">
+        <label><input type="checkbox" class="regen-check" data-id="78"> Нужна перегенерация</label>
+        <input type="text" class="regen-instruction" data-id="78" placeholder="Доп. инструкции для перегенерации">
+      </div>
+    </div>
+    <div class="card" data-id="49">
+      <div class="card-header">
+        <img src="./49.png" alt="Superman" class="thumb" loading="lazy" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect fill=%22%23eee%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2250%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23999%22 font-size=%2212%22>No image</text></svg>'">
+        <div class="meta">
+          <strong>Superman</strong> <span class="id">#49</span><br>
+          <span class="muscle">спина</span>
+        </div>
+      </div>
+      <p class="description">Одновременный подъем рук и ног лежа на животе.</p>
+      <details class="steps">
+        <summary>Шаги</summary>
+        <pre>1. Лягте на живот. Руки вытянуты перед собой.
+2. Поднимите прямые руки и ноги вверх.
+3. Задержитесь.
+4. Опуститесь.</pre>
+      </details>
+      <div class="actions">
+        <label><input type="checkbox" class="regen-check" data-id="49"> Нужна перегенерация</label>
+        <input type="text" class="regen-instruction" data-id="49" placeholder="Доп. инструкции для перегенерации">
+      </div>
+    </div>
+    <div class="card" data-id="50">
+      <div class="card-header">
+        <img src="./50.png" alt="Boat Pose" class="thumb" loading="lazy" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect fill=%22%23eee%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2250%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23999%22 font-size=%2212%22>No image</text></svg>'">
+        <div class="meta">
+          <strong>Boat Pose</strong> <span class="id">#50</span><br>
+          <span class="muscle">спина</span>
+        </div>
+      </div>
+      <p class="description">Удержание позы супермена с динамическим раскачиванием.</p>
+      <details class="steps">
+        <summary>Шаги</summary>
+        <pre>1. Поза Супермена (руки и ноги подняты).
+2. Начните раскачиваться на животе.
+3. Сохраняйте конечности прямыми.
+4. Не опускайте руки.</pre>
+      </details>
+      <div class="actions">
+        <label><input type="checkbox" class="regen-check" data-id="50"> Нужна перегенерация</label>
+        <input type="text" class="regen-instruction" data-id="50" placeholder="Доп. инструкции для перегенерации">
+      </div>
+    </div>
+    <div class="card" data-id="51">
+      <div class="card-header">
+        <img src="./51.png" alt="Hyperextension" class="thumb" loading="lazy" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect fill=%22%23eee%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2250%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23999%22 font-size=%2212%22>No image</text></svg>'">
+        <div class="meta">
+          <strong>Hyperextension</strong> <span class="id">#51</span><br>
+          <span class="muscle">спина</span>
+        </div>
+      </div>
+      <p class="description">Подъем только верхней части корпуса лежа на животе.</p>
+      <details class="steps">
+        <summary>Шаги</summary>
+        <pre>1. Лягте на живот, ноги прижаты к полу.
+2. Поднимите грудь максимально высоко.
+3. Плавно опуститесь.
+4. Руки за головой или у груди.</pre>
+      </details>
+      <div class="actions">
+        <label><input type="checkbox" class="regen-check" data-id="51"> Нужна перегенерация</label>
+        <input type="text" class="regen-instruction" data-id="51" placeholder="Доп. инструкции для перегенерации">
+      </div>
+    </div>
+    <div class="card" data-id="53">
+      <div class="card-header">
+        <img src="./53.png" alt="W Raise" class="thumb" loading="lazy" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect fill=%22%23eee%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2250%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23999%22 font-size=%2212%22>No image</text></svg>'">
+        <div class="meta">
+          <strong>W Raise</strong> <span class="id">#53</span><br>
+          <span class="muscle">спина</span>
+        </div>
+      </div>
+      <p class="description">Сведение лопаток лежа, руки образуют букву W.</p>
+      <details class="steps">
+        <summary>Шаги</summary>
+        <pre>1. Лягте на живот, руки согнуты (буква W).
+2. Поднимите локти и грудь.
+3. Максимально сведите лопатки.
+4. Опуститесь.</pre>
+      </details>
+      <div class="actions">
+        <label><input type="checkbox" class="regen-check" data-id="53"> Нужна перегенерация</label>
+        <input type="text" class="regen-instruction" data-id="53" placeholder="Доп. инструкции для перегенерации">
+      </div>
+    </div>
+    <div class="card" data-id="54">
+      <div class="card-header">
+        <img src="./54.png" alt="Reverse Bridge" class="thumb" loading="lazy" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect fill=%22%23eee%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2250%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23999%22 font-size=%2212%22>No image</text></svg>'">
+        <div class="meta">
+          <strong>Reverse Bridge</strong> <span class="id">#54</span><br>
+          <span class="muscle">спина</span>
+        </div>
+      </div>
+      <p class="description">Упор сзади на прямых руках, подъем таза до прямой линии.</p>
+      <details class="steps">
+        <summary>Шаги</summary>
+        <pre>1. Сидя, руки сзади, ноги согнуты.
+2. Поднимите таз до линии стола.
+3. Напрягите ягодицы и спину.
+4. Опуститесь.</pre>
+      </details>
+      <div class="actions">
+        <label><input type="checkbox" class="regen-check" data-id="54"> Нужна перегенерация</label>
+        <input type="text" class="regen-instruction" data-id="54" placeholder="Доп. инструкции для перегенерации">
+      </div>
+    </div>
+    <div class="card" data-id="55">
+      <div class="card-header">
+        <img src="./55.png" alt="Table Pull-Up" class="thumb" loading="lazy" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect fill=%22%23eee%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2250%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23999%22 font-size=%2212%22>No image</text></svg>'">
+        <div class="meta">
+          <strong>Table Pull-Up</strong> <span class="id">#55</span><br>
+          <span class="muscle">спина</span>
+        </div>
+      </div>
+      <p class="description">Горизонтальные подтягивания, используя край стола.</p>
+      <details class="steps">
+        <summary>Шаги</summary>
+        <pre>1. Лягте под стол.
+2. Схватитесь за край.
+3. Подтяните грудь к столешнице.
+4. Медленно опуститесь.</pre>
+      </details>
+      <div class="actions">
+        <label><input type="checkbox" class="regen-check" data-id="55"> Нужна перегенерация</label>
+        <input type="text" class="regen-instruction" data-id="55" placeholder="Доп. инструкции для перегенерации">
+      </div>
+    </div>
+    <div class="card" data-id="56">
+      <div class="card-header">
+        <img src="./56.png" alt="Snow Angel" class="thumb" loading="lazy" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect fill=%22%23eee%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2250%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23999%22 font-size=%2212%22>No image</text></svg>'">
+        <div class="meta">
+          <strong>Snow Angel</strong> <span class="id">#56</span><br>
+          <span class="muscle">спина</span>
+        </div>
+      </div>
+      <p class="description">Движение прямыми руками вдоль пола лежа на животе.</p>
+      <details class="steps">
+        <summary>Шаги</summary>
+        <pre>1. Лягте на живот, руки на весу.
+2. Опишите ими полукруг через стороны до головы.
+3. Верните к бедрам.
+4. Не касайтесь руками пола.</pre>
+      </details>
+      <div class="actions">
+        <label><input type="checkbox" class="regen-check" data-id="56"> Нужна перегенерация</label>
+        <input type="text" class="regen-instruction" data-id="56" placeholder="Доп. инструкции для перегенерации">
+      </div>
+    </div>
+    <div class="card" data-id="57">
+      <div class="card-header">
+        <img src="./57.png" alt="Y Raise" class="thumb" loading="lazy" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect fill=%22%23eee%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2250%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23999%22 font-size=%2212%22>No image</text></svg>'">
+        <div class="meta">
+          <strong>Y Raise</strong> <span class="id">#57</span><br>
+          <span class="muscle">спина</span>
+        </div>
+      </div>
+      <p class="description">Подъем рук вперед-вверх в форме буквы Y лежа на животе.</p>
+      <details class="steps">
+        <summary>Шаги</summary>
+        <pre>1. Лягте на живот, руки в форме Y.
+2. Поднимите прямые руки вверх.
+3. Большие пальцы в потолок.
+4. Опуститесь.</pre>
+      </details>
+      <div class="actions">
+        <label><input type="checkbox" class="regen-check" data-id="57"> Нужна перегенерация</label>
+        <input type="text" class="regen-instruction" data-id="57" placeholder="Доп. инструкции для перегенерации">
+      </div>
+    </div>
+    <div class="card" data-id="58">
+      <div class="card-header">
+        <img src="./58.png" alt="Bird Dog" class="thumb" loading="lazy" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect fill=%22%23eee%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2250%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23999%22 font-size=%2212%22>No image</text></svg>'">
+        <div class="meta">
+          <strong>Bird Dog</strong> <span class="id">#58</span><br>
+          <span class="muscle">спина</span>
+        </div>
+      </div>
+      <p class="description">Подъем противоположных руки и ноги из планки.</p>
+      <details class="steps">
+        <summary>Шаги</summary>
+        <pre>1. Поза стола или планка.
+2. Поднимите правую руку и левую ногу.
+3. Держите баланс и ровную спину.
+4. Поменяйте стороны.</pre>
+      </details>
+      <div class="actions">
+        <label><input type="checkbox" class="regen-check" data-id="58"> Нужна перегенерация</label>
+        <input type="text" class="regen-instruction" data-id="58" placeholder="Доп. инструкции для перегенерации">
+      </div>
+    </div>
+    <div class="card" data-id="60">
+      <div class="card-header">
+        <img src="./60.png" alt="Back Widow" class="thumb" loading="lazy" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect fill=%22%23eee%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2250%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23999%22 font-size=%2212%22>No image</text></svg>'">
+        <div class="meta">
+          <strong>Back Widow</strong> <span class="id">#60</span><br>
+          <span class="muscle">спина</span>
+        </div>
+      </div>
+      <p class="description">Подъем грудной клетки лежа на спине с опорой на локти.</p>
+      <details class="steps">
+        <summary>Шаги</summary>
+        <pre>1. Лежа на спине, локти в стороны упираются в пол.
+2. Давите локтями, поднимая грудь вверх.
+3. Спина отрывается от пола.
+4. Опуститесь.</pre>
+      </details>
+      <div class="actions">
+        <label><input type="checkbox" class="regen-check" data-id="60"> Нужна перегенерация</label>
+        <input type="text" class="regen-instruction" data-id="60" placeholder="Доп. инструкции для перегенерации">
+      </div>
+    </div>
+    <div class="card" data-id="89">
+      <div class="card-header">
+        <img src="./89.png" alt="Pike Push-Up" class="thumb" loading="lazy" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect fill=%22%23eee%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2250%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23999%22 font-size=%2212%22>No image</text></svg>'">
+        <div class="meta">
+          <strong>Pike Push-Up</strong> <span class="id">#89</span><br>
+          <span class="muscle">плечи</span>
+        </div>
+      </div>
+      <p class="description">Отжимания уголком, акцентирующие максимальную нагрузку на передние и средние дельты.</p>
+      <details class="steps">
+        <summary>Шаги</summary>
+        <pre>1. Примите упор лежа, затем подойдите ногами к рукам, поднимая таз высоко вверх.
+2. Тело должно образовывать перевернутую букву V.
+3. Сгибайте руки, опуская макушку головы к полу чуть впереди ладоней.
+4. Мощно выжмите себя вверх в исходное положение.</pre>
+      </details>
+      <div class="actions">
+        <label><input type="checkbox" class="regen-check" data-id="89"> Нужна перегенерация</label>
+        <input type="text" class="regen-instruction" data-id="89" placeholder="Доп. инструкции для перегенерации">
+      </div>
+    </div>
+    <div class="card" data-id="90">
+      <div class="card-header">
+        <img src="./90.png" alt="Wall Walk" class="thumb" loading="lazy" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect fill=%22%23eee%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2250%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23999%22 font-size=%2212%22>No image</text></svg>'">
+        <div class="meta">
+          <strong>Wall Walk</strong> <span class="id">#90</span><br>
+          <span class="muscle">плечи</span>
+        </div>
+      </div>
+      <p class="description">Зашагивания ногами на стену из упора лежа до стойки на руках и обратно.</p>
+      <details class="steps">
+        <summary>Шаги</summary>
+        <pre>1. Примите упор лежа, пятки упираются в стену.
+2. Начните переступать ногами вверх по стене, одновременно &quot;шагая&quot; руками к ней.
+3. Подойдите руками максимально близко к стене (в идеале — грудью).
+4. Контролируемо спуститесь руками и ногами обратно в упор лежа.</pre>
+      </details>
+      <div class="actions">
+        <label><input type="checkbox" class="regen-check" data-id="90"> Нужна перегенерация</label>
+        <input type="text" class="regen-instruction" data-id="90" placeholder="Доп. инструкции для перегенерации">
+      </div>
+    </div>
+    <div class="card" data-id="91">
+      <div class="card-header">
+        <img src="./91.png" alt="Shoulder Taps" class="thumb" loading="lazy" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect fill=%22%23eee%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2250%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23999%22 font-size=%2212%22>No image</text></svg>'">
+        <div class="meta">
+          <strong>Shoulder Taps</strong> <span class="id">#91</span><br>
+          <span class="muscle">плечи</span>
+        </div>
+      </div>
+      <p class="description">Поочередное касание плеч руками в планке для развития стабильности плечевого пояса.</p>
+      <details class="steps">
+        <summary>Шаги</summary>
+        <pre>1. Встаньте в планку на прямых руках, ноги поставьте чуть шире плеч для баланса.
+2. Оторвите правую руку от пола и коснитесь левого плеча.
+3. Верните руку на пол и коснитесь правого плеча левой рукой.
+4. Чередуйте стороны, стараясь не раскачивать таз.</pre>
+      </details>
+      <div class="actions">
+        <label><input type="checkbox" class="regen-check" data-id="91"> Нужна перегенерация</label>
+        <input type="text" class="regen-instruction" data-id="91" placeholder="Доп. инструкции для перегенерации">
+      </div>
+    </div>
+    <div class="card" data-id="92">
+      <div class="card-header">
+        <img src="./92.png" alt="Elevated Shoulder Taps" class="thumb" loading="lazy" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect fill=%22%23eee%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2250%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23999%22 font-size=%2212%22>No image</text></svg>'">
+        <div class="meta">
+          <strong>Elevated Shoulder Taps</strong> <span class="id">#92</span><br>
+          <span class="muscle">плечи</span>
+        </div>
+      </div>
+      <p class="description">Касания плеч в упоре лежа с ногами на стуле.</p>
+      <details class="steps">
+        <summary>Шаги</summary>
+        <pre>1. Примите упор лежа, поставив стопы на устойчивый стул.
+2. Перенесите вес на левую руку, а правой коснитесь левого плеча.
+3. Плавно верните руку и поменяйте сторону.
+4. Держите корпус напряженным, не прогибая поясницу.</pre>
+      </details>
+      <div class="actions">
+        <label><input type="checkbox" class="regen-check" data-id="92"> Нужна перегенерация</label>
+        <input type="text" class="regen-instruction" data-id="92" placeholder="Доп. инструкции для перегенерации">
+      </div>
+    </div>
+    <div class="card" data-id="93">
+      <div class="card-header">
+        <img src="./93.png" alt="Wall Handstand Hold" class="thumb" loading="lazy" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect fill=%22%23eee%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2250%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23999%22 font-size=%2212%22>No image</text></svg>'">
+        <div class="meta">
+          <strong>Wall Handstand Hold</strong> <span class="id">#93</span><br>
+          <span class="muscle">плечи</span>
+        </div>
+      </div>
+      <p class="description">Статическое удержание стойки на руках у стены.</p>
+      <details class="steps">
+        <summary>Шаги</summary>
+        <pre>1. Поставьте руки на пол в 15-20 см от стены.
+2. Закиньте ноги на стену махом или &quot;зашагайте&quot; по ней вверх.
+3. Вытянитесь в прямую линию, опираясь только на руки (пятки касаются стены).
+4. Удерживайте положение, активно давя ладонями в пол и напрягая плечи.</pre>
+      </details>
+      <div class="actions">
+        <label><input type="checkbox" class="regen-check" data-id="93"> Нужна перегенерация</label>
+        <input type="text" class="regen-instruction" data-id="93" placeholder="Доп. инструкции для перегенерации">
+      </div>
+    </div>
+    <div class="card" data-id="94">
+      <div class="card-header">
+        <img src="./94.png" alt="Wall Handstand Push-Up" class="thumb" loading="lazy" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect fill=%22%23eee%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2250%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23999%22 font-size=%2212%22>No image</text></svg>'">
+        <div class="meta">
+          <strong>Wall Handstand Push-Up</strong> <span class="id">#94</span><br>
+          <span class="muscle">плечи</span>
+        </div>
+      </div>
+      <p class="description">Отжимания в вертикальной стойке на руках с опорой на стену.</p>
+      <details class="steps">
+        <summary>Шаги</summary>
+        <pre>1. Встаньте в стойку на руках, опираясь пятками о стену.
+2. Медленно согните локти, опуская голову до легкого касания пола.
+3. Мощным усилием плеч и трицепсов выжмите себя вверх.
+4. Сохраняйте тело ровным, избегая сильного прогиба в спине.</pre>
+      </details>
+      <div class="actions">
+        <label><input type="checkbox" class="regen-check" data-id="94"> Нужна перегенерация</label>
+        <input type="text" class="regen-instruction" data-id="94" placeholder="Доп. инструкции для перегенерации">
+      </div>
+    </div>
+    <div class="card" data-id="95">
+      <div class="card-header">
+        <img src="./95.png" alt="Dolphin Push-Up" class="thumb" loading="lazy" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect fill=%22%23eee%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2250%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23999%22 font-size=%2212%22>No image</text></svg>'">
+        <div class="meta">
+          <strong>Dolphin Push-Up</strong> <span class="id">#95</span><br>
+          <span class="muscle">плечи</span>
+        </div>
+      </div>
+      <p class="description">Динамичный переход из планки на предплечьях в позу дельфина с поднятым тазом.</p>
+      <details class="steps">
+        <summary>Шаги</summary>
+        <pre>1. Встаньте в классическую планку на локтях.
+2. На выдохе поднимите таз максимально вверх, слегка шагая ногами вперед.
+3. Сделайте паузу, чувствуя напряжение в плечах.
+4. Плавно вернитесь в исходную планку на предплечьях.</pre>
+      </details>
+      <div class="actions">
+        <label><input type="checkbox" class="regen-check" data-id="95"> Нужна перегенерация</label>
+        <input type="text" class="regen-instruction" data-id="95" placeholder="Доп. инструкции для перегенерации">
+      </div>
+    </div>
+    <div class="card" data-id="96">
+      <div class="card-header">
+        <img src="./96.png" alt="Pike Toe Touch" class="thumb" loading="lazy" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect fill=%22%23eee%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2250%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23999%22 font-size=%2212%22>No image</text></svg>'">
+        <div class="meta">
+          <strong>Pike Toe Touch</strong> <span class="id">#96</span><br>
+          <span class="muscle">плечи</span>
+        </div>
+      </div>
+      <p class="description">Переход из планки в позицию &quot;горки&quot; с касанием рукой противоположной стопы.</p>
+      <details class="steps">
+        <summary>Шаги</summary>
+        <pre>1. Встаньте в планку на прямых руках.
+2. На выдохе поднимите таз вверх (поза горки) и потянитесь правой рукой к левому носку.
+3. Вернитесь в прямую планку.
+4. Повторите движение левой рукой к правому носку.</pre>
+      </details>
+      <div class="actions">
+        <label><input type="checkbox" class="regen-check" data-id="96"> Нужна перегенерация</label>
+        <input type="text" class="regen-instruction" data-id="96" placeholder="Доп. инструкции для перегенерации">
+      </div>
+    </div>
+    <div class="card" data-id="97">
+      <div class="card-header">
+        <img src="./97.png" alt="Table Face Pull" class="thumb" loading="lazy" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect fill=%22%23eee%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2250%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23999%22 font-size=%2212%22>No image</text></svg>'">
+        <div class="meta">
+          <strong>Table Face Pull</strong> <span class="id">#97</span><br>
+          <span class="muscle">плечи</span>
+        </div>
+      </div>
+      <p class="description">Горизонтальная тяга под столом с акцентом на заднюю дельту.</p>
+      <details class="steps">
+        <summary>Шаги</summary>
+        <pre>1. Лягте под крепкий стол, возьмитесь за край столешницы хватом шире плеч.
+2. Тело вытянуто в прямую линию, пятки упираются в пол.
+3. Подтяните тело вверх, направляя лицо к краю стола и разводя локти строго в стороны.
+4. Медленно и подконтрольно опуститесь вниз.</pre>
+      </details>
+      <div class="actions">
+        <label><input type="checkbox" class="regen-check" data-id="97"> Нужна перегенерация</label>
+        <input type="text" class="regen-instruction" data-id="97" placeholder="Доп. инструкции для перегенерации">
+      </div>
+    </div>
+    <div class="card" data-id="99">
+      <div class="card-header">
+        <img src="./99.png" alt="Plank Arm Reaches" class="thumb" loading="lazy" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect fill=%22%23eee%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2250%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23999%22 font-size=%2212%22>No image</text></svg>'">
+        <div class="meta">
+          <strong>Plank Arm Reaches</strong> <span class="id">#99</span><br>
+          <span class="muscle">плечи</span>
+        </div>
+      </div>
+      <p class="description">Поочередное вытягивание рук вперед из положения планки.</p>
+      <details class="steps">
+        <summary>Шаги</summary>
+        <pre>1. Примите упор лежа на прямых руках.
+2. Оторвите одну руку от пола и вытяните ее прямо перед собой параллельно полу.
+3. Удержите напряжение на секунду и верните руку обратно.
+4. Повторите другой рукой, не допуская скручивания корпуса.</pre>
+      </details>
+      <div class="actions">
+        <label><input type="checkbox" class="regen-check" data-id="99"> Нужна перегенерация</label>
+        <input type="text" class="regen-instruction" data-id="99" placeholder="Доп. инструкции для перегенерации">
+      </div>
+    </div>
+    <div class="card" data-id="100">
+      <div class="card-header">
+        <img src="./100.png" alt="Crab Reach" class="thumb" loading="lazy" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect fill=%22%23eee%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2250%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23999%22 font-size=%2212%22>No image</text></svg>'">
+        <div class="meta">
+          <strong>Crab Reach</strong> <span class="id">#100</span><br>
+          <span class="muscle">плечи</span>
+        </div>
+      </div>
+      <p class="description">Подъем таза из положения сидя с вытягиванием одной руки за голову.</p>
+      <details class="steps">
+        <summary>Шаги</summary>
+        <pre>1. Сядьте на пол, упритесь руками сзади, ноги согнуты (поза краба).
+2. Оторвите таз от пола.
+3. Мощно вытолкните таз вверх, отрывая одну руку и вытягивая ее по диагонали назад за голову.
+4. Вернитесь в позу краба и смените сторону.</pre>
+      </details>
+      <div class="actions">
+        <label><input type="checkbox" class="regen-check" data-id="100"> Нужна перегенерация</label>
+        <input type="text" class="regen-instruction" data-id="100" placeholder="Доп. инструкции для перегенерации">
+      </div>
+    </div>
+    <div class="card" data-id="101">
+      <div class="card-header">
+        <img src="./101.png" alt="Loaded Beast to Plank" class="thumb" loading="lazy" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect fill=%22%23eee%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2250%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23999%22 font-size=%2212%22>No image</text></svg>'">
+        <div class="meta">
+          <strong>Loaded Beast to Plank</strong> <span class="id">#101</span><br>
+          <span class="muscle">плечи</span>
+        </div>
+      </div>
+      <p class="description">Взрывное движение из сгруппированной позиции в планку, нагружающее дельты.</p>
+      <details class="steps">
+        <summary>Шаги</summary>
+        <pre>1. Из упора лежа согните колени и отведите таз назад к пяткам (колени не касаются пола).
+2. Руки остаются вытянутыми далеко вперед.
+3. Резко вытолкните тело вперед, возвращаясь в прямую планку.
+4. Погасите инерцию за счет силы плеч и кора, затем повторите.</pre>
+      </details>
+      <div class="actions">
+        <label><input type="checkbox" class="regen-check" data-id="101"> Нужна перегенерация</label>
+        <input type="text" class="regen-instruction" data-id="101" placeholder="Доп. инструкции для перегенерации">
+      </div>
+    </div>
+    <div class="card" data-id="102">
+      <div class="card-header">
+        <img src="./102.png" alt="Crab Walk" class="thumb" loading="lazy" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect fill=%22%23eee%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2250%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23999%22 font-size=%2212%22>No image</text></svg>'">
+        <div class="meta">
+          <strong>Crab Walk</strong> <span class="id">#102</span><br>
+          <span class="muscle">плечи</span>
+        </div>
+      </div>
+      <p class="description">Ходьба &quot;крабиком&quot; лицом вверх, активно задействующая передние дельты.</p>
+      <details class="steps">
+        <summary>Шаги</summary>
+        <pre>1. Сядьте на пол, согните ноги, упритесь руками сзади себя.
+2. Оторвите таз от пола.
+3. Перемещайтесь, синхронно переставляя разноименные руку и ногу.
+4. Держите таз на весу на протяжении всего подхода.</pre>
+      </details>
+      <div class="actions">
+        <label><input type="checkbox" class="regen-check" data-id="102"> Нужна перегенерация</label>
+        <input type="text" class="regen-instruction" data-id="102" placeholder="Доп. инструкции для перегенерации">
+      </div>
+    </div>
+    <div class="card" data-id="103">
+      <div class="card-header">
+        <img src="./103.png" alt="Plank Push-Away" class="thumb" loading="lazy" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect fill=%22%23eee%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2250%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23999%22 font-size=%2212%22>No image</text></svg>'">
+        <div class="meta">
+          <strong>Plank Push-Away</strong> <span class="id">#103</span><br>
+          <span class="muscle">плечи</span>
+        </div>
+      </div>
+      <p class="description">Отталкивание корпуса назад из планки на локтях для проработки плеч.</p>
+      <details class="steps">
+        <summary>Шаги</summary>
+        <pre>1. Встаньте в планку на предплечьях.
+2. С помощью усилия плеч толкните тело назад, так чтобы плечи оказались далеко позади локтей.
+3. Удерживайте позицию 2-3 секунды, чувствуя напряжение.
+4. Вернитесь в классическую планку (плечи ровно над локтями).</pre>
+      </details>
+      <div class="actions">
+        <label><input type="checkbox" class="regen-check" data-id="103"> Нужна перегенерация</label>
+        <input type="text" class="regen-instruction" data-id="103" placeholder="Доп. инструкции для перегенерации">
+      </div>
+    </div></div>
+  <script>
+    const out = document.getElementById('out');
+    function getChecked() {
+      const ids = [];
+      const hasInstructions = {};
+      document.querySelectorAll('.regen-check:checked').forEach(cb => {
+        const id = cb.dataset.id;
+        if (!id) return;
+        ids.push(id);
+        const input = document.querySelector('.regen-instruction[data-id="' + id + '"]');
+        const text = input && input.value ? input.value.trim() : '';
+        if (text) hasInstructions[id] = text;
+      });
+      return { ids, hasInstructions };
+    }
+    document.getElementById('export-ids').onclick = function() {
+      const { ids } = getChecked();
+      const s = ids.join(',');
+      navigator.clipboard.writeText(s).then(() => { out.textContent = 'Скопировано: ' + s; setTimeout(() => out.textContent = '', 3000); });
+    };
+    document.getElementById('download-instructions').onclick = function() {
+      const { ids, hasInstructions } = getChecked();
+      const obj = {};
+      ids.forEach(id => { obj[id] = hasInstructions[id] || ''; });
+      const a = document.createElement('a');
+      a.href = 'data:application/json,' + encodeURIComponent(JSON.stringify(obj, null, 2));
+      a.download = 'regen-instructions.json';
+      a.click();
+      out.textContent = 'Скачан regen-instructions.json';
+      setTimeout(() => out.textContent = '', 3000);
+    };
+    document.getElementById('regen-command').onclick = function() {
+      const { ids, hasInstructions } = getChecked();
+      if (ids.length === 0) {
+        out.textContent = 'Отметьте упражнения для перегенерации';
+        setTimeout(() => out.textContent = '', 3000);
+        return;
+      }
+      let cmd = 'npm run generate-exercise-images -- --regen ' + ids.join(',');
+      const hasAnyInstructions = Object.values(hasInstructions).some(Boolean);
+      if (hasAnyInstructions) cmd += ' --instructions regen-instructions.json';
+      navigator.clipboard.writeText(cmd).then(() => {
+        out.textContent = 'Команда скопирована. В терминале из корня проекта вставьте и выполните.';
+        if (hasAnyInstructions) out.textContent += ' Сначала скачайте instructions.json и сохраните как regen-instructions.json в корне проекта.';
+        setTimeout(() => out.textContent = '', 8000);
+      });
+    };
+  </script>
+</body>
+</html>

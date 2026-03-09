@@ -3,59 +3,34 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { ScreenSettings } from '@/components/ScreenSettings';
 import { StorageService } from '@/services/storageService';
-import { TTSService } from '@/services/ttsService';
 import { createSettings } from '../helpers';
 import { MuscleGroup } from '@/types';
 
-vi.mock('@/services/storageService', () => ({
-  StorageService: {
-    getSettings: vi.fn(),
-    saveSettings: vi.fn(),
-    getLastLog: vi.fn(),
-    clearLastLog: vi.fn(),
-  },
-}));
-
-const mockEnVoice = {
-  voiceURI: 'en-us-1',
-  name: 'US English',
-  lang: 'en-US',
-  default: true,
-  localService: true,
-} as SpeechSynthesisVoice;
-
-const mockEnGbVoice = {
-  voiceURI: 'en-gb-1',
-  name: 'UK English',
-  lang: 'en-GB',
-  default: false,
-  localService: true,
-} as SpeechSynthesisVoice;
-
-vi.mock('@/services/ttsService', () => ({
-  TTSService: {
-    getVoices: vi.fn(() => [mockEnVoice, mockEnGbVoice]),
-    getDefaultVoice: vi.fn(() => mockEnVoice),
-  },
-}));
+const testVoices: SpeechSynthesisVoice[] = [
+  { voiceURI: 'en-us-1', name: 'US English', lang: 'en-US', default: true, localService: true },
+  { voiceURI: 'en-gb-1', name: 'UK English', lang: 'en-GB', default: false, localService: true },
+] as SpeechSynthesisVoice[];
 
 describe('ScreenSettings', () => {
   const onBack = vi.fn();
 
   beforeEach(() => {
-    vi.mocked(StorageService.getSettings).mockReturnValue(createSettings());
-    vi.mocked(StorageService.getLastLog).mockReturnValue(null);
+    localStorage.clear();
+    (window.speechSynthesis.getVoices as ReturnType<typeof vi.fn>).mockReturnValue(testVoices);
+    StorageService.saveSettings(createSettings());
+    StorageService.clearHistory();
     onBack.mockClear();
   });
 
   it('отображает текущие значения настроек из StorageService', () => {
-    const settings = createSettings({
-      exerciseDuration: 45,
-      breakDuration: 7,
-      exercisesPerCycle: 8,
-      cycleCount: 3,
-    });
-    vi.mocked(StorageService.getSettings).mockReturnValue(settings);
+    StorageService.saveSettings(
+      createSettings({
+        exerciseDuration: 45,
+        breakDuration: 7,
+        exercisesPerCycle: 8,
+        cycleCount: 3,
+      })
+    );
     render(<ScreenSettings onBack={onBack} />);
 
     expect(screen.getByDisplayValue('45')).toBeInTheDocument();
@@ -67,17 +42,14 @@ describe('ScreenSettings', () => {
 
   it('изменение breakDuration сохраняет через StorageService.saveSettings, минимум 3', async () => {
     const user = userEvent.setup();
-    const settings = createSettings({ breakDuration: 5 });
-    vi.mocked(StorageService.getSettings).mockReturnValue(settings);
+    StorageService.saveSettings(createSettings({ breakDuration: 5 }));
     render(<ScreenSettings onBack={onBack} />);
 
     const breakInput = screen.getByDisplayValue('5');
     fireEvent.change(breakInput, { target: { value: '2' } });
     await user.click(screen.getByRole('button', { name: /сохранить/i }));
 
-    expect(StorageService.saveSettings).toHaveBeenCalledWith(
-      expect.objectContaining({ breakDuration: 3 })
-    );
+    expect(StorageService.getSettings().breakDuration).toBe(3);
     expect(onBack).toHaveBeenCalled();
   });
 
@@ -91,25 +63,26 @@ describe('ScreenSettings', () => {
     expect(options.length).toBeGreaterThanOrEqual(2);
   });
 
-  it('кнопка «Очистить данные последней тренировки» вызывает clearLastLog', async () => {
+  it('кнопка «Очистить данные последней тренировки» очищает последний лог', async () => {
     const user = userEvent.setup();
-    vi.mocked(StorageService.getLastLog).mockReturnValue({
+    StorageService.addLog({
       date: new Date().toISOString(),
       muscleGroupsUsed: [MuscleGroup.ARMS, MuscleGroup.LEGS],
     });
+    expect(StorageService.getLastLog()).not.toBeNull();
     render(<ScreenSettings onBack={onBack} />);
 
-    expect(screen.getByText(/ARMS|руки|LEGS|ноги/)).toBeInTheDocument();
+    expect(screen.getByText(/руки|ноги/)).toBeInTheDocument();
     await user.click(screen.getByRole('button', { name: /очистить данные последней тренировки/i }));
 
-    expect(StorageService.clearLastLog).toHaveBeenCalled();
+    expect(StorageService.getLastLog()).toBeNull();
   });
 
   it('при отсутствии lastLog показывает сообщение и нет кнопки очистки', () => {
-    vi.mocked(StorageService.getLastLog).mockReturnValue(null);
+    StorageService.clearHistory();
     render(<ScreenSettings onBack={onBack} />);
 
-    expect(screen.getByText(/нет данных о завершённых тренировках/i)).toBeInTheDocument();
+    expect(screen.getByText(/нет данных о завершённых тренировка/i)).toBeInTheDocument();
     expect(screen.queryByRole('button', { name: /очистить данные последней тренировки/i })).not.toBeInTheDocument();
   });
 });

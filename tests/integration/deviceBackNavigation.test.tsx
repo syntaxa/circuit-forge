@@ -108,11 +108,13 @@ describe('deviceBackNavigation (integration)', () => {
     await waitFor(() => expect(startBtn).not.toBeDisabled());
     await user.click(startBtn);
 
-    expect(screen.getByText(/ГОТОВЬСЯ/i)).toBeInTheDocument();
+    await waitFor(() => expect(screen.getByText(/ГОТОВЬСЯ/i)).toBeInTheDocument(), { timeout: 5000 });
+    await act(async () => {
+      await new Promise((r) => setTimeout(r, 0));
+    });
 
-    const state: HistoryState = { screen: AppScreen.SETUP, exerciseDetail: null };
     await act(() => {
-      window.dispatchEvent(new PopStateEvent('popstate', { state }));
+      history.back();
     });
 
     expect(confirmFn).toHaveBeenCalledWith('Прервать тренировку?');
@@ -130,14 +132,18 @@ describe('deviceBackNavigation (integration)', () => {
     await waitFor(() => expect(startBtn).not.toBeDisabled());
     await user.click(startBtn);
 
-    expect(screen.getByText(/ГОТОВЬСЯ/i)).toBeInTheDocument();
-
-    const state: HistoryState = { screen: AppScreen.SETUP, exerciseDetail: null };
-    await act(() => {
-      window.dispatchEvent(new PopStateEvent('popstate', { state }));
+    await waitFor(() => expect(screen.getByText(/ГОТОВЬСЯ/i)).toBeInTheDocument(), { timeout: 5000 });
+    await act(async () => {
+      await new Promise((r) => setTimeout(r, 0));
     });
 
-    expect(screen.getByText(/ГОТОВЬСЯ/i)).toBeInTheDocument();
+    await act(() => {
+      history.back();
+    });
+
+    await waitFor(() => {
+      expect(screen.getByText(/ГОТОВЬСЯ/i)).toBeInTheDocument();
+    });
     expect(screen.getByRole('button', { name: /Отмена/i })).toBeInTheDocument();
   });
 });

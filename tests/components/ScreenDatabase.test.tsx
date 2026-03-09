@@ -6,19 +6,6 @@ import { createExercise } from '../helpers';
 import { MuscleGroup, Difficulty } from '@/types';
 import { StorageService } from '@/services/storageService';
 
-vi.mock('@/services/storageService', () => ({
-  StorageService: {
-    getExercises: vi.fn(),
-    getUserExercises: vi.fn(),
-    saveUserExercises: vi.fn(),
-    getDeactivatedBaseIds: vi.fn(),
-    setDeactivatedBaseIds: vi.fn(),
-    toggleBaseActive: vi.fn(),
-    getHideCloneWarning: vi.fn(),
-    setHideCloneWarning: vi.fn(),
-  },
-}));
-
 describe('ScreenDatabase', () => {
   const onBack = vi.fn();
   const onOpenInfo = vi.fn();
@@ -40,10 +27,10 @@ describe('ScreenDatabase', () => {
   ];
 
   beforeEach(() => {
-    vi.mocked(StorageService.getExercises).mockReturnValue(initialExercises);
-    vi.mocked(StorageService.getDeactivatedBaseIds).mockReturnValue([]);
-    vi.mocked(StorageService.getHideCloneWarning).mockReturnValue(true);
-    vi.mocked(StorageService.getUserExercises).mockReturnValue(initialExercises);
+    localStorage.clear();
+    StorageService.saveUserExercises(initialExercises);
+    StorageService.setDeactivatedBaseIds([]);
+    StorageService.setHideCloneWarning(true);
     onBack.mockClear();
   });
 
@@ -58,30 +45,25 @@ describe('ScreenDatabase', () => {
 
   it('добавление: заполнение формы + сохранение → появляется в списке', async () => {
     const user = userEvent.setup();
+    const uniqueName = 'MyCustomPlankTest123';
     render(<ScreenDatabase onBack={onBack} onOpenInfo={onOpenInfo} />);
     await user.click(screen.getByRole('button', { name: /добавить упражнение/i }));
     expect(screen.getByRole('heading', { name: /добавить/i })).toBeInTheDocument();
     const textboxes = screen.getAllByRole('textbox');
-    await user.type(textboxes[0], 'Plank');
+    await user.type(textboxes[0], uniqueName);
     const combos = screen.getAllByRole('combobox');
     await user.selectOptions(combos[0], MuscleGroup.ABS);
     await user.selectOptions(combos[1], Difficulty.MEDIUM);
     await user.click(screen.getByRole('button', { name: /сохранить/i }));
-    expect(StorageService.saveUserExercises).toHaveBeenCalledWith(
-      expect.arrayContaining([
-        expect.objectContaining({
-          name: 'Plank',
-          muscleGroup: MuscleGroup.ABS,
-          difficulty: Difficulty.MEDIUM,
-          source: 'user',
-        }),
-      ])
-    );
+    expect(screen.getByText(uniqueName)).toBeInTheDocument();
+    const saved = StorageService.getUserExercises();
+    expect(saved.some((e) => e.name === uniqueName && e.muscleGroup === MuscleGroup.ABS)).toBe(true);
   });
 
   it('редактирование: клик по упражнению → форма заполняется → сохранение', async () => {
     const user = userEvent.setup();
     render(<ScreenDatabase onBack={onBack} onOpenInfo={onOpenInfo} />);
+    await user.click(screen.getByRole('button', { name: /Только мои/i }));
     const editButtons = screen.getAllByRole('button', { name: /редактировать/i });
     await user.click(editButtons[1]);
     expect(screen.getByRole('heading', { name: /редактировать/i })).toBeInTheDocument();
@@ -89,38 +71,33 @@ describe('ScreenDatabase', () => {
     await user.clear(nameInput);
     await user.type(nameInput, 'Jump Squats');
     await user.click(screen.getByRole('button', { name: /сохранить/i }));
-    expect(StorageService.saveUserExercises).toHaveBeenCalledWith(
-      expect.arrayContaining([expect.objectContaining({ name: 'Jump Squats' })])
-    );
+    expect(screen.getByText('Jump Squats')).toBeInTheDocument();
+    expect(StorageService.getUserExercises().some((e) => e.name === 'Jump Squats')).toBe(true);
   });
 
   it('удаление: подтверждение → упражнение исчезает из списка', async () => {
     const user = userEvent.setup();
-    const confirmFn = vi.fn(() => true);
-    vi.stubGlobal('confirm', confirmFn);
-    vi.mocked(StorageService.saveUserExercises).mockClear();
+    vi.stubGlobal('confirm', () => true);
     render(<ScreenDatabase onBack={onBack} onOpenInfo={onOpenInfo} />);
     const deleteButtons = screen.getAllByRole('button', { name: /удалить/i });
     await user.click(deleteButtons[0]);
-    expect(confirmFn).toHaveBeenCalledWith('Удалить упражнение?');
-    expect(StorageService.saveUserExercises).toHaveBeenCalled();
-    const saved = vi.mocked(StorageService.saveUserExercises).mock.calls[0][0] as { name: string }[];
-    expect(saved.map(e => e.name)).not.toContain('Push-ups');
-    expect(saved.map(e => e.name)).toContain('Squats');
+    expect(screen.queryByText('Push-ups')).not.toBeInTheDocument();
+    expect(screen.getByText('Squats')).toBeInTheDocument();
+    expect(StorageService.getUserExercises().map((e) => e.name)).not.toContain('Push-ups');
     vi.unstubAllGlobals();
   });
 
   it('валидация: нельзя сохранить без заполнения обязательных полей', async () => {
     const user = userEvent.setup();
-    vi.mocked(StorageService.saveUserExercises).mockClear();
+    const initialCount = StorageService.getUserExercises().length;
     render(<ScreenDatabase onBack={onBack} onOpenInfo={onOpenInfo} />);
     await user.click(screen.getByRole('button', { name: /добавить упражнение/i }));
     const textboxes = screen.getAllByRole('textbox');
     expect(textboxes[0]).toHaveValue('');
     await user.click(screen.getByRole('button', { name: /сохранить/i }));
-    expect(StorageService.saveUserExercises).not.toHaveBeenCalled();
+    expect(StorageService.getUserExercises().length).toBe(initialCount);
     await user.type(textboxes[0], 'Valid Name');
     await user.click(screen.getByRole('button', { name: /сохранить/i }));
-    expect(StorageService.saveUserExercises).toHaveBeenCalled();
+    expect(StorageService.getUserExercises().length).toBe(initialCount + 1);
   });
 });

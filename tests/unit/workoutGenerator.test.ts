@@ -1,29 +1,20 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { describe, it, expect, beforeEach } from 'vitest';
 import { WorkoutGenerator } from '@/services/workoutGenerator';
 import { StorageService } from '@/services/storageService';
 import { MuscleGroup, Difficulty } from '@/types';
-import { ALL_MUSCLE_GROUPS } from '@/constants';
+import { ALL_MUSCLE_GROUPS, SEED_EXERCISES } from '@/constants';
 import { createExercise, createWorkoutLog } from '../helpers';
-
-vi.mock('@/services/storageService', () => ({
-  StorageService: {
-    getLastLog: vi.fn(),
-    getExercises: vi.fn(),
-    getExercisesForWorkout: vi.fn(),
-  },
-}));
 
 describe('WorkoutGenerator', () => {
   beforeEach(() => {
-    vi.mocked(StorageService.getLastLog).mockReturnValue(null);
-    vi.mocked(StorageService.getExercises).mockReturnValue([]);
-    vi.mocked(StorageService.getExercisesForWorkout).mockReturnValue([]);
+    localStorage.clear();
+    StorageService.clearHistory();
+    // Деактивируем базовые упражнения, чтобы использовать только пользовательские для контролируемых тестов
+    StorageService.setDeactivatedBaseIds(SEED_EXERCISES.map((e) => e.id));
   });
 
   describe('selectMuscleGroups', () => {
     it('без истории — возвращает ровно 3 уникальные группы мышц', () => {
-      vi.mocked(StorageService.getLastLog).mockReturnValue(null);
-
       const result = WorkoutGenerator.selectMuscleGroups();
 
       expect(result).toHaveLength(3);
@@ -35,9 +26,7 @@ describe('WorkoutGenerator', () => {
 
     it('с историей — возвращает 2 из предыдущей тренировки + 1 новую', () => {
       const previous = [MuscleGroup.LEGS, MuscleGroup.ABS, MuscleGroup.BACK];
-      vi.mocked(StorageService.getLastLog).mockReturnValue(
-        createWorkoutLog({ muscleGroupsUsed: previous })
-      );
+      StorageService.addLog(createWorkoutLog({ muscleGroupsUsed: previous }));
 
       const result = WorkoutGenerator.selectMuscleGroups();
 
@@ -51,9 +40,7 @@ describe('WorkoutGenerator', () => {
 
     it('все группы использованы — корректный fallback при исчерпании групп', () => {
       const allUsed = [...ALL_MUSCLE_GROUPS];
-      vi.mocked(StorageService.getLastLog).mockReturnValue(
-        createWorkoutLog({ muscleGroupsUsed: allUsed })
-      );
+      StorageService.addLog(createWorkoutLog({ muscleGroupsUsed: allUsed }));
 
       const result = WorkoutGenerator.selectMuscleGroups();
 
@@ -72,7 +59,7 @@ describe('WorkoutGenerator', () => {
         createExercise({ id: '3', muscleGroup: MuscleGroup.LEGS }),
         createExercise({ id: '4', muscleGroup: MuscleGroup.LEGS }),
       ];
-      vi.mocked(StorageService.getExercisesForWorkout).mockReturnValue(exercises);
+      StorageService.saveUserExercises(exercises);
 
       const result = WorkoutGenerator.generatePlaylist(targetMuscles, 4);
 
@@ -86,47 +73,40 @@ describe('WorkoutGenerator', () => {
     it('количество — возвращает ровно count упражнений', () => {
       const targetMuscles = [MuscleGroup.ARMS];
       const exercises = [
-        createExercise({ muscleGroup: MuscleGroup.ARMS }),
-        createExercise({ muscleGroup: MuscleGroup.ARMS }),
-        createExercise({ muscleGroup: MuscleGroup.ARMS }),
+        createExercise({ id: 'a1', muscleGroup: MuscleGroup.ARMS }),
+        createExercise({ id: 'a2', muscleGroup: MuscleGroup.ARMS }),
+        createExercise({ id: 'a3', muscleGroup: MuscleGroup.ARMS }),
       ];
-      vi.mocked(StorageService.getExercisesForWorkout).mockReturnValue(exercises);
+      StorageService.saveUserExercises(exercises);
 
       const result = WorkoutGenerator.generatePlaylist(targetMuscles, 3);
 
       expect(result).toHaveLength(3);
     });
 
-    it('ограничение сложности — нет двух HARD подряд (best effort за 10 попыток)', () => {
+    it('ограничение сложности — нет двух HARD подряд', () => {
       const targetMuscles = [MuscleGroup.ARMS];
       const exercises = [
         createExercise({ id: '1', muscleGroup: MuscleGroup.ARMS, difficulty: Difficulty.HARD }),
         createExercise({ id: '2', muscleGroup: MuscleGroup.ARMS, difficulty: Difficulty.HARD }),
         createExercise({ id: '3', muscleGroup: MuscleGroup.ARMS, difficulty: Difficulty.MEDIUM }),
       ];
-      vi.mocked(StorageService.getExercisesForWorkout).mockReturnValue(exercises);
+      StorageService.saveUserExercises(exercises);
 
-      // Детерминируем выбор: один из каждой группы (индексы 0, 1, 2), чтобы в плейлисте 2 HARD и 1 MEDIUM
-      let pickIndex = 0;
-      vi.spyOn(Math, 'random').mockImplementation(() => {
-        const out = [0, 1 / 3, 2 / 3][pickIndex % 3];
-        pickIndex++;
-        return out;
-      });
-
-      const result = WorkoutGenerator.generatePlaylist(targetMuscles, 3);
-
-      vi.mocked(Math.random).mockRestore();
-      expect(result).toHaveLength(3);
-      for (let i = 0; i < result.length - 1; i++) {
-        const noTwoHard =
-          result[i].difficulty !== Difficulty.HARD || result[i + 1].difficulty !== Difficulty.HARD;
-        expect(noTwoHard).toBe(true);
+      // Алгоритм гарантирует отсутствие двух HARD подряд; проверяем в нескольких запусках
+      for (let run = 0; run < 30; run++) {
+        const result = WorkoutGenerator.generatePlaylist(targetMuscles, 3);
+        expect(result).toHaveLength(3);
+        for (let i = 0; i < result.length - 1; i++) {
+          const noTwoHard =
+            result[i].difficulty !== Difficulty.HARD || result[i + 1].difficulty !== Difficulty.HARD;
+          expect(noTwoHard).toBe(true);
+        }
       }
     });
 
     it('пустая база — возвращает пустой массив при отсутствии кандидатов', () => {
-      vi.mocked(StorageService.getExercisesForWorkout).mockReturnValue([]);
+      StorageService.saveUserExercises([]);
 
       const result = WorkoutGenerator.generatePlaylist([MuscleGroup.ARMS], 5);
 
@@ -140,7 +120,7 @@ describe('WorkoutGenerator', () => {
         createExercise({ id: '2', muscleGroup: MuscleGroup.ABS }),
         createExercise({ id: '3', muscleGroup: MuscleGroup.ABS }),
       ];
-      vi.mocked(StorageService.getExercisesForWorkout).mockReturnValue(exercises);
+      StorageService.saveUserExercises(exercises);
 
       const result = WorkoutGenerator.generatePlaylist(targetMuscles, 3);
 
@@ -156,7 +136,7 @@ describe('WorkoutGenerator', () => {
         createExercise({ id: '3', muscleGroup: MuscleGroup.LEGS }),
         createExercise({ id: '4', muscleGroup: MuscleGroup.LEGS }),
       ];
-      vi.mocked(StorageService.getExercisesForWorkout).mockReturnValue(exercises);
+      StorageService.saveUserExercises(exercises);
 
       const result = WorkoutGenerator.generatePlaylist(targetMuscles, 4);
 
@@ -172,7 +152,7 @@ describe('WorkoutGenerator', () => {
         createExercise({ id: '2', name: 'B', muscleGroup: MuscleGroup.LEGS }),
         createExercise({ id: '3', name: 'C', muscleGroup: MuscleGroup.ARMS }),
       ];
-      vi.mocked(StorageService.getExercisesForWorkout).mockReturnValue(exercises);
+      StorageService.saveUserExercises(exercises);
 
       const result = WorkoutGenerator.generatePlaylist(targetMuscles, 6);
 

@@ -100,9 +100,9 @@ function App() {
     );
   };
 
-  const handleStartWorkout = (playlist: Exercise[], muscles: MuscleGroup[]) => {
+  const handleStartWorkout = async (playlist: Exercise[], muscles: MuscleGroup[]) => {
     enableWakeLock(); // вызов из user gesture критичен для Wake Lock и video fallback
-    TTSService.unlock(); // разблокировка TTS в PWA/мобильном (iOS/Android требуют жеста)
+    await TTSService.warmUp(); // прогрев TTS в контексте жеста — без озвучивания, до загрузки экрана
     setActivePlaylist(playlist);
     setActiveMuscles(muscles);
     navigateTo(AppScreen.WORKOUT);

@@ -85,10 +85,13 @@ describe('TTSService', () => {
     expect(voices.some((v) => v.lang === 'ru-RU')).toBe(false);
   });
 
-  it('unlock — вызывает cancel и speak в контексте жеста (для PWA/мобильного)', () => {
+  it('warmUp — вызов speak с volume 0 (тихий прогрев) и ожидание завершения', async () => {
     const cancelSpy = vi.mocked(window.speechSynthesis.cancel);
     cancelSpy.mockClear();
-    TTSService.unlock();
+    vi.mocked(window.speechSynthesis.speak).mockImplementation((u: SpeechSynthesisUtterance) => {
+      if (u.onend) u.onend();
+    });
+    await TTSService.warmUp();
     expect(cancelSpy).toHaveBeenCalled();
     expect(window.speechSynthesis.speak).toHaveBeenCalled();
     const [u] = (window.speechSynthesis.speak as ReturnType<typeof vi.fn>).mock.calls[0] as [SpeechSynthesisUtterance];

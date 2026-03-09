@@ -13,17 +13,43 @@ function findDefaultEnglishVoice(voices: SpeechSynthesisVoice[]): SpeechSynthesi
 
 export const TTSService = {
   /**
-   * Вызвать один раз из обработчика пользовательского жеста (например, при нажатии «Начать тренировку»).
-   * На iOS/Android в PWA speechSynthesis блокируется до первого вызова в контексте жеста;
-   * пустая фраза «разблокирует» последующие вызовы speak() из таймеров/колбеков.
+   * Прогрев TTS в контексте пользовательского жеста (вызывать при «Начать тренировку»).
+   * Выполняет «тихую» инициализацию без озвучивания; после завершения utterance ждёт
+   * дополнительно SETTLE_MS, чтобы движок был готов к следующей фразе (на Android
+   * иначе начало названия упражнения может обрезаться).
    */
-  unlock: () => {
-    if (!('speechSynthesis' in window)) return;
-    window.speechSynthesis.cancel();
-    const u = new SpeechSynthesisUtterance(' ');
-    u.volume = 0;
-    window.speechSynthesis.speak(u);
-    window.speechSynthesis.cancel();
+  warmUp: (): Promise<void> => {
+    const SETTLE_MS = 400;
+    const MAX_WAIT_MS = 800;
+
+    return new Promise((resolve) => {
+      if (!('speechSynthesis' in window)) {
+        resolve();
+        return;
+      }
+      let timeoutId: ReturnType<typeof setTimeout> | undefined = undefined;
+      let settleId: ReturnType<typeof setTimeout> | undefined = undefined;
+
+      const finish = () => {
+        if (timeoutId !== undefined) clearTimeout(timeoutId);
+        if (settleId !== undefined) clearTimeout(settleId);
+        resolve();
+      };
+
+      const onUtteranceDone = () => {
+        if (timeoutId !== undefined) clearTimeout(timeoutId);
+        timeoutId = undefined;
+        settleId = setTimeout(finish, SETTLE_MS);
+      };
+
+      window.speechSynthesis.cancel();
+      const u = new SpeechSynthesisUtterance('\u00A0');
+      u.volume = 0;
+      u.onend = onUtteranceDone;
+      u.onerror = onUtteranceDone;
+      window.speechSynthesis.speak(u);
+      timeoutId = setTimeout(finish, MAX_WAIT_MS);
+    });
   },
 
   speak: (text: string, voiceURI: string | null, lang: 'ru-RU' | 'en-US' = 'ru-RU', onEnd?: () => void) => {
