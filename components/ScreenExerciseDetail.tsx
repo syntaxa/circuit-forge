@@ -3,7 +3,7 @@ import { Exercise } from '../types';
 import { Button } from './Button';
 import { getDifficultyPillStyles } from '../utils/difficultyStyles';
 
-const getExerciseImageUrl = (id: string) => `/exercise-images/${id}.png`;
+const getExerciseImageUrl = (id: string) => `${import.meta.env.BASE_URL}exercise-images/${id}.png`;
 
 interface ScreenExerciseDetailProps {
   exercise: Exercise;
