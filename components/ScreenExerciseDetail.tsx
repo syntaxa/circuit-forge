@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Exercise } from '../types';
 import { Button } from './Button';
 import { getDifficultyPillStyles } from '../utils/difficultyStyles';
+
+const getExerciseImageUrl = (id: string) => `/exercise-images/${id}.png`;
 
 interface ScreenExerciseDetailProps {
   exercise: Exercise;
@@ -9,6 +11,15 @@ interface ScreenExerciseDetailProps {
 }
 
 export const ScreenExerciseDetail: React.FC<ScreenExerciseDetailProps> = ({ exercise, onBack }) => {
+  const [imageError, setImageError] = useState(false);
+
+  useEffect(() => {
+    setImageError(false);
+  }, [exercise.id]);
+
+  const imageUrl = getExerciseImageUrl(exercise.id);
+  const showPlaceholder = imageError;
+
   return (
     <div className="h-full w-full flex flex-col bg-dark text-white overflow-auto">
       <div className="flex flex-col p-6 max-w-lg mx-auto w-full flex-1">
@@ -28,13 +39,24 @@ export const ScreenExerciseDetail: React.FC<ScreenExerciseDetailProps> = ({ exer
           </span>
         </div>
 
-        {/* Placeholder for square illustration (images not ready yet) */}
+        {/* Illustration: image from public/exercise-images/{id}.png or placeholder if missing */}
         <div
-          className="w-full max-w-[280px] mx-auto aspect-square rounded-xl bg-slate-800 border border-slate-700 flex flex-col items-center justify-center text-slate-500 text-sm mb-6 gap-1"
+          className="w-full max-w-[280px] mx-auto aspect-square rounded-xl bg-slate-800 border border-slate-700 flex flex-col items-center justify-center text-slate-500 text-sm mb-6 overflow-hidden"
           aria-hidden
         >
-          <span>Иллюстрация</span>
-          <span>появится позже</span>
+          {showPlaceholder ? (
+            <>
+              <span>Иллюстрация</span>
+              <span>появится позже</span>
+            </>
+          ) : (
+            <img
+              src={imageUrl}
+              alt=""
+              className="w-full h-full object-cover rounded-xl"
+              onError={() => setImageError(true)}
+            />
+          )}
         </div>
 
         <div className="space-y-4">
