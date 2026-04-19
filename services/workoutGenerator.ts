@@ -12,10 +12,128 @@ function shuffle<T>(array: T[]): T[] {
   return arr;
 }
 
+function getTransitionPenalty(previous: Exercise | null, current: Exercise): number {
+  if (!previous) {
+    return 0;
+  }
+
+  let penalty = 0;
+
+  if (previous.id === current.id) {
+    penalty += 1000;
+  }
+
+  if (previous.muscleGroup === current.muscleGroup) {
+    penalty += 100;
+  }
+
+  if (previous.difficulty === Difficulty.HARD && current.difficulty === Difficulty.HARD) {
+    penalty += 1;
+  }
+
+  return penalty;
+}
+
+function scoreCandidate(candidate: Exercise, previous: Exercise | null, remaining: Exercise[]): number {
+  let score = -getTransitionPenalty(previous, candidate);
+
+  const sameIdRemaining = remaining.filter((ex) => ex.id === candidate.id).length;
+  const sameGroupRemaining = remaining.filter((ex) => ex.muscleGroup === candidate.muscleGroup).length;
+  score += sameIdRemaining * 10;
+  score += sameGroupRemaining;
+
+  return score;
+}
+
+function arrangePlaylistGreedy(list: Exercise[]): Exercise[] {
+  const remaining = shuffle(list);
+  const result: Exercise[] = [];
+
+  while (remaining.length > 0) {
+    const previous = result.length > 0 ? result[result.length - 1] : null;
+    let bestIndex = 0;
+    let bestScore = Number.NEGATIVE_INFINITY;
+
+    for (let i = 0; i < remaining.length; i++) {
+      const candidate = remaining[i];
+      const others = remaining.filter((_, idx) => idx !== i);
+      const score = scoreCandidate(candidate, previous, others);
+
+      if (score > bestScore) {
+        bestScore = score;
+        bestIndex = i;
+      }
+    }
+
+    result.push(remaining.splice(bestIndex, 1)[0]);
+  }
+
+  return result;
+}
+
+function arrangePlaylistOptimized(list: Exercise[]): Exercise[] {
+  const shuffled = shuffle(list);
+  const memo = new Map<string, { penalty: number; order: number[] }>();
+
+  function solve(previousIndex: number, usedMask: number): { penalty: number; order: number[] } {
+    const key = `${previousIndex}|${usedMask}`;
+    const cached = memo.get(key);
+    if (cached) {
+      return cached;
+    }
+
+    if (usedMask === (1 << shuffled.length) - 1) {
+      const done = { penalty: 0, order: [] };
+      memo.set(key, done);
+      return done;
+    }
+
+    let best: { penalty: number; order: number[] } | null = null;
+
+    for (let i = 0; i < shuffled.length; i++) {
+      if ((usedMask & (1 << i)) !== 0) {
+        continue;
+      }
+
+      const current = shuffled[i];
+      const previous = previousIndex >= 0 ? shuffled[previousIndex] : null;
+      const transitionPenalty = getTransitionPenalty(previous, current);
+      const next = solve(i, usedMask | (1 << i));
+      const candidate = {
+        penalty: transitionPenalty + next.penalty,
+        order: [i, ...next.order],
+      };
+
+      if (
+        best === null ||
+        candidate.penalty < best.penalty
+      ) {
+        best = candidate;
+      }
+    }
+
+    const resolved = best ?? { penalty: 0, order: [] };
+    memo.set(key, resolved);
+    return resolved;
+  }
+
+  return solve(-1, 0).order.map((index) => shuffled[index]);
+}
+
+function arrangePlaylist(list: Exercise[]): Exercise[] {
+  if (list.length <= 1) return [...list];
+
+  if (list.length <= 14) {
+    return arrangePlaylistOptimized(list);
+  }
+
+  return arrangePlaylistGreedy(list);
+}
+
 export const WorkoutGenerator = {
   selectMuscleGroups: (): MuscleGroup[] => {
     const lastLog = StorageService.getLastLog();
-    
+
     // Rule: If no history, pick 3 random unique
     if (!lastLog || !lastLog.muscleGroupsUsed || lastLog.muscleGroupsUsed.length === 0) {
       return shuffle(ALL_MUSCLE_GROUPS).slice(0, 3);
@@ -24,10 +142,10 @@ export const WorkoutGenerator = {
     // Rule: Pick 2 from previous, add 1 new
     const previous = lastLog.muscleGroupsUsed;
     const availableNew = ALL_MUSCLE_GROUPS.filter(mg => !previous.includes(mg));
-    
+
     // If we somehow exhausted all muscles (e.g. if we used 5 last time), fallback to random
     if (availableNew.length === 0) {
-       return shuffle(ALL_MUSCLE_GROUPS).slice(0, 3);
+      return shuffle(ALL_MUSCLE_GROUPS).slice(0, 3);
     }
 
     const twoOld = shuffle(previous).slice(0, 2);
@@ -38,7 +156,7 @@ export const WorkoutGenerator = {
 
   generatePlaylist: (targetMuscles: MuscleGroup[], count: number): Exercise[] => {
     const allExercises = StorageService.getExercisesForWorkout();
-    
+
     // Filter exercises that match target muscles
     const candidates = allExercises.filter(ex => targetMuscles.includes(ex.muscleGroup));
 
@@ -46,7 +164,7 @@ export const WorkoutGenerator = {
       return [];
     }
 
-    // Distinct exercises (by id) — use these first so duplicates appear only when necessary
+    // Distinct exercises (by id) - use these first so duplicates appear only when necessary
     const distinctList = shuffle([...new Map(candidates.map((e) => [e.id, e])).values()]);
     const usedIds = new Set<string>();
     let playlist: Exercise[] = [];
@@ -80,75 +198,6 @@ export const WorkoutGenerator = {
       playlist.push(pool[Math.floor(Math.random() * pool.length)]);
     }
 
-    // Apply difficulty constraint: No HARD followed immediately by HARD.
-    // Partition into HARD and non-HARD; if we have enough non-HARD to separate (notHard.length >= hard.length - 1), interleave.
-    const hard = playlist.filter(ex => ex.difficulty === Difficulty.HARD);
-    const notHard = playlist.filter(ex => ex.difficulty !== Difficulty.HARD);
-    const canSeparate = hard.length <= 1 || notHard.length >= hard.length - 1;
-    if (!canSeparate) {
-      playlist = shuffle(playlist);
-    } else if (hard.length > 0 && notHard.length > 0) {
-      const result: Exercise[] = [];
-      let hi = 0;
-      let ni = 0;
-      const startWithHard = hard.length > notHard.length;
-      while (hi < hard.length || ni < notHard.length) {
-        if (startWithHard) {
-          if (hi < hard.length) result.push(hard[hi++]);
-          if (ni < notHard.length) result.push(notHard[ni++]);
-        } else {
-          if (ni < notHard.length) result.push(notHard[ni++]);
-          if (hi < hard.length) result.push(hard[hi++]);
-        }
-      }
-      playlist = result;
-    } else {
-      playlist = shuffle(playlist);
-    }
-
-    // Ensure no two identical exercises in a row (difficulty reorder may have created duplicates)
-    playlist = avoidConsecutiveDuplicates(playlist);
-
-    return playlist;
+    return arrangePlaylist(playlist);
   }
 };
-
-/**
- * Rearrange so that no two adjacent exercises share the same id.
- * Greedy "most-frequent first" approach: always place the exercise
- * from the largest remaining group whose id differs from the last
- * placed one. Guarantees zero consecutive duplicates when
- * max_count(id) <= ceil(n / 2), and minimises them otherwise.
- */
-function avoidConsecutiveDuplicates(list: Exercise[]): Exercise[] {
-  if (list.length <= 1) return [...list];
-
-  const groups = new Map<string, Exercise[]>();
-  for (const ex of list) {
-    let g = groups.get(ex.id);
-    if (!g) { g = []; groups.set(ex.id, g); }
-    g.push(ex);
-  }
-
-  const buckets = [...groups.values()];
-  const result: Exercise[] = [];
-
-  while (result.length < list.length) {
-    buckets.sort((a, b) => b.length - a.length);
-    const lastId = result.length > 0 ? result[result.length - 1].id : null;
-    let placed = false;
-    for (const bucket of buckets) {
-      if (bucket.length === 0) continue;
-      if (bucket[0].id === lastId) continue;
-      result.push(bucket.pop()!);
-      placed = true;
-      break;
-    }
-    if (!placed) {
-      for (const bucket of buckets) {
-        if (bucket.length > 0) { result.push(bucket.pop()!); break; }
-      }
-    }
-  }
-  return result;
-}

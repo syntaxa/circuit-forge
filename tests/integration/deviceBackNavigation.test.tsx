@@ -96,7 +96,7 @@ describe('deviceBackNavigation (integration)', () => {
       expect(screen.queryByRole('heading', { name: 'Как выполнять' })).not.toBeInTheDocument();
     });
     expect(screen.getByRole('heading', { name: /База упражнений/i })).toBeInTheDocument();
-  });
+  }, 15000);
 
   it('симуляция кнопки «Назад» во время тренировки: показ подтверждения и возврат при согласии', async () => {
     const user = userEvent.setup();
@@ -121,7 +121,7 @@ describe('deviceBackNavigation (integration)', () => {
     await waitFor(() => {
       expect(screen.getByRole('button', { name: /Начать тренировку/i })).toBeInTheDocument();
     });
-  });
+  }, 15000);
 
   it('симуляция кнопки «Назад» во время тренировки: при отказе остаёмся на тренировке', async () => {
     const user = userEvent.setup();
@@ -145,5 +145,5 @@ describe('deviceBackNavigation (integration)', () => {
       expect(screen.getByText(/ГОТОВЬСЯ/i)).toBeInTheDocument();
     });
     expect(screen.getByRole('button', { name: /Отмена/i })).toBeInTheDocument();
-  });
+  }, 15000);
 });

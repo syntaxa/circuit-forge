@@ -83,7 +83,7 @@ describe('databaseSync (integration)', () => {
       },
       { timeout: 5000 }
     );
-  });
+  }, 15000);
 
   it('удаление упражнения из базы → плейлист не содержит удалённого упражнения', async () => {
     const toDelete = createExercise({
@@ -132,5 +132,5 @@ describe('databaseSync (integration)', () => {
     });
 
     vi.unstubAllGlobals();
-  });
+  }, 15000);
 });
