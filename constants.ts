@@ -1,7 +1,8 @@
 import { Difficulty, Exercise, MuscleGroup, Settings } from './types';
+import packageJson from './package.json';
 
 /** Версия приложения для отображения в UI (экран «О приложении»). */
-export const APP_VERSION = '1.4.0';
+export const APP_VERSION = packageJson.version;
 
 export const DEFAULT_SETTINGS: Settings = {
   exerciseDuration: 30,
