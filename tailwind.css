@@ -2,6 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Установленное PWA на мобильных: 100vh соответствует "большому" вьюпорту
+   и может быть заметно выше видимой области (симптом "высота в 2 раза больше
+   экрана"). 100dvh совпадает с реальной видимой высотой. */
+@supports (height: 100dvh) {
+  .h-screen {
+    height: 100dvh;
+  }
+  .min-h-screen {
+    min-height: 100dvh;
+  }
+}
+
 /* Hide native number input spinners for compact UI. */
 .no-number-spinner::-webkit-outer-spin-button,
 .no-number-spinner::-webkit-inner-spin-button {
