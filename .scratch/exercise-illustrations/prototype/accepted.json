@@ -1,0 +1,32 @@
+{
+  "reference": "public/exercise-images/1.png",
+  "generatedAttempts": 4,
+  "items": [
+    {
+      "id": "13",
+      "name": "Chair Dip",
+      "image": "13-v1.png",
+      "prompt": "prompts-v1.json",
+      "status": "accepted-by-user",
+      "attempts": 1
+    },
+    {
+      "id": "14",
+      "name": "Diamond Push-Up",
+      "image": "14-v1.png",
+      "prompt": "prompts-v1.json",
+      "status": "accepted-by-user",
+      "attempts": 1
+    },
+    {
+      "id": "65",
+      "name": "Lunge Touch And Kick",
+      "image": "65-v2.png",
+      "prompt": "prompt-65-v2.json",
+      "status": "accepted-by-user",
+      "attempts": 2,
+      "discarded": "65-v1.png",
+      "reason": "User chose bottom lunge with knee and hand touching floor instead of kick phase"
+    }
+  ]
+}
