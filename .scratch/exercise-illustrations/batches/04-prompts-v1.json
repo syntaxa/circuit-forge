@@ -1,0 +1,51 @@
+{
+  "reference": "public/exercise-images/1.png",
+  "mode": "built-in image_gen",
+  "items": [
+    {
+      "id": "22",
+      "name": "Push-Up Hold",
+      "version": "v1",
+      "status": "accepted-by-user",
+      "file": "22-v1.png",
+      "specific": "Bottom of push-up held still: both palms and toes on floor, elbows bent, chest hovering a few centimeters above floor, body straight head to heels. Full body side three-quarter view.",
+      "prompt": "Use case: scientific-educational. Square fitness app illustration, legible at 280 x 280 pixels. Image 1: style and character reference only. Match the same adult man, short dark hair, featureless face, gray T-shirt, navy shorts, white socks, gray sneakers; thin dark outlines, softly shaded flat instructional illustration, pale blue background with large lighter circle and dark blue inset border. Whole body inside border. One person, one frozen pose, coherent anatomy and support contacts. No text, arrows, multiple panels, motion trails, watermark, or equipment.\n\nPrimary request: illustrate Push-Up Hold. Bottom of push-up held still: both palms and toes on floor, elbows bent, chest hovering a few centimeters above floor, body straight head to heels. Full body side three-quarter view."
+    },
+    {
+      "id": "24",
+      "name": "Plank Fist Raise",
+      "version": "v1",
+      "status": "accepted-by-user",
+      "file": "24-v1.png",
+      "specific": "Intermediate phase of high plank: body straight from head to heels, legs straight and toes on floor, one arm straight with palm flat on floor and the other arm straight with fist planted knuckles down on the same floor. Slightly elevated front three-quarter view clearly showing both distinct contacts.",
+      "prompt": "Use case: scientific-educational. Square fitness app illustration, legible at 280 x 280 pixels. Image 1: style and character reference only. Match the same adult man, short dark hair, featureless face, gray T-shirt, navy shorts, white socks, gray sneakers; thin dark outlines, softly shaded flat instructional illustration, pale blue background with large lighter circle and dark blue inset border. Whole body inside border. One person, one frozen pose, coherent anatomy and support contacts. No text, arrows, multiple panels, motion trails, watermark, or equipment.\n\nPrimary request: illustrate Plank Fist Raise. Intermediate phase of high plank: body straight from head to heels, legs straight and toes on floor, one arm straight with palm flat on floor and the other arm straight with fist planted knuckles down on the same floor. Slightly elevated front three-quarter view clearly showing both distinct contacts."
+    },
+    {
+      "id": "25",
+      "name": "Bicycle Crunch",
+      "version": "v1",
+      "status": "generated-awaiting-user-review",
+      "file": "25-v1.png",
+      "specific": "On back on floor, shoulder blades raised and torso rotated, left elbow approaches right bent knee, other leg extended straight and hovering above floor, both hands lightly behind head, right knee drawn in. Full body three-quarter view; only lower back touches floor.",
+      "prompt": "Use case: scientific-educational. Square fitness app illustration, legible at 280 x 280 pixels. Image 1: style and character reference only. Match the same adult man, short dark hair, featureless face, gray T-shirt, navy shorts, white socks, gray sneakers; thin dark outlines, softly shaded flat instructional illustration, pale blue background with large lighter circle and dark blue inset border. Whole body inside border. One person, one frozen pose, coherent anatomy and support contacts. No text, arrows, multiple panels, motion trails, watermark, or equipment.\n\nPrimary request: illustrate Bicycle Crunch. On back on floor, shoulder blades raised and torso rotated, left elbow approaches right bent knee, other leg extended straight and hovering above floor, both hands lightly behind head, right knee drawn in. Full body three-quarter view; only lower back touches floor."
+    },
+    {
+      "id": "26",
+      "name": "V-Up",
+      "version": "v1",
+      "status": "accepted-by-user",
+      "file": "26-v1.png",
+      "specific": "Peak position balanced on buttocks on floor, straight legs lifted together diagonally, torso raised forming a V, straight arms reach toward feet, no hands or feet touch floor. Side three-quarter view, whole body visible.",
+      "prompt": "Use case: scientific-educational. Square fitness app illustration, legible at 280 x 280 pixels. Image 1: style and character reference only. Match the same adult man, short dark hair, featureless face, gray T-shirt, navy shorts, white socks, gray sneakers; thin dark outlines, softly shaded flat instructional illustration, pale blue background with large lighter circle and dark blue inset border. Whole body inside border. One person, one frozen pose, coherent anatomy and support contacts. No text, arrows, multiple panels, motion trails, watermark, or equipment.\n\nPrimary request: illustrate V-Up. Peak position balanced on buttocks on floor, straight legs lifted together diagonally, torso raised forming a V, straight arms reach toward feet, no hands or feet touch floor. Side three-quarter view, whole body visible."
+    },
+    {
+      "id": "27",
+      "name": "Mountain Climber",
+      "version": "v1",
+      "status": "accepted-by-user",
+      "file": "27-v1.png",
+      "specific": "High plank: palms flat beneath shoulders, arms straight, one leg extended back with toes on floor; opposite knee drawn forward toward chest, that foot off floor, hips level. Full body side three-quarter view.",
+      "prompt": "Use case: scientific-educational. Square fitness app illustration, legible at 280 x 280 pixels. Image 1: style and character reference only. Match the same adult man, short dark hair, featureless face, gray T-shirt, navy shorts, white socks, gray sneakers; thin dark outlines, softly shaded flat instructional illustration, pale blue background with large lighter circle and dark blue inset border. Whole body inside border. One person, one frozen pose, coherent anatomy and support contacts. No text, arrows, multiple panels, motion trails, watermark, or equipment.\n\nPrimary request: illustrate Mountain Climber. High plank: palms flat beneath shoulders, arms straight, one leg extended back with toes on floor; opposite knee drawn forward toward chest, that foot off floor, hips level. Full body side three-quarter view."
+    }
+  ]
+}

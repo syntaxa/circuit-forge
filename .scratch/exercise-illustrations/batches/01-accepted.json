@@ -1,0 +1,9 @@
+{
+  "items": [
+    {"id": "66", "name": "Plyo Split Squat", "image": "66-v1.png", "prompt": "01-prompts-v1.json", "status": "accepted-by-user"},
+    {"id": "67", "name": "Side To Side Hops", "image": "67-v3.png", "prompt": "01-prompts-revisions.json", "status": "accepted-by-user"},
+    {"id": "68", "name": "Lunge And Rotation", "image": "68-v3.png", "prompt": "01-prompts-revisions.json", "status": "accepted-by-user"},
+    {"id": "69", "name": "Power Lunge Jump", "image": "69-v1.png", "prompt": "01-prompts-v1.json", "status": "accepted-by-user"},
+    {"id": "70", "name": "One Leg Squat Hops", "image": "70-v2.png", "prompt": "01-prompts-revisions.json", "status": "accepted-by-user"}
+  ]
+}

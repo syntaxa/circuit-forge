@@ -1,0 +1,51 @@
+{
+  "reference": "public/exercise-images/1.png",
+  "mode": "built-in image_gen",
+  "items": [
+    {
+      "id": "66",
+      "name": "Plyo Split Squat",
+      "specific": "Show the athlete in midair after switching legs: legs split forward and backward, both knees slightly bent, both feet visibly clear of the floor, torso upright, arms balance naturally. Full-body side view with a slight three-quarter turn.",
+      "prompt": "Use case: scientific-educational. Asset type: one square exercise illustration for a fitness app, legible at 280 x 280 pixels. Input image 1: STYLE AND CHARACTER REFERENCE ONLY, not a pose reference. Match the reference closely: same adult male character, short dark brown hair, simple featureless face, light skin, gray short-sleeve T-shirt, dark navy shorts, white socks, gray sneakers. Same clean thin dark outlines, softly shaded flat instructional illustration, muted blue palette. Same pale blue background with a large lighter blue circle, dark blue rectangular border inset from a narrow white outer margin. Keep the whole body inside the border and leave breathing room. Change body orientation and camera angle as specified by the exercise. Keep clothing, character proportions and rendering consistent with input image 1. One person, exactly one frozen pose. Correct coherent anatomy and physically plausible support contacts. No text, labels, numbers, arrows, motion trails, multiple panels, ghost limbs or watermark. No equipment.\n\nPrimary request: illustrate Plyo Split Squat. Show the athlete in midair after switching legs: legs split forward and backward, both knees slightly bent, both feet visibly clear of the floor, torso upright, arms balance naturally. Full-body side view with a slight three-quarter turn.",
+      "version": "v1",
+      "status": "accepted-by-user",
+      "file": "66-v1.png"
+    },
+    {
+      "id": "67",
+      "name": "Side To Side Hops",
+      "specific": "Show landing after a hop to the right: right foot planted on floor, right knee slightly bent, left foot close to right foot but clearly off the floor, torso leaning slightly right, arms balancing. Front view. Legs do not cross; this is not a skater jump.",
+      "prompt": "Use case: scientific-educational. Asset type: one square exercise illustration for a fitness app, legible at 280 x 280 pixels. Input image 1: STYLE AND CHARACTER REFERENCE ONLY, not a pose reference. Match the reference closely: same adult male character, short dark brown hair, simple featureless face, light skin, gray short-sleeve T-shirt, dark navy shorts, white socks, gray sneakers. Same clean thin dark outlines, softly shaded flat instructional illustration, muted blue palette. Same pale blue background with a large lighter blue circle, dark blue rectangular border inset from a narrow white outer margin. Keep the whole body inside the border and leave breathing room. Change body orientation and camera angle as specified by the exercise. Keep clothing, character proportions and rendering consistent with input image 1. One person, exactly one frozen pose. Correct coherent anatomy and physically plausible support contacts. No text, labels, numbers, arrows, motion trails, multiple panels, ghost limbs or watermark. No equipment.\n\nPrimary request: illustrate Side To Side Hops. Show landing after a hop to the right: right foot planted on floor, right knee slightly bent, left foot close to right foot but clearly off the floor, torso leaning slightly right, arms balancing. Front view. Legs do not cross; this is not a skater jump.",
+      "version": "v1",
+      "status": "generated-awaiting-user-review",
+      "file": "67-v1.png"
+    },
+    {
+      "id": "68",
+      "name": "Lunge And Rotation",
+      "specific": "Show the bottom of a forward lunge on the right leg: right foot planted forward, right knee bent, rear knee hovering above the floor, rear toes on floor. Torso rotates to the right; both arms extend straight in front of the chest and turn together with shoulders. Front three-quarter view clearly showing the lunge and rotation.",
+      "prompt": "Use case: scientific-educational. Asset type: one square exercise illustration for a fitness app, legible at 280 x 280 pixels. Input image 1: STYLE AND CHARACTER REFERENCE ONLY, not a pose reference. Match the reference closely: same adult male character, short dark brown hair, simple featureless face, light skin, gray short-sleeve T-shirt, dark navy shorts, white socks, gray sneakers. Same clean thin dark outlines, softly shaded flat instructional illustration, muted blue palette. Same pale blue background with a large lighter blue circle, dark blue rectangular border inset from a narrow white outer margin. Keep the whole body inside the border and leave breathing room. Change body orientation and camera angle as specified by the exercise. Keep clothing, character proportions and rendering consistent with input image 1. One person, exactly one frozen pose. Correct coherent anatomy and physically plausible support contacts. No text, labels, numbers, arrows, motion trails, multiple panels, ghost limbs or watermark. No equipment.\n\nPrimary request: illustrate Lunge And Rotation. Show the bottom of a forward lunge on the right leg: right foot planted forward, right knee bent, rear knee hovering above the floor, rear toes on floor. Torso rotates to the right; both arms extend straight in front of the chest and turn together with shoulders. Front three-quarter view clearly showing the lunge and rotation.",
+      "version": "v1",
+      "status": "generated-awaiting-user-review",
+      "file": "68-v1.png"
+    },
+    {
+      "id": "69",
+      "name": "Power Lunge Jump",
+      "specific": "Show the top of the jump after a reverse lunge: the former rear leg's knee is drawn up toward the chest, the other leg points down, both feet clearly airborne, torso nearly upright, arms balance naturally. Full-body side view.",
+      "prompt": "Use case: scientific-educational. Asset type: one square exercise illustration for a fitness app, legible at 280 x 280 pixels. Input image 1: STYLE AND CHARACTER REFERENCE ONLY, not a pose reference. Match the reference closely: same adult male character, short dark brown hair, simple featureless face, light skin, gray short-sleeve T-shirt, dark navy shorts, white socks, gray sneakers. Same clean thin dark outlines, softly shaded flat instructional illustration, muted blue palette. Same pale blue background with a large lighter blue circle, dark blue rectangular border inset from a narrow white outer margin. Keep the whole body inside the border and leave breathing room. Change body orientation and camera angle as specified by the exercise. Keep clothing, character proportions and rendering consistent with input image 1. One person, exactly one frozen pose. Correct coherent anatomy and physically plausible support contacts. No text, labels, numbers, arrows, motion trails, multiple panels, ghost limbs or watermark. No equipment.\n\nPrimary request: illustrate Power Lunge Jump. Show the top of the jump after a reverse lunge: the former rear leg's knee is drawn up toward the chest, the other leg points down, both feet clearly airborne, torso nearly upright, arms balance naturally. Full-body side view.",
+      "version": "v1",
+      "status": "accepted-by-user",
+      "file": "69-v1.png"
+    },
+    {
+      "id": "70",
+      "name": "One Leg Squat Hops",
+      "specific": "Show a small single-leg squat hop: the jumping leg remains bent in a partial squat and its foot is just above the floor; the free leg is bent and lifted, both arms forward for balance. Both feet airborne with visible gap to floor. Full-body side view with a slight three-quarter turn.",
+      "prompt": "Use case: scientific-educational. Asset type: one square exercise illustration for a fitness app, legible at 280 x 280 pixels. Input image 1: STYLE AND CHARACTER REFERENCE ONLY, not a pose reference. Match the reference closely: same adult male character, short dark brown hair, simple featureless face, light skin, gray short-sleeve T-shirt, dark navy shorts, white socks, gray sneakers. Same clean thin dark outlines, softly shaded flat instructional illustration, muted blue palette. Same pale blue background with a large lighter blue circle, dark blue rectangular border inset from a narrow white outer margin. Keep the whole body inside the border and leave breathing room. Change body orientation and camera angle as specified by the exercise. Keep clothing, character proportions and rendering consistent with input image 1. One person, exactly one frozen pose. Correct coherent anatomy and physically plausible support contacts. No text, labels, numbers, arrows, motion trails, multiple panels, ghost limbs or watermark. No equipment.\n\nPrimary request: illustrate One Leg Squat Hops. Show a small single-leg squat hop: the jumping leg remains bent in a partial squat and its foot is just above the floor; the free leg is bent and lifted, both arms forward for balance. Both feet airborne with visible gap to floor. Full-body side view with a slight three-quarter turn.",
+      "version": "v1",
+      "status": "generated-awaiting-user-review",
+      "file": "70-v1.png"
+    }
+  ]
+}

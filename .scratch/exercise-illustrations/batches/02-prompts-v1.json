@@ -1,0 +1,51 @@
+{
+  "reference": "public/exercise-images/1.png",
+  "mode": "built-in image_gen",
+  "items": [
+    {
+      "id": "71",
+      "name": "One Leg Squat Touch",
+      "version": "v1",
+      "status": "accepted-by-user",
+      "file": "71-v1.png",
+      "specific": "Bottom of a single-leg squat: right foot planted, right knee bent, torso inclined forward with straight back, left hand touches the floor, left leg extended backwards off the floor for balance. Other hand balances. Full body side view with slight three-quarter angle.",
+      "prompt": "Use case: scientific-educational. Asset type: one square exercise illustration for a fitness app, legible at 280 x 280 pixels. Input image 1: STYLE AND CHARACTER REFERENCE ONLY, not a pose reference. Match the reference closely: same adult male character, short dark brown hair, simple featureless face, light skin, gray short-sleeve T-shirt, dark navy shorts, white socks, gray sneakers. Same clean thin dark outlines, softly shaded flat instructional illustration, muted blue palette. Same pale blue background with a large lighter blue circle, dark blue rectangular border inset from a narrow white outer margin. Keep the whole body inside the border and leave breathing room. Change body orientation and camera angle as specified by the exercise. Keep clothing, character proportions and rendering consistent with input image 1. One person, exactly one frozen pose. Correct coherent anatomy and physically plausible support contacts. No text, labels, numbers, arrows, motion trails, multiple panels, ghost limbs or watermark. Include only equipment required by the exercise.\n\nPrimary request: illustrate One Leg Squat Touch. Bottom of a single-leg squat: right foot planted, right knee bent, torso inclined forward with straight back, left hand touches the floor, left leg extended backwards off the floor for balance. Other hand balances. Full body side view with slight three-quarter angle."
+    },
+    {
+      "id": "72",
+      "name": "One Leg Wall Sit",
+      "version": "v1",
+      "status": "accepted-by-user",
+      "file": "72-v1.png",
+      "specific": "Static wall sit: back pressed firmly against a simple vertical wall behind the athlete, supporting thigh approximately horizontal and supporting foot flat on floor. The other leg extended forward with foot visibly off floor. Show wall and floor meeting and all support contacts. Full body side view with slight three-quarter angle.",
+      "prompt": "Use case: scientific-educational. Asset type: one square exercise illustration for a fitness app, legible at 280 x 280 pixels. Input image 1: STYLE AND CHARACTER REFERENCE ONLY, not a pose reference. Match the reference closely: same adult male character, short dark brown hair, simple featureless face, light skin, gray short-sleeve T-shirt, dark navy shorts, white socks, gray sneakers. Same clean thin dark outlines, softly shaded flat instructional illustration, muted blue palette. Same pale blue background with a large lighter blue circle, dark blue rectangular border inset from a narrow white outer margin. Keep the whole body inside the border and leave breathing room. Change body orientation and camera angle as specified by the exercise. Keep clothing, character proportions and rendering consistent with input image 1. One person, exactly one frozen pose. Correct coherent anatomy and physically plausible support contacts. No text, labels, numbers, arrows, motion trails, multiple panels, ghost limbs or watermark. Include only equipment required by the exercise.\n\nPrimary request: illustrate One Leg Wall Sit. Static wall sit: back pressed firmly against a simple vertical wall behind the athlete, supporting thigh approximately horizontal and supporting foot flat on floor. The other leg extended forward with foot visibly off floor. Show wall and floor meeting and all support contacts. Full body side view with slight three-quarter angle."
+    },
+    {
+      "id": "73",
+      "name": "Power Squat",
+      "version": "v1",
+      "status": "accepted-by-user",
+      "file": "73-v1.png",
+      "specific": "Bottom of a deep squat, both feet flat on floor slightly wider than shoulder width, knees bent, hips lowered, arms forward for balance. Front three-quarter view. No jump.",
+      "prompt": "Use case: scientific-educational. Asset type: one square exercise illustration for a fitness app, legible at 280 x 280 pixels. Input image 1: STYLE AND CHARACTER REFERENCE ONLY, not a pose reference. Match the reference closely: same adult male character, short dark brown hair, simple featureless face, light skin, gray short-sleeve T-shirt, dark navy shorts, white socks, gray sneakers. Same clean thin dark outlines, softly shaded flat instructional illustration, muted blue palette. Same pale blue background with a large lighter blue circle, dark blue rectangular border inset from a narrow white outer margin. Keep the whole body inside the border and leave breathing room. Change body orientation and camera angle as specified by the exercise. Keep clothing, character proportions and rendering consistent with input image 1. One person, exactly one frozen pose. Correct coherent anatomy and physically plausible support contacts. No text, labels, numbers, arrows, motion trails, multiple panels, ghost limbs or watermark. Include only equipment required by the exercise.\n\nPrimary request: illustrate Power Squat. Bottom of a deep squat, both feet flat on floor slightly wider than shoulder width, knees bent, hips lowered, arms forward for balance. Front three-quarter view. No jump."
+    },
+    {
+      "id": "15",
+      "name": "Plank To Elbow",
+      "version": "v1",
+      "status": "accepted-by-user",
+      "file": "15-v1.png",
+      "specific": "One intermediate transition pose: straight body from head through hips to heels, straight legs and toes on floor; one palm and opposite forearm planted on the floor supporting the body, one elbow bent and the other arm straight. Front three-quarter view slightly above, showing both distinct arms and contacts.",
+      "prompt": "Use case: scientific-educational. Asset type: one square exercise illustration for a fitness app, legible at 280 x 280 pixels. Input image 1: STYLE AND CHARACTER REFERENCE ONLY, not a pose reference. Match the reference closely: same adult male character, short dark brown hair, simple featureless face, light skin, gray short-sleeve T-shirt, dark navy shorts, white socks, gray sneakers. Same clean thin dark outlines, softly shaded flat instructional illustration, muted blue palette. Same pale blue background with a large lighter blue circle, dark blue rectangular border inset from a narrow white outer margin. Keep the whole body inside the border and leave breathing room. Change body orientation and camera angle as specified by the exercise. Keep clothing, character proportions and rendering consistent with input image 1. One person, exactly one frozen pose. Correct coherent anatomy and physically plausible support contacts. No text, labels, numbers, arrows, motion trails, multiple panels, ghost limbs or watermark. Include only equipment required by the exercise.\n\nPrimary request: illustrate Plank To Elbow. One intermediate transition pose: straight body from head through hips to heels, straight legs and toes on floor; one palm and opposite forearm planted on the floor supporting the body, one elbow bent and the other arm straight. Front three-quarter view slightly above, showing both distinct arms and contacts."
+    },
+    {
+      "id": "16",
+      "name": "Shadow Boxing",
+      "version": "v1",
+      "status": "accepted-by-user",
+      "file": "16-v1.png",
+      "specific": "A single straight punch in a boxing stance, both feet grounded in a staggered stance, one arm extended forward in a punch, other fist guarding the face. Front three-quarter view. No opponent or boxing equipment.",
+      "prompt": "Use case: scientific-educational. Asset type: one square exercise illustration for a fitness app, legible at 280 x 280 pixels. Input image 1: STYLE AND CHARACTER REFERENCE ONLY, not a pose reference. Match the reference closely: same adult male character, short dark brown hair, simple featureless face, light skin, gray short-sleeve T-shirt, dark navy shorts, white socks, gray sneakers. Same clean thin dark outlines, softly shaded flat instructional illustration, muted blue palette. Same pale blue background with a large lighter blue circle, dark blue rectangular border inset from a narrow white outer margin. Keep the whole body inside the border and leave breathing room. Change body orientation and camera angle as specified by the exercise. Keep clothing, character proportions and rendering consistent with input image 1. One person, exactly one frozen pose. Correct coherent anatomy and physically plausible support contacts. No text, labels, numbers, arrows, motion trails, multiple panels, ghost limbs or watermark. Include only equipment required by the exercise.\n\nPrimary request: illustrate Shadow Boxing. A single straight punch in a boxing stance, both feet grounded in a staggered stance, one arm extended forward in a punch, other fist guarding the face. Front three-quarter view. No opponent or boxing equipment."
+    }
+  ]
+}

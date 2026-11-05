@@ -1,0 +1,9 @@
+{
+  "id": "19",
+  "name": "Wall Curl",
+  "version": "v7",
+  "file": "19-v7.png",
+  "reference": "19-v6.png",
+  "status": "accepted-by-user",
+  "prompt": "Edit image 1. Rotate the man's body to a strict complete side profile facing the wall, so only the near arm and hand are visible and the far arm and hand are completely hidden directly behind them by perspective. Both arms still exist and remain in the same pose. Preserve everything else: the upright stance, straight lowered arm angled slightly forward, palm against wall with fingers pointing down, wall location, clothing, character, proportions, color palette, background, circle, frame, and illustration style. Do not alter the exercise pose or add anything."
+}

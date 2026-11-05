@@ -1,0 +1,60 @@
+{
+  "reference": "public/exercise-images/1.png",
+  "mode": "built-in image_gen",
+  "items": [
+    {
+      "id": "17",
+      "name": "Triceps Push-Up",
+      "version": "v1",
+      "status": "accepted-by-user",
+      "file": "17-v1.png",
+      "specific": "Bottom of a triceps push-up: both palms on floor shoulder-width beneath chest, elbows bent tightly alongside ribs pointing backwards, chest just above floor, body straight from head to heels, toes on floor. Side three-quarter view showing arms close to torso.",
+      "prompt": "Use case: scientific-educational. Asset type: one square exercise illustration for a fitness app, legible at 280 x 280 pixels. Input image 1: STYLE AND CHARACTER REFERENCE ONLY, not a pose reference. Match the reference closely: same adult male character, short dark brown hair, simple featureless face, light skin, gray short-sleeve T-shirt, dark navy shorts, white socks, gray sneakers. Same clean thin dark outlines, softly shaded flat instructional illustration, muted blue palette. Same pale blue background with a large lighter blue circle, dark blue rectangular border inset from a narrow white outer margin. Keep the whole body inside the border and leave breathing room. Change body orientation and camera angle as specified by the exercise. Keep clothing, character proportions and rendering consistent with input image 1. One person, exactly one frozen pose. Correct coherent anatomy and physically plausible support contacts. No text, labels, numbers, arrows, motion trails, multiple panels, ghost limbs or watermark. Include only equipment required by the exercise.\n\nPrimary request: illustrate Triceps Push-Up. Bottom of a triceps push-up: both palms on floor shoulder-width beneath chest, elbows bent tightly alongside ribs pointing backwards, chest just above floor, body straight from head to heels, toes on floor. Side three-quarter view showing arms close to torso."
+    },
+    {
+      "id": "18",
+      "name": "Plank Walk",
+      "version": "v1",
+      "status": "accepted-by-user",
+      "file": "18-v1.png",
+      "specific": "Wide phase of lateral plank walk: body straight in high plank, both palms and toes on floor, right hand and right foot placed laterally outward, hands and feet wider apart than usual; arms straight. Front three-quarter elevated view, all four contact points visible. Lateral movement is not shown with arrows.",
+      "prompt": "Use case: scientific-educational. Asset type: one square exercise illustration for a fitness app, legible at 280 x 280 pixels. Input image 1: STYLE AND CHARACTER REFERENCE ONLY, not a pose reference. Match the reference closely: same adult male character, short dark brown hair, simple featureless face, light skin, gray short-sleeve T-shirt, dark navy shorts, white socks, gray sneakers. Same clean thin dark outlines, softly shaded flat instructional illustration, muted blue palette. Same pale blue background with a large lighter blue circle, dark blue rectangular border inset from a narrow white outer margin. Keep the whole body inside the border and leave breathing room. Change body orientation and camera angle as specified by the exercise. Keep clothing, character proportions and rendering consistent with input image 1. One person, exactly one frozen pose. Correct coherent anatomy and physically plausible support contacts. No text, labels, numbers, arrows, motion trails, multiple panels, ghost limbs or watermark. Include only equipment required by the exercise.\n\nPrimary request: illustrate Plank Walk. Wide phase of lateral plank walk: body straight in high plank, both palms and toes on floor, right hand and right foot placed laterally outward, hands and feet wider apart than usual; arms straight. Front three-quarter elevated view, all four contact points visible. Lateral movement is not shown with arrows."
+    },
+    {
+      "id": "19",
+      "name": "Wall Curl",
+      "version": "v1",
+      "status": "generated-awaiting-user-review",
+      "file": "19-v1.png",
+      "specific": "Standing facing a simple vertical wall, both palms pressed flat against wall at waist height with fingers pointing down, elbows bent close to sides as if trying to curl upward against wall, both feet on floor. Side three-quarter view showing palms in contact with wall and downward pointing fingers.",
+      "prompt": "Use case: scientific-educational. Asset type: one square exercise illustration for a fitness app, legible at 280 x 280 pixels. Input image 1: STYLE AND CHARACTER REFERENCE ONLY, not a pose reference. Match the reference closely: same adult male character, short dark brown hair, simple featureless face, light skin, gray short-sleeve T-shirt, dark navy shorts, white socks, gray sneakers. Same clean thin dark outlines, softly shaded flat instructional illustration, muted blue palette. Same pale blue background with a large lighter blue circle, dark blue rectangular border inset from a narrow white outer margin. Keep the whole body inside the border and leave breathing room. Change body orientation and camera angle as specified by the exercise. Keep clothing, character proportions and rendering consistent with input image 1. One person, exactly one frozen pose. Correct coherent anatomy and physically plausible support contacts. No text, labels, numbers, arrows, motion trails, multiple panels, ghost limbs or watermark. Include only equipment required by the exercise.\n\nPrimary request: illustrate Wall Curl. Standing facing a simple vertical wall, both palms pressed flat against wall at waist height with fingers pointing down, elbows bent close to sides as if trying to curl upward against wall, both feet on floor. Side three-quarter view showing palms in contact with wall and downward pointing fingers."
+    },
+    {
+      "id": "20",
+      "name": "Plank Up",
+      "version": "v1",
+      "status": "accepted-by-user",
+      "file": "20-v1.png",
+      "specific": "Intermediate hand-walk phase: feet and both palms planted on floor, legs mostly straight, hips raised high into an inverted V, hands ahead of feet, back straight, arms extended. Side view, no equipment. This shows the walkout between standing and plank.",
+      "prompt": "Use case: scientific-educational. Asset type: one square exercise illustration for a fitness app, legible at 280 x 280 pixels. Input image 1: STYLE AND CHARACTER REFERENCE ONLY, not a pose reference. Match the reference closely: same adult male character, short dark brown hair, simple featureless face, light skin, gray short-sleeve T-shirt, dark navy shorts, white socks, gray sneakers. Same clean thin dark outlines, softly shaded flat instructional illustration, muted blue palette. Same pale blue background with a large lighter blue circle, dark blue rectangular border inset from a narrow white outer margin. Keep the whole body inside the border and leave breathing room. Change body orientation and camera angle as specified by the exercise. Keep clothing, character proportions and rendering consistent with input image 1. One person, exactly one frozen pose. Correct coherent anatomy and physically plausible support contacts. No text, labels, numbers, arrows, motion trails, multiple panels, ghost limbs or watermark. Include only equipment required by the exercise.\n\nPrimary request: illustrate Plank Up. Intermediate hand-walk phase: feet and both palms planted on floor, legs mostly straight, hips raised high into an inverted V, hands ahead of feet, back straight, arms extended. Side view, no equipment. This shows the walkout between standing and plank."
+    },
+    {
+      "id": "21",
+      "name": "One Arm Push-Up",
+      "version": "v1",
+      "status": "generated-awaiting-user-review",
+      "file": "21-v1.png",
+      "specific": "Bottom of one-arm push-up: one palm planted on floor beneath chest, that elbow bent, torso low and body straight, legs spread wide with both toes on floor, other hand held behind lower back and not touching floor. Front three-quarter view showing single arm support.",
+      "prompt": "Use case: scientific-educational. Asset type: one square exercise illustration for a fitness app, legible at 280 x 280 pixels. Input image 1: STYLE AND CHARACTER REFERENCE ONLY, not a pose reference. Match the reference closely: same adult male character, short dark brown hair, simple featureless face, light skin, gray short-sleeve T-shirt, dark navy shorts, white socks, gray sneakers. Same clean thin dark outlines, softly shaded flat instructional illustration, muted blue palette. Same pale blue background with a large lighter blue circle, dark blue rectangular border inset from a narrow white outer margin. Keep the whole body inside the border and leave breathing room. Change body orientation and camera angle as specified by the exercise. Keep clothing, character proportions and rendering consistent with input image 1. One person, exactly one frozen pose. Correct coherent anatomy and physically plausible support contacts. No text, labels, numbers, arrows, motion trails, multiple panels, ghost limbs or watermark. Include only equipment required by the exercise.\n\nPrimary request: illustrate One Arm Push-Up. Bottom of one-arm push-up: one palm planted on floor beneath chest, that elbow bent, torso low and body straight, legs spread wide with both toes on floor, other hand held behind lower back and not touching floor. Front three-quarter view showing single arm support."
+    },
+    {
+      "id": "19",
+      "name": "Wall Curl",
+      "version": "v2",
+      "status": "generated-awaiting-user-review",
+      "file": "19-v2.png",
+      "specific": "Standing facing a simple vertical wall, both palms pressed flat against wall at waist height with fingers pointing down, elbows bent close to sides as if trying to curl upward against wall, both feet on floor. Side three-quarter view showing palms in contact with wall and downward pointing fingers.",
+      "prompt": "Use case: scientific-educational. Asset type: one square exercise illustration for a fitness app, legible at 280 x 280 pixels. Input image 1: STYLE AND CHARACTER REFERENCE ONLY, not a pose reference. Match the reference closely: same adult male character, short dark brown hair, simple featureless face, light skin, gray short-sleeve T-shirt, dark navy shorts, white socks, gray sneakers. Same clean thin dark outlines, softly shaded flat instructional illustration, muted blue palette. Same pale blue background with a large lighter blue circle, dark blue rectangular border inset from a narrow white outer margin. Keep the whole body inside the border and leave breathing room. Change body orientation and camera angle as specified by the exercise. Keep clothing, character proportions and rendering consistent with input image 1. One person, exactly one frozen pose. Correct coherent anatomy and physically plausible support contacts. No text, labels, numbers, arrows, motion trails, multiple panels, ghost limbs or watermark. Include only equipment required by the exercise.\n\nPrimary request: illustrate Wall Curl. Standing facing a simple vertical wall, both palms pressed flat against wall at waist height with fingers pointing down, elbows bent close to sides as if trying to curl upward against wall, both feet on floor. Side three-quarter view showing palms in contact with wall and downward pointing fingers.\n\nCritical: both palms are flat against the vertical wall, not dangling in air. Both wrists are against the wall, all fingers point straight down and visibly touch the wall. Show the wall as a front-facing flat surface in three-quarter view so both hand contacts can be seen."
+    }
+  ]
+}

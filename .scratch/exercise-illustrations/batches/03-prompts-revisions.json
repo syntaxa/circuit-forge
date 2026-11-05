@@ -1,0 +1,48 @@
+{
+  "reference": "public/exercise-images/1.png",
+  "mode": "built-in image_gen",
+  "items": [
+    {
+      "id": "19",
+      "name": "Wall Curl",
+      "version": "v3",
+      "status": "generated-awaiting-user-review",
+      "file": "19-v3.png",
+      "specific": "Standing facing a simple vertical wall, both palms pressed flat against wall at waist height with fingers pointing down, elbows bent close to sides as if trying to curl upward against wall, both feet on floor. Side three-quarter view showing palms in contact with wall and downward pointing fingers.",
+      "prompt": "Use case: scientific-educational. Asset type: one square exercise illustration for a fitness app, legible at 280 x 280 pixels. Input image 1: STYLE AND CHARACTER REFERENCE ONLY, not a pose reference. Match the reference closely: same adult male character, short dark brown hair, simple featureless face, light skin, gray short-sleeve T-shirt, dark navy shorts, white socks, gray sneakers. Same clean thin dark outlines, softly shaded flat instructional illustration, muted blue palette. Same pale blue background with a large lighter blue circle, dark blue rectangular border inset from a narrow white outer margin. Keep the whole body inside the border and leave breathing room. Change body orientation and camera angle as specified by the exercise. Keep clothing, character proportions and rendering consistent with input image 1. One person, exactly one frozen pose. Correct coherent anatomy and physically plausible support contacts. No text, labels, numbers, arrows, motion trails, multiple panels, ghost limbs or watermark. Include only equipment required by the exercise.\n\nPrimary request: illustrate Wall Curl. Standing facing a simple vertical wall, both palms pressed flat against wall at waist height with fingers pointing down, elbows bent close to sides as if trying to curl upward against wall, both feet on floor. Side three-quarter view showing palms in contact with wall and downward pointing fingers.\n\nCorrection: Use a rear three-quarter view looking over the athlete's shoulder toward a broad flat wall in front of him. Both arms reach forward to the wall. Both palms are pressed flat directly against its visible near surface, fingers straight and pointing downward, with no gap between either palm and wall. Elbows bent near the torso. Both feet flat on floor. Make both palms visibly on the wall, not hanging in front of it."
+    },
+    {
+      "id": "21",
+      "name": "One Arm Push-Up",
+      "version": "v2",
+      "status": "generated-awaiting-user-review",
+      "file": "21-v2.png",
+      "specific": "Bottom of one-arm push-up: one palm planted on floor beneath chest, that elbow bent, torso low and body straight, legs spread wide with both toes on floor, other hand held behind lower back and not touching floor. Front three-quarter view showing single arm support.",
+      "prompt": "Use case: scientific-educational. Asset type: one square exercise illustration for a fitness app, legible at 280 x 280 pixels. Input image 1: STYLE AND CHARACTER REFERENCE ONLY, not a pose reference. Match the reference closely: same adult male character, short dark brown hair, simple featureless face, light skin, gray short-sleeve T-shirt, dark navy shorts, white socks, gray sneakers. Same clean thin dark outlines, softly shaded flat instructional illustration, muted blue palette. Same pale blue background with a large lighter blue circle, dark blue rectangular border inset from a narrow white outer margin. Keep the whole body inside the border and leave breathing room. Change body orientation and camera angle as specified by the exercise. Keep clothing, character proportions and rendering consistent with input image 1. One person, exactly one frozen pose. Correct coherent anatomy and physically plausible support contacts. No text, labels, numbers, arrows, motion trails, multiple panels, ghost limbs or watermark. Include only equipment required by the exercise.\n\nPrimary request: illustrate One Arm Push-Up. Bottom of one-arm push-up: one palm planted on floor beneath chest, that elbow bent, torso low and body straight, legs spread wide with both toes on floor, other hand held behind lower back and not touching floor. Front three-quarter view showing single arm support.\n\nCorrection: The single supporting palm is planted directly beneath the center of the chest, centered under the sternum, not out to the side. The supporting elbow bends backward beside the torso. Other hand behind back, legs wide, both toes on the floor. Use a front three-quarter view from moderately above so the centered palm position is unmistakable."
+    },
+    {
+      "id": "19",
+      "version": "v4",
+      "prompt": "Use case: scientific-educational. Square fitness app illustration. Image 1 is the style and character reference: same man, gray T-shirt, navy shorts, blue circular background and inset frame. Illustrate Wall Curl: view from behind and slightly to the side of an athlete facing a flat vertical wall. Both hands are side by side at waist height; both palms are pressed against the same near face of the wall with fingers pointing straight down, forearms connected to hands normally. Both elbows bent and close to torso. Wall is behind the hands, never in front of the athlete or arms. Show two complete arms, two attached hands, clear contact, and feet on floor. No floating or detached hands, no text.",
+      "name": "Wall Curl",
+      "file": "19-v4.png",
+      "status": "generated-awaiting-user-review"
+    },
+    {
+      "id": "21",
+      "version": "v3",
+      "prompt": "Use case: scientific-educational. Square fitness app illustration. Image 1 is the style and character reference: same man, gray T-shirt, navy shorts, blue circular background and inset frame. Illustrate one-arm push-up at the TOP, straight-arm plank position. Full body in front three-quarter elevated view: one arm straight and vertical, its single supporting palm planted on floor directly beneath the midpoint of the chest, centered under sternum between the shoulders. Other hand rests behind lower back. Torso and legs form one straight line; both feet wide apart and toes on floor. Exactly two arms, one hand touching ground, no text.",
+      "name": "One Arm Push-Up",
+      "file": "21-v3.png",
+      "status": "accepted-by-user"
+    },
+    {
+      "id": "19",
+      "name": "Wall Curl",
+      "version": "v5",
+      "file": "19-v5.png",
+      "status": "generated-awaiting-user-review",
+      "prompt": "Use case: scientific-educational. Square exercise illustration matching input image 1: same man, gray T-shirt, navy shorts, blue circle and border. Wall Curl: athlete stands facing a vertical wall. Show a SIDE VIEW of the entire body facing right. His TWO arms extend forward from the shoulders toward the wall; elbows slightly bent. Both palms are FLAT on the wall, fingers point down. His two wrists are at the wall, each hand attached to its forearm. The wall is to the right of his entire body, directly in front of him, and only the front surface is visible. The arms reach across the gap to touch it. Both feet on ground. Anatomically correct, no detached limbs, no text."
+    }
+  ]
+}

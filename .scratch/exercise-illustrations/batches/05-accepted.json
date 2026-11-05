@@ -1,0 +1,46 @@
+[
+  {
+    "id": "28",
+    "name": "V-Sit Twist",
+    "version": "v1",
+    "status": "accepted-by-user",
+    "file": "28-v1.png",
+    "specific": "Seated balanced on buttocks, knees bent and both feet clearly off floor, torso leaning back and rotated to one side, hands clasped together with arms extended forward turning with torso. Front three-quarter view, show rotation and both airborne feet.",
+    "prompt": "Use case: scientific-educational. Square fitness app illustration, legible at 280 x 280 pixels. Image 1: style and character reference only. Match same adult man, short dark hair, featureless face, gray T-shirt, navy shorts, white socks, gray sneakers; thin dark outlines, softly shaded flat instructional illustration, pale blue background with large lighter circle and dark blue inset border. Whole body inside border. One person, one frozen pose, coherent anatomy and support contacts. No text, arrows, multiple panels, motion trails, watermark, or equipment.\n\nPrimary request: illustrate V-Sit Twist. Seated balanced on buttocks, knees bent and both feet clearly off floor, torso leaning back and rotated to one side, hands clasped together with arms extended forward turning with torso. Front three-quarter view, show rotation and both airborne feet."
+  },
+  {
+    "id": "29",
+    "name": "Reverse Crunch",
+    "version": "v1",
+    "status": "accepted-by-user",
+    "file": "29-v1.png",
+    "specific": "On back, shoulders and upper back resting on floor, arms on floor alongside torso, knees bent and drawn toward face, pelvis and lower back lifted off floor by curling upward. Side three-quarter view showing raised pelvis and full body.",
+    "prompt": "Use case: scientific-educational. Square fitness app illustration, legible at 280 x 280 pixels. Image 1: style and character reference only. Match same adult man, short dark hair, featureless face, gray T-shirt, navy shorts, white socks, gray sneakers; thin dark outlines, softly shaded flat instructional illustration, pale blue background with large lighter circle and dark blue inset border. Whole body inside border. One person, one frozen pose, coherent anatomy and support contacts. No text, arrows, multiple panels, motion trails, watermark, or equipment.\n\nPrimary request: illustrate Reverse Crunch. On back, shoulders and upper back resting on floor, arms on floor alongside torso, knees bent and drawn toward face, pelvis and lower back lifted off floor by curling upward. Side three-quarter view showing raised pelvis and full body."
+  },
+  {
+    "id": "30",
+    "name": "Star Plank",
+    "version": "v1",
+    "status": "accepted-by-user",
+    "file": "30-v1.png",
+    "specific": "High plank with straight back, straight arms spread very wide and legs spread very wide into a star shape, both palms and both toes on floor. Elevated front three-quarter view showing all four distinct supports.",
+    "prompt": "Use case: scientific-educational. Square fitness app illustration, legible at 280 x 280 pixels. Image 1: style and character reference only. Match same adult man, short dark hair, featureless face, gray T-shirt, navy shorts, white socks, gray sneakers; thin dark outlines, softly shaded flat instructional illustration, pale blue background with large lighter circle and dark blue inset border. Whole body inside border. One person, one frozen pose, coherent anatomy and support contacts. No text, arrows, multiple panels, motion trails, watermark, or equipment.\n\nPrimary request: illustrate Star Plank. High plank with straight back, straight arms spread very wide and legs spread very wide into a star shape, both palms and both toes on floor. Elevated front three-quarter view showing all four distinct supports."
+  },
+  {
+    "id": "31",
+    "name": "Leg Raise",
+    "version": "v1",
+    "status": "accepted-by-user",
+    "file": "31-v1.png",
+    "specific": "Lying flat on back with head and back on floor, hands under buttocks, both straight legs together angled low above floor and not touching it. Side view, entire body visible.",
+    "prompt": "Use case: scientific-educational. Square fitness app illustration, legible at 280 x 280 pixels. Image 1: style and character reference only. Match same adult man, short dark hair, featureless face, gray T-shirt, navy shorts, white socks, gray sneakers; thin dark outlines, softly shaded flat instructional illustration, pale blue background with large lighter circle and dark blue inset border. Whole body inside border. One person, one frozen pose, coherent anatomy and support contacts. No text, arrows, multiple panels, motion trails, watermark, or equipment.\n\nPrimary request: illustrate Leg Raise. Lying flat on back with head and back on floor, hands under buttocks, both straight legs together angled low above floor and not touching it. Side view, entire body visible."
+  },
+  {
+    "id": "32",
+    "name": "Side Plank Hip Lift",
+    "version": "v2",
+    "file": "32-v2.png",
+    "status": "accepted-by-user",
+    "prompt": "Use case: scientific-educational. Square exercise illustration for a fitness app, readable at 280 x 280. Image 1 is the style and character reference only: same man with short dark hair, featureless face, gray T-shirt, navy shorts, white socks, gray sneakers, thin outlines, pale blue background with light circle and dark inset border. Illustrate the LOWER phase of Side Plank Hip Lift, one frozen pose. The athlete lies on his side with both straight legs stacked on top of each other. The outer side of the entire lower leg's thigh and the lower hip are resting ON the floor, with clear contact along the lower thigh; do not lift the hips or lower thigh off the floor. The upper body is propped up on the bottom forearm, with the elbow on the floor below the shoulder and forearm on the floor. Free hand on hip. Legs extend straight on floor, feet stacked. Full body front three-quarter view showing the floor contact of hip and lower thigh, the support forearm and the stacked legs. One person, anatomically coherent, no text, arrows, additional limbs or equipment."
+  }
+]
