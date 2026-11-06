@@ -1,0 +1,141 @@
+{
+  "reference": "public/exercise-images/1.png",
+  "mode": "built-in image_gen",
+  "items": [
+    {
+      "id": "38",
+      "name": "Chair Decline Push-Up",
+      "version": "v1",
+      "status": "accepted-by-user",
+      "file": "38-v1.png",
+      "specific": "Bottom of decline push-up: both toes on seat of sturdy chair behind him, both palms on floor, elbows bent, chest close to floor; straight body from head to heels. Side three-quarter view showing whole chair and both contacts.",
+      "prompt": "Scientific-educational square fitness app illustration readable at 280×280. Image 1 is STYLE AND CHARACTER reference only: same adult man with short dark hair, featureless face, gray T-shirt, navy shorts, white socks and gray sneakers. Same thin dark outlines, softly shaded flat illustration, pale blue background with large lighter circle, dark blue inset border and white margin. One person, one frozen pose, entire body visible, correct anatomy and physical contact. No text, arrows, motion trails, extra limbs, multiple panels, watermark. Only equipment specified.\n\nPrimary request: illustrate Chair Decline Push-Up. Bottom of decline push-up: both toes on seat of sturdy chair behind him, both palms on floor, elbows bent, chest close to floor; straight body from head to heels. Side three-quarter view showing whole chair and both contacts."
+    },
+    {
+      "id": "39",
+      "name": "Power Push-Up",
+      "version": "v1",
+      "status": "accepted-by-user",
+      "file": "39-v1.png",
+      "specific": "Explosive push-up phase: both feet toes on floor, body straight, both hands clearly lifted just above floor with visible gap, arms nearly extended. Side view, no clapping.",
+      "prompt": "Scientific-educational square fitness app illustration readable at 280×280. Image 1 is STYLE AND CHARACTER reference only: same adult man with short dark hair, featureless face, gray T-shirt, navy shorts, white socks and gray sneakers. Same thin dark outlines, softly shaded flat illustration, pale blue background with large lighter circle, dark blue inset border and white margin. One person, one frozen pose, entire body visible, correct anatomy and physical contact. No text, arrows, motion trails, extra limbs, multiple panels, watermark. Only equipment specified.\n\nPrimary request: illustrate Power Push-Up. Explosive push-up phase: both feet toes on floor, body straight, both hands clearly lifted just above floor with visible gap, arms nearly extended. Side view, no clapping."
+    },
+    {
+      "id": "42",
+      "name": "Pause Push-Up",
+      "version": "v1",
+      "status": "accepted-by-user",
+      "file": "42-v1.png",
+      "specific": "Held bottom of regular push-up, both palms and toes on floor, elbows bent, chest just above floor, body straight. Side three-quarter view.",
+      "prompt": "Scientific-educational square fitness app illustration readable at 280×280. Image 1 is STYLE AND CHARACTER reference only: same adult man with short dark hair, featureless face, gray T-shirt, navy shorts, white socks and gray sneakers. Same thin dark outlines, softly shaded flat illustration, pale blue background with large lighter circle, dark blue inset border and white margin. One person, one frozen pose, entire body visible, correct anatomy and physical contact. No text, arrows, motion trails, extra limbs, multiple panels, watermark. Only equipment specified.\n\nPrimary request: illustrate Pause Push-Up. Held bottom of regular push-up, both palms and toes on floor, elbows bent, chest just above floor, body straight. Side three-quarter view."
+    },
+    {
+      "id": "44",
+      "name": "Slow Negative Push-Up",
+      "version": "v1",
+      "status": "accepted-by-user",
+      "file": "44-v1.png",
+      "specific": "Midway down from high plank: elbows partly bent, both palms and toes on floor, rigid straight body, chest between top and bottom. Side view.",
+      "prompt": "Scientific-educational square fitness app illustration readable at 280×280. Image 1 is STYLE AND CHARACTER reference only: same adult man with short dark hair, featureless face, gray T-shirt, navy shorts, white socks and gray sneakers. Same thin dark outlines, softly shaded flat illustration, pale blue background with large lighter circle, dark blue inset border and white margin. One person, one frozen pose, entire body visible, correct anatomy and physical contact. No text, arrows, motion trails, extra limbs, multiple panels, watermark. Only equipment specified.\n\nPrimary request: illustrate Slow Negative Push-Up. Midway down from high plank: elbows partly bent, both palms and toes on floor, rigid straight body, chest between top and bottom. Side view."
+    },
+    {
+      "id": "45",
+      "name": "Plyo Push-Up",
+      "version": "v1",
+      "status": "accepted-by-user",
+      "file": "45-v1.png",
+      "specific": "Staggered hand push-up phase: body straight and toes planted, one palm clearly further forward toward head and the other back beside ribs, both hands on floor. Elevated side three-quarter view showing offset.",
+      "prompt": "Scientific-educational square fitness app illustration readable at 280×280. Image 1 is STYLE AND CHARACTER reference only: same adult man with short dark hair, featureless face, gray T-shirt, navy shorts, white socks and gray sneakers. Same thin dark outlines, softly shaded flat illustration, pale blue background with large lighter circle, dark blue inset border and white margin. One person, one frozen pose, entire body visible, correct anatomy and physical contact. No text, arrows, motion trails, extra limbs, multiple panels, watermark. Only equipment specified.\n\nPrimary request: illustrate Plyo Push-Up. Staggered hand push-up phase: body straight and toes planted, one palm clearly further forward toward head and the other back beside ribs, both hands on floor. Elevated side three-quarter view showing offset."
+    },
+    {
+      "id": "41",
+      "name": "Hindu Push-Up",
+      "version": "v1",
+      "status": "accepted-by-user",
+      "file": "41-v1.png",
+      "specific": "End of swooping phase: both palms on floor, arms straight, torso extended upward facing forward, hips low near floor, legs extended backward with toes on floor. Side view.",
+      "prompt": "Scientific-educational square fitness app illustration readable at 280×280. Image 1 is STYLE AND CHARACTER reference only: same adult man with short dark hair, featureless face, gray T-shirt, navy shorts, white socks and gray sneakers. Same thin dark outlines, softly shaded flat illustration, pale blue background with large lighter circle, dark blue inset border and white margin. One person, one frozen pose, entire body visible, correct anatomy and physical contact. No text, arrows, motion trails, extra limbs, multiple panels, watermark. Only equipment specified.\n\nPrimary request: illustrate Hindu Push-Up. End of swooping phase: both palms on floor, arms straight, torso extended upward facing forward, hips low near floor, legs extended backward with toes on floor. Side view."
+    },
+    {
+      "id": "46",
+      "name": "Push-Up And Rotation",
+      "version": "v1",
+      "status": "generated-awaiting-user-review",
+      "file": "46-v1.png",
+      "specific": "High side plank phase after push-up: one straight supporting arm, palm and side of lower foot on floor, straight body and stacked feet, torso rotated toward camera, free arm raised vertically. Front view.",
+      "prompt": "Scientific-educational square fitness app illustration readable at 280×280. Image 1 is STYLE AND CHARACTER reference only: same adult man with short dark hair, featureless face, gray T-shirt, navy shorts, white socks and gray sneakers. Same thin dark outlines, softly shaded flat illustration, pale blue background with large lighter circle, dark blue inset border and white margin. One person, one frozen pose, entire body visible, correct anatomy and physical contact. No text, arrows, motion trails, extra limbs, multiple panels, watermark. Only equipment specified.\n\nPrimary request: illustrate Push-Up And Rotation. High side plank phase after push-up: one straight supporting arm, palm and side of lower foot on floor, straight body and stacked feet, torso rotated toward camera, free arm raised vertically. Front view."
+    },
+    {
+      "id": "47",
+      "name": "Chest Press",
+      "version": "v1",
+      "status": "accepted-by-user",
+      "file": "47-v1.png",
+      "specific": "Standing upright facing camera, both feet on floor; elbows out, palms pressed firmly together vertically at center of chest, fingers up. No equipment.",
+      "prompt": "Scientific-educational square fitness app illustration readable at 280×280. Image 1 is STYLE AND CHARACTER reference only: same adult man with short dark hair, featureless face, gray T-shirt, navy shorts, white socks and gray sneakers. Same thin dark outlines, softly shaded flat illustration, pale blue background with large lighter circle, dark blue inset border and white margin. One person, one frozen pose, entire body visible, correct anatomy and physical contact. No text, arrows, motion trails, extra limbs, multiple panels, watermark. Only equipment specified.\n\nPrimary request: illustrate Chest Press. Standing upright facing camera, both feet on floor; elbows out, palms pressed firmly together vertically at center of chest, fingers up. No equipment."
+    },
+    {
+      "id": "48",
+      "name": "Spiderman Push-Up",
+      "version": "v1",
+      "status": "accepted-by-user",
+      "file": "48-v1.png",
+      "specific": "Bottom push-up with both palms and one set of toes on floor, elbows bent, same-side knee drawn outward toward elbow, bent foot lifted. Elevated front three-quarter view.",
+      "prompt": "Scientific-educational square fitness app illustration readable at 280×280. Image 1 is STYLE AND CHARACTER reference only: same adult man with short dark hair, featureless face, gray T-shirt, navy shorts, white socks and gray sneakers. Same thin dark outlines, softly shaded flat illustration, pale blue background with large lighter circle, dark blue inset border and white margin. One person, one frozen pose, entire body visible, correct anatomy and physical contact. No text, arrows, motion trails, extra limbs, multiple panels, watermark. Only equipment specified.\n\nPrimary request: illustrate Spiderman Push-Up. Bottom push-up with both palms and one set of toes on floor, elbows bent, same-side knee drawn outward toward elbow, bent foot lifted. Elevated front three-quarter view."
+    },
+    {
+      "id": "74",
+      "name": "Bird Dog Push-Up",
+      "version": "v1",
+      "status": "accepted-by-user",
+      "file": "74-v1.png",
+      "specific": "Top plank balance: one palm and opposite foot toes on floor, other arm extended forward, opposite leg lifted straight back, body level. Side three-quarter view distinguishing limbs.",
+      "prompt": "Scientific-educational square fitness app illustration readable at 280×280. Image 1 is STYLE AND CHARACTER reference only: same adult man with short dark hair, featureless face, gray T-shirt, navy shorts, white socks and gray sneakers. Same thin dark outlines, softly shaded flat illustration, pale blue background with large lighter circle, dark blue inset border and white margin. One person, one frozen pose, entire body visible, correct anatomy and physical contact. No text, arrows, motion trails, extra limbs, multiple panels, watermark. Only equipment specified.\n\nPrimary request: illustrate Bird Dog Push-Up. Top plank balance: one palm and opposite foot toes on floor, other arm extended forward, opposite leg lifted straight back, body level. Side three-quarter view distinguishing limbs."
+    },
+    {
+      "id": "75",
+      "name": "Chair Pike Push-Up",
+      "version": "v1",
+      "status": "generated-awaiting-user-review",
+      "file": "75-v1.png",
+      "specific": "Pike push-up: both feet on sturdy chair seat, both palms on floor, hips high forming inverted L, elbows bent with crown near floor. Side view show entire chair and all contacts.",
+      "prompt": "Scientific-educational square fitness app illustration readable at 280×280. Image 1 is STYLE AND CHARACTER reference only: same adult man with short dark hair, featureless face, gray T-shirt, navy shorts, white socks and gray sneakers. Same thin dark outlines, softly shaded flat illustration, pale blue background with large lighter circle, dark blue inset border and white margin. One person, one frozen pose, entire body visible, correct anatomy and physical contact. No text, arrows, motion trails, extra limbs, multiple panels, watermark. Only equipment specified.\n\nPrimary request: illustrate Chair Pike Push-Up. Pike push-up: both feet on sturdy chair seat, both palms on floor, hips high forming inverted L, elbows bent with crown near floor. Side view show entire chair and all contacts."
+    },
+    {
+      "id": "76",
+      "name": "Grasshopper Push-Up",
+      "version": "v1",
+      "status": "generated-awaiting-user-review",
+      "file": "76-v1.png",
+      "specific": "Bottom push-up with elbows bent and chest near floor, one knee drawn beneath body toward opposite elbow, other leg straight with toes on floor, both palms on floor. Elevated front three-quarter view.",
+      "prompt": "Scientific-educational square fitness app illustration readable at 280×280. Image 1 is STYLE AND CHARACTER reference only: same adult man with short dark hair, featureless face, gray T-shirt, navy shorts, white socks and gray sneakers. Same thin dark outlines, softly shaded flat illustration, pale blue background with large lighter circle, dark blue inset border and white margin. One person, one frozen pose, entire body visible, correct anatomy and physical contact. No text, arrows, motion trails, extra limbs, multiple panels, watermark. Only equipment specified.\n\nPrimary request: illustrate Grasshopper Push-Up. Bottom push-up with elbows bent and chest near floor, one knee drawn beneath body toward opposite elbow, other leg straight with toes on floor, both palms on floor. Elevated front three-quarter view."
+    },
+    {
+      "id": "77",
+      "name": "One Leg Push-Up",
+      "version": "v1",
+      "status": "accepted-by-user",
+      "file": "77-v1.png",
+      "specific": "Bottom push-up, both palms and one foot's toes on floor, elbows bent, body straight, other straight leg lifted above the supporting leg with visible gap. Side three-quarter view.",
+      "prompt": "Scientific-educational square fitness app illustration readable at 280×280. Image 1 is STYLE AND CHARACTER reference only: same adult man with short dark hair, featureless face, gray T-shirt, navy shorts, white socks and gray sneakers. Same thin dark outlines, softly shaded flat illustration, pale blue background with large lighter circle, dark blue inset border and white margin. One person, one frozen pose, entire body visible, correct anatomy and physical contact. No text, arrows, motion trails, extra limbs, multiple panels, watermark. Only equipment specified.\n\nPrimary request: illustrate One Leg Push-Up. Bottom push-up, both palms and one foot's toes on floor, elbows bent, body straight, other straight leg lifted above the supporting leg with visible gap. Side three-quarter view."
+    },
+    {
+      "id": "78",
+      "name": "Staggered Push-Up",
+      "version": "v1",
+      "status": "accepted-by-user",
+      "file": "78-v1.png",
+      "specific": "Bottom push-up with one palm placed clearly forward toward head and other palm back beside chest, elbows bent, body straight, toes on floor. Elevated side three-quarter view clearly showing unequal hand placement.",
+      "prompt": "Scientific-educational square fitness app illustration readable at 280×280. Image 1 is STYLE AND CHARACTER reference only: same adult man with short dark hair, featureless face, gray T-shirt, navy shorts, white socks and gray sneakers. Same thin dark outlines, softly shaded flat illustration, pale blue background with large lighter circle, dark blue inset border and white margin. One person, one frozen pose, entire body visible, correct anatomy and physical contact. No text, arrows, motion trails, extra limbs, multiple panels, watermark. Only equipment specified.\n\nPrimary request: illustrate Staggered Push-Up. Bottom push-up with one palm placed clearly forward toward head and other palm back beside chest, elbows bent, body straight, toes on floor. Elevated side three-quarter view clearly showing unequal hand placement."
+    },
+    {
+      "id": "49",
+      "name": "Superman",
+      "version": "v1",
+      "status": "accepted-by-user",
+      "file": "49-v1.png",
+      "specific": "Lying face down on abdomen, both arms straight forward and both legs straight back, chest and all four limbs lifted off floor, abdomen and pelvis supported on floor. Side three-quarter view.",
+      "prompt": "Scientific-educational square fitness app illustration readable at 280×280. Image 1 is STYLE AND CHARACTER reference only: same adult man with short dark hair, featureless face, gray T-shirt, navy shorts, white socks and gray sneakers. Same thin dark outlines, softly shaded flat illustration, pale blue background with large lighter circle, dark blue inset border and white margin. One person, one frozen pose, entire body visible, correct anatomy and physical contact. No text, arrows, motion trails, extra limbs, multiple panels, watermark. Only equipment specified.\n\nPrimary request: illustrate Superman. Lying face down on abdomen, both arms straight forward and both legs straight back, chest and all four limbs lifted off floor, abdomen and pelvis supported on floor. Side three-quarter view."
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "reference": "public/exercise-images/1.png",
+  "mode": "built-in image_gen",
+  "items": [
+    {
+      "id": "88",
+      "name": "Windscreen Wipers",
+      "version": "v3",
+      "specific": "TOP-DOWN overhead camera, looking straight down at a man lying on his back, shoulders and both arms extended sideways firmly on the floor. Both legs are straight, together, and tilted as one unit to his right side, almost touching the floor but visibly hovering slightly above it. The pelvis rotates with legs while both shoulders stay on the ground. The start is legs vertical but show only the low side position, no duplicate figures.",
+      "file": "88-v3.png",
+      "status": "generated-awaiting-user-review",
+      "prompt": "Scientific educational square fitness app illustration. Input image 1 is style/character reference: same adult male, short dark hair, featureless face, gray T-shirt, navy shorts, white socks, gray sneakers, thin dark outlines, pale blue background with lighter circle and dark blue inset frame. One person, exactly one head and torso, two arms and two legs, coherent anatomy, full body, no text, arrows, motion trails, extra limbs or panels.\n\nPrimary request: Windscreen Wipers. TOP-DOWN overhead camera, looking straight down at a man lying on his back, shoulders and both arms extended sideways firmly on the floor. Both legs are straight, together, and tilted as one unit to his right side, almost touching the floor but visibly hovering slightly above it. The pelvis rotates with legs while both shoulders stay on the ground. The start is legs vertical but show only the low side position, no duplicate figures."
+    },
+    {
+      "id": "46",
+      "name": "Push-Up And Rotation",
+      "version": "v2",
+      "specific": "A push-up plank with torso rotation. Both feet remain in the original face-down push-up position, toes on floor side by side, legs and hips facing floor and kept stable. Only upper torso rotates sideways, with one straight arm planted palm-down below shoulder and the other arm raised toward ceiling. Show both feet supported on their toes, not stacked and not on sides. Three-quarter view from front showing torso twist and feet.",
+      "file": "46-v2.png",
+      "status": "generated-awaiting-user-review",
+      "prompt": "Scientific educational square fitness app illustration. Input image 1 is style/character reference: same adult male, short dark hair, featureless face, gray T-shirt, navy shorts, white socks, gray sneakers, thin dark outlines, pale blue background with lighter circle and dark blue inset frame. One person, exactly one head and torso, two arms and two legs, coherent anatomy, full body, no text, arrows, motion trails, extra limbs or panels.\n\nPrimary request: Push-Up And Rotation. A push-up plank with torso rotation. Both feet remain in the original face-down push-up position, toes on floor side by side, legs and hips facing floor and kept stable. Only upper torso rotates sideways, with one straight arm planted palm-down below shoulder and the other arm raised toward ceiling. Show both feet supported on their toes, not stacked and not on sides. Three-quarter view from front showing torso twist and feet."
+    },
+    {
+      "id": "75",
+      "name": "Chair Pike Push-Up",
+      "version": "v2",
+      "specific": "Lower phase of shoulder-focused pike push-up: both feet on seat of sturdy chair, hips high, torso points nearly vertically toward floor, both palms on floor and head near floor. BOTH elbows bent and pointing OUTWARD to the sides, perpendicular to the torso rather than backward along it. View from in front of the head and slightly to side so both flared elbows and the chair supporting both feet are visible.",
+      "file": "75-v2.png",
+      "status": "generated-awaiting-user-review",
+      "prompt": "Scientific educational square fitness app illustration. Input image 1 is style/character reference: same adult male, short dark hair, featureless face, gray T-shirt, navy shorts, white socks, gray sneakers, thin dark outlines, pale blue background with lighter circle and dark blue inset frame. One person, exactly one head and torso, two arms and two legs, coherent anatomy, full body, no text, arrows, motion trails, extra limbs or panels.\n\nPrimary request: Chair Pike Push-Up. Lower phase of shoulder-focused pike push-up: both feet on seat of sturdy chair, hips high, torso points nearly vertically toward floor, both palms on floor and head near floor. BOTH elbows bent and pointing OUTWARD to the sides, perpendicular to the torso rather than backward along it. View from in front of the head and slightly to side so both flared elbows and the chair supporting both feet are visible."
+    }
+  ]
+}
